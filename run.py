@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 from tornado.ncss import Server
 
+#user has id, email, fname, lname, location, password
+#post has userid, message, status, timestamp
+
+
+user = [{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
+        {'id': 2, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
+        {'id': 3, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},]
+
 
 def home_handler(response):
     #see if authorised or unauthorised
@@ -18,7 +26,7 @@ def profile_handler(response, id):
 
 def own_profile_handler(response):
     #redirect to user's own profile page
-    response.redirect('/profile/1') #always go to profile 1
+    profile_handler(response, '1') #always go to profile 1
 
 def edit_profile_handler(response, id):
     #edit profile with given id
@@ -45,7 +53,7 @@ def about_handler(response):
     
 
 server = Server()
-server.register(r'/', home_handler)
+server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/search', search_handler, url_name = 'search')
 server.register(r'/profile/(\d+)', profile_handler, url_name = 'profile')
 server.register(r'/profile', own_profile_handler, url_name = 'own_profile')
