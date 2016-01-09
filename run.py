@@ -46,14 +46,14 @@ def about_handler(response):
 
 server = Server()
 server.register(r'/', home_handler)
-server.register(r'/search', search_handler)
-server.register(r'/profile/(\d+)', profile_handler)
-server.register(r'/profile', own_profile_handler)
-server.register(r'/profile/(\d+)/edit', edit_profile_handler)
-server.register(r'/profile/create', create_profile_handler)
-server.register(r'/post/all', all_post_handler)
-server.register(r'/post/create', new_post_handler)
-server.register(r'/about', about_handler)
+server.register(r'/search', search_handler, url_name = 'search')
+server.register(r'/profile/(\d+)', profile_handler, url_name = 'profile')
+server.register(r'/profile', own_profile_handler, url_name = 'own_profile')
+server.register(r'/profile/(\d+)/edit', edit_profile_handler, url_name = 'edit_profile')
+server.register(r'/profile/create', create_profile_handler, url_name = 'create_profile')
+server.register(r'/post/all', all_post_handler, url_name = 'all_post')
+server.register(r'/post/create', new_post_handler, url_name = 'create_post')
+server.register(r'/about', about_handler, url_name = 'about')
 
 
 server.run()
