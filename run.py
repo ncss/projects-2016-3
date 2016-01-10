@@ -6,7 +6,7 @@ from engine import render_file, ParseError
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
 #status is 0-2
-#skill has skill id, skill name, category id, rank, 
+#skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
 users = {1:{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
 
@@ -25,7 +25,7 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         }
 
 def login_handler(response):
-    #database password check 
+    #database password check
     #assume database stuff worked fine
     email = response.get_field("email")
     password = response.get_field("password")
@@ -40,7 +40,7 @@ def login_handler(response):
         response.redirect('/')
     else:
         response.write("wrong login")
-    
+
 
 def unknown_handler(response, error):
 	response.write('404<br>{}'.format(error))
@@ -65,19 +65,19 @@ def home_handler(response):
             collect login details
             make cookie with login details
 
-    ''' 
+    '''
     response.write('Home!')
 
 def search_handler(response):
     #display search page
     #do search later
-    response.write('Search!')
+    response.write(render_file('templates\\search.html', {}))
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    response.write(render_file('templates\\profile.html', {}))    
-    
-   
+    response.write(render_file('templates\\profile.html', {}))
+
+
 def own_profile_handler(response):
     #redirect to user's own profile page
     profile_handler(response, '1') #always go to profile 1
@@ -108,9 +108,9 @@ def about_handler(response):
 
 
 
-    
 
-    
+
+
 
 server = Server()
 server.register(r'/', home_handler, url_name = 'name')
