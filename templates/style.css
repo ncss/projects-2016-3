@@ -1,0 +1,15 @@
+main#container {
+  width:960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer{
+  margin-top: 15px;
+  text-align: center;
+}
+
+footer a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
