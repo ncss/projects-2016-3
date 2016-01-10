@@ -5,25 +5,32 @@ header{
 }
 nav{
   margin-left: 200px;
-  margin-right: auto;
+  margin-right: 200px;
   width: 80%;
+  height: 100px;
   text-align: center;
-  position:absolute;
+  position: relative;
 }
 .header-icon{
-    float:left;
+    text-align: left;
     width: 60px;
     margin-right: 40px;
+    padding: 10px;
+    position: fixed;
 }
 a:hover{
   color: white;
 }
-.clear-floats{
-  clear: both;
+.float-right{
+  text-align: right;
+  padding-top: 5px;
 }
+
 #user-details {
   text-align: right;
 }
+
+
 
 
 main#container {
