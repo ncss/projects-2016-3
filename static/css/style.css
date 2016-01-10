@@ -1,0 +1,80 @@
+/* --- Base Infrastructure --- */
+
+header {
+  background-color: gray;
+}
+nav {
+  margin-left: 200px;
+  margin-right: 200px;
+  width: 80%;
+  height: 100px;
+  text-align: center;
+  position: relative;
+}
+
+.header-icon{
+    text-align: left;
+    width: 60px;
+    margin-right: 40px;
+    padding: 10px;
+}
+
+.header-imgs{
+  padding: 10px;
+}
+a:hover {
+  color: white;
+}
+
+.float-right{
+  text-align: right;
+  padding-top: 5px;
+}
+
+#user-details {
+  text-align: right;
+}
+
+main#container {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+footer a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+/* --- Common layouts --- */
+
+aside.sidebar {
+  float: left;
+  display: inline-block;
+  width: 30%;
+}
+
+article.main-content {
+  float: left;
+  display: inline-block;
+  width: 70%;
+}
+
+
+/* --- Profile --- */
+
+
+
+
+
+/* --- Utilities --- */
+
+.clearfix {
+  clear: both;
+}
