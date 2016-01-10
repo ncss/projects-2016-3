@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from tornado.ncss import Server
-
+import pprint
 
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
@@ -8,6 +8,7 @@ from tornado.ncss import Server
 #skill has skill id, skill name, category id, rank, 
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
 users = {1:{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
+
         2:{'id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
         3:{'id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
 }
@@ -40,9 +41,11 @@ def login_handler(response):
         response.write("wrong login")
     
 
+def unknown_handler(response, error):
+	response.write('404<br>{}'.format(error))
 
 def home_handler(response):
-    #see if authorised or unauthorised
+	#see if authorised or unauthorised
     #display either home page
     #login(response, '2')
     response.write(str(response.get_secure_cookie("userLoggedIn")))
@@ -69,10 +72,15 @@ def search_handler(response):
     #do search later
     response.write('Search!')
 
-def profile_handler(response, id):
+def profile_handler(response, profile_id):
     #displays profile of user with given id 
-    response.write(id)
-
+    profile_id = int(profile_id)
+    print(profile_id)
+    if profile_id not in users:
+	    unknown_handler(response, 'User {} not found'.format(profile_id))
+    else:
+	    response.write(pprint.pformat(users[profile_id]).replace('\n', '<br>'))
+   
 def own_profile_handler(response):
     #redirect to user's own profile page
     profile_handler(response, '1') #always go to profile 1
@@ -100,6 +108,8 @@ def new_post_handler(response):
 def about_handler(response):
     #about page
     response.write('about')
+
+
 
     
 
