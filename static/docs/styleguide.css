@@ -1,0 +1,82 @@
+
+body {
+  background-color: rgb(38, 38, 38);
+  font-family: "Roboto";
+  font-size: 16px;
+  line-height: 24px;
+
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  color: rgb(204, 204, 204);
+  margin-bottom: 5px;
+}
+h1 {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+p, blockquote, summary, a, dt, legend {
+  color: rgb(204, 204, 204);
+}
+
+p {
+  margin-bottom: 
+}
+
+
+figcaption {
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(204, 204, 204, 0.75);
+  /*font-size: 10px;*/
+}
+
+a:hover {
+  color: rgba(204, 204, 204, 0.75);
+}
+a:active {
+  color: rgba(204, 204, 204, 0.25)
+}
+mark {
+  background-color: #FFFFFF;
+}
+
+ol, ul, dd {
+  color: rgba(204, 204, 204, 0.75);
+}
+fieldset {
+  border: 1px groove rgb(255,255,255);
+}
+
+input, textarea {
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: rgba(204, 204, 204, 0.75);
+}
+
+input:disabled{
+    color: rgba(204, 204, 204, 0.25);
+    /*border: 1px groove rgba(204, 204, 204, 0.75);*/
+}
+textarea {
+  font-family: inherit;
+}
+
+select {
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: rgba(204, 204, 204, 0.75);
+}

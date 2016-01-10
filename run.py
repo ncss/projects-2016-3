@@ -9,7 +9,7 @@ from models import User
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
 #status is 0-2
-#skill has skill id, skill name, category id, rank, 
+#skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
 users = {1:{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
         2:{'id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
@@ -30,7 +30,7 @@ def get_cookie(response):
     return response.get_secure_cookie("userLoggedIn")
 
 def login_handler(response):
-    #database password check 
+    #database password check
     #assume database stuff worked fine
     email = response.get_field("email")
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
@@ -63,11 +63,10 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write('Search!')
+    response.write(render_file('templates\\search.html', {}))
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-
     response.write(render_file(os.path.join('templates', 'profile.html'), {}))
    
 def own_profile_handler(response):
@@ -84,7 +83,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write('sign up')
+    response.write(render_file('templates\\create.html', {}))
 
 def all_post_handler(response):
 
@@ -103,12 +102,6 @@ def about_handler(response):
     #about page
     response.write('about')
 
-
-
-    
-
-    
-
 server = Server()
 server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/login', login_handler, url_name = 'login')
@@ -121,6 +114,5 @@ server.register(r'/profile/create', create_profile_handler, url_name = 'create_p
 server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
-
 
 server.run()
