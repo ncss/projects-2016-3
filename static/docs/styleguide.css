@@ -1,72 +1,86 @@
 
 body {
-  background-color: rgb(38, 38, 38);
+  background-color: #262626;
   font-family: "Roboto";
   font-size: 16px;
   line-height: 24px;
-
 }
 
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
-  color: rgb(204, 204, 204);
-  margin-bottom: 5px;
+  color: #CCCCCC;
+  margin-top: 15px;
+  margin-bottom: 0px;
 }
 h1 {
   font-size: 32px;
   line-height: 48px;
 }
-
 h2 {
   font-size: 24px;
   line-height: 36px;
 }
-
 h3 {
   font-size: 20px;
   line-height: 30px;
 }
 
+
 p, blockquote, summary, a, dt, legend {
-  color: rgb(204, 204, 204);
+  color: #CCCCCC;
+}
+p {
+  margin-bottom: 10px;
 }
 
-p {
-  margin-bottom: 
+
+section {
+  background-color: #3C3C3C;
 }
 
 
 figcaption {
   font-weight: 500;
   font-style: italic;
-  color: rgba(204, 204, 204, 0.75);
+  color: #CCCCCC;
   /*font-size: 10px;*/
 }
 
+
 a:hover {
-  color: rgba(204, 204, 204, 0.75);
+  color: #CCCCCC;
 }
 a:active {
-  color: rgba(204, 204, 204, 0.25)
+  color: rgba(204, 204, 204, 0.25);
 }
+
+
 mark {
   background-color: #FFFFFF;
 }
 
+
 ol, ul, dd {
   color: rgba(204, 204, 204, 0.75);
-}
-fieldset {
-  border: 1px groove rgb(255,255,255);
+
 }
 
+
+hr {
+  border-color: #CCCCCC;
+}
+
+
+fieldset {
+  /* border: 1px groove rgb(255,255,255); */
+  border: 0px;
+}
 input, textarea {
   border: 0px;
   background-color: rgba(255, 255, 255, 0.25);
-  color: rgba(204, 204, 204, 0.75);
+  color: #CCCCCC;
 }
-
 input:disabled{
     color: rgba(204, 204, 204, 0.25);
     /*border: 1px groove rgba(204, 204, 204, 0.75);*/
@@ -74,9 +88,8 @@ input:disabled{
 textarea {
   font-family: inherit;
 }
-
 select {
   border: 0px;
   background-color: rgba(255, 255, 255, 0.25);
-  color: rgba(204, 204, 204, 0.75);
+  color: #CCCCCC;
 }
