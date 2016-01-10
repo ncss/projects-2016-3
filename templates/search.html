@@ -1,10 +1,21 @@
 {% include header.html %}
 
     <form action="/send_to">
-      <input type="text" name="search-query"><br>
-      <input type="checkbox" name="name">Name<br>
-      <input type="checkbox" name="location">Location<br>
-      <input type="submit" value="Search">
+      <fieldset>
+        <p>
+          <input type="text" name="search-query" placeholder="Enter">
+        </p>
+        <p>
+          <label>By Name: </label>
+          <input type="checkbox" name="name">
+        </p>
+        <p>
+          <label>By Location: </label>
+          <input type="checkbox" name="location">
+        </p>
+        <p>
+          <input type="submit" value="Search">
+        </p>
     </form>
 
 {% include footer.html %}

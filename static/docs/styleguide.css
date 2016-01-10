@@ -6,6 +6,18 @@ body {
   line-height: 24px;
 }
 
+div#test {
+  background-color: #505050;
+  position: static;
+  margin: auto;
+  padding: 20px;
+  width: 750px;
+}
+
+div#header-test {
+  background-color: #353535;
+  padding: 20px;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
@@ -37,6 +49,10 @@ p {
 
 section {
   background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 
