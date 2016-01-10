@@ -68,8 +68,12 @@ def render_template(template, context):
 def render_file(filename, context):
     try:
         with open(filename) as f:
+            currentDirectory = os.getcwd()
             os.chdir(os.path.dirname(os.path.abspath(filename)))
-            return render_template(f.read(), context)
+            rendered = render_template(f.read(), context)
+            os.chdir(currentDirectory)
+            return rendered
+
     except FileNotFoundError:
         raise ParseError('Tried to render nonexistent file')
 if __name__ == '__main__':
