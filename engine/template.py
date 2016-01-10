@@ -1,5 +1,5 @@
 import re
-
+import os
 tokenisingExpr = re.compile(r'(?:\{(?=%|\{))(.*?)(?:%|\})\}')
 
 class ParseError(Exception):
@@ -68,6 +68,7 @@ def render_template(template, context):
 def render_file(filename, context):
     try:
         with open(filename) as f:
+            os.chdir(os.path.dirname(os.path.abspath(filename)))
             return render_template(f.read(), context)
     except FileNotFoundError:
         raise ParseError('Tried to render nonexistent file')
