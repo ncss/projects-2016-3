@@ -29,6 +29,17 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
 def get_cookie(response):
     return response.get_secure_cookie("userLoggedIn")
 
+def login_required(function):
+    #login decorator
+    #check if user is logged in, if not redirect to home
+    def inner(response, *args, **kwargs):
+        if get_cookie(response):
+            return function(response, *args, **kwargs)
+        else:
+            response.set_status('403')
+            response.redirect('/')
+        return inner
+    
 def login_handler(response):
     #database password check
     #assume database stuff worked fine
@@ -45,11 +56,8 @@ def logout_handler(response):
     response.clear_cookie("userLoggedIn")
     response.redirect('/')
 
-def unknown_handler(response, error):
-	response.write('404<br>{}'.format(error))
-
 def home_handler(response):
-	#see if authorised or unauthorised
+    #see if authorised or unauthorised
     #display either home page
     #login(response, '2')
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
@@ -60,15 +68,18 @@ def home_handler(response):
         response.write('Not logged in!')
     response.write('Home!')
 
+@login_required
 def search_handler(response):
     #display search page
     #do search later
     response.write(render_file(os.path.join('templates', 'search.html'), {}))
 
+@login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
     response.write(render_file(os.path.join('templates', 'profile.html'), {}))
    
+@login_required
 def own_profile_handler(response):
     #redirect to user's own profile page
     '''
@@ -81,28 +92,28 @@ def own_profile_handler(response):
 
     response.write('profile')
 
+@login_required
 def edit_profile_handler(response, id):
     #edit profile with given id
     response.write('edit profile {}'.format(id))
 
+@login_required
 def create_profile_handler(response):
     #signup page
     response.write(render_file(os.path.join('templates', 'create.html'), {}))
 
+@login_required
 def all_post_handler(response):
-    userID = get_cookie()
-    if userID:
-        posts = Post.get10()
-        for post in posts:
-            response.write(post.message + '<br>')
-            userName = User.get_user(post.author_id).fname
-            response.write('by' + userName + '<br>')
-            response.write('all posts')
-    else:
-        response.redirect('/')
+    posts = Post.get10()
+    for post in posts:
+        response.write(post.message + '<br>')
+        userName = User.get_user(post.author_id).fname
+        response.write('by' + userName + '<br>')
+        response.write('all posts')
     
     #display all posts
 
+@login_required
 def new_post_handler(response):
     #new post page
     response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
@@ -110,6 +121,10 @@ def new_post_handler(response):
 def about_handler(response):
     #about page
     response.write('about')
+
+def default_handler(response, method, *args, **kwargs):
+    #default 404
+    return return_404(response)
 
 server = Server()
 server.register(r'/', home_handler, url_name = 'name')
@@ -123,5 +138,6 @@ server.register(r'/profile/create', create_profile_handler, url_name = 'create_p
 server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
+server.set_default_handler(default_handler)
 
 server.run()
