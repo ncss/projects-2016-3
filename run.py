@@ -100,7 +100,7 @@ def all_post_handler(response):
 
 def new_post_handler(response):
     #new post page
-    response.write('new post')
+    response.write(render_file('templates\\addpost.html', {}))
 
 def about_handler(response):
     #about page
