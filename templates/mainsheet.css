@@ -1,0 +1,31 @@
+.sidebar {
+  padding: 2px;
+  position: relative;
+  width: 40%;
+
+}
+
+#firstname {
+  width: 100px;
+
+}
+
+.edit-titles {
+  font-size: 30px;
+  color: red;
+  font-weight: bold;
+}
+
+.skills {
+  width: 60%;
+  height: 40%;
+}
+
+.img-zone{
+
+}
+
+fieldset {
+  border: 1px groove grey;
+  /*position: float;*/
+}
