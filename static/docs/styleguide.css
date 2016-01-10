@@ -6,6 +6,13 @@ body {
   line-height: 24px;
 }
 
+div {
+  background-color: #505050;
+  position: static;
+  margin: auto;
+  padding: 7.5px;
+  width: 750px;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
