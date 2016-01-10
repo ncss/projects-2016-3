@@ -3,6 +3,8 @@ python:
   - "3.4"
 install:
   - echo
+script:
+  - echo
 deploy:
   provider: heroku
   api_key:
