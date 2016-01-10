@@ -49,8 +49,8 @@ def _parse_template(template, upto, parent):
     tokenvalues = _tokenise(template)
     content = []
     for token in tokenvalues:
-        if token.startswith('{ '):
-            token = PythonNode(token[2:-1], root_node)
+        if token.startswith('{'):
+            token = PythonNode(token[1:].strip(), root_node)
         elif token.startswith('% include'):
             token = IncludeNode(token[len('% include '):-1], root_node)
         else:
