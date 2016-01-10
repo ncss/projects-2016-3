@@ -1,9 +1,9 @@
-/* ---Base Infrastructure --- */
+/* --- Base Infrastructure --- */
 
-header{
-  background-color:gray;
+header {
+  background-color: gray;
 }
-nav{
+nav {
   margin-left: 200px;
   margin-right: 200px;
   width: 80%;
@@ -11,6 +11,7 @@ nav{
   text-align: center;
   position: relative;
 }
+
 .header-icon{
     text-align: left;
     width: 60px;
@@ -18,9 +19,10 @@ nav{
     padding: 10px;
     position: fixed;
 }
-a:hover{
+a:hover {
   color: white;
 }
+
 .float-right{
   text-align: right;
   padding-top: 5px;
@@ -30,17 +32,14 @@ a:hover{
   text-align: right;
 }
 
-
-
-
 main#container {
-  width:960px;
+  width: 960px;
   margin-left: auto;
   margin-right: auto;
+  padding: 20px 10px;
 }
 
-footer{
-  margin-top: 15px;
+footer {
   text-align: center;
 }
 
@@ -49,14 +48,30 @@ footer a {
   padding-right: 20px;
 }
 
-/* --- Profile --- */
 
-aside {
+/* --- Common layouts --- */
+
+aside.sidebar {
+  float: left;
   display: inline-block;
   width: 30%;
 }
 
-article {
+article.main-content {
+  float: left;
   display: inline-block;
   width: 70%;
+}
+
+
+/* --- Profile --- */
+
+
+
+
+
+/* --- Utilities --- */
+
+.clearfix {
+  clear: both;
 }
