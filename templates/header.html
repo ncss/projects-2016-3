@@ -2,28 +2,23 @@
 <html>
   <head>
     <title> Page Title </title>
-
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-
   </head>
   <body>
     <header>
       <nav>
-        <div class="header-icon" id="header-logo">
-          <a href="/index"  class="header-imgs"><img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg" name="logo"></a>
-          <a href="/profile" class="header-imgs">Profile <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">  </a>
-          <a href="/posts" class="header-imgs">Posts <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">  </a>
-          <a href="/add" class="header-imgs">Add Post <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">  </a>
-          <a href="/search" class="header-imgs">Search <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
+        <div class="header-icon">
+          <a href="/index"><img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
+          <a href="/profile">Profile <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
+          <a href="/posts">Posts  <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
+          <a href="/add">Add Post<img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
+          <a href="/search">Search<img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg"></a>
         </div>
         <div class="float-right">
-          <p>Hello, {{ Name }}</p>
+          <p>Hello, Name</p>
           <a href="/logout">Logout</a>
         </div>
       </nav>
-      <div id="user-details">
-
-      </div>
     </header>
-    <main id="container">
+    <div id="main">

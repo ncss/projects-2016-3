@@ -11,9 +11,9 @@ from models import User
 #status is 0-2
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
-users = {1:{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2'},
-        2:{'id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
-        3:{'id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
+users = {1:{'user_id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2', 'age':'18', 'gender':'Male'},
+        2:{'user_id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
+        3:{'user_id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
 }
 '''
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
@@ -36,7 +36,7 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        response.set_secure_cookie("userLoggedIn", User.getPerson(email).user_id)
+        response.set_secure_cookie("userLoggedIn", User.getPerson(email).get_user_id())
         response.redirect('/')
     else:
         response.write("wrong login")
@@ -63,19 +63,32 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file(os.path.join('templates', 'search.html')), {})
+    response.write(render_file(os.path.join('templates', 'search.html'), {}))
+
+
+
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    response.write(render_file(os.path.join('templates', 'profile.html')), {})
-   
+    personInfo = users[1]
+    response.write(render_file(os.path.join('templates', 'profile.html'), personInfo))
+  
+
+
+
+
+
 def own_profile_handler(response):
     #redirect to user's own profile page
+    '''
     userID = get_cookie()
     if userID:
         profile_handler(response, userID)
     else:
         response.redirect('/')
+    '''
+
+    response.write('profile')
 
 def edit_profile_handler(response, id):
     #edit profile with given id
@@ -83,9 +96,10 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {})
+    response.write(render_file(os.path.join('templates', 'create.html'), {}))
 
 def all_post_handler(response):
+    '''
     userID = get_cookie()
     if userID:
         posts = Post.get10()
@@ -96,12 +110,13 @@ def all_post_handler(response):
             response.write('all posts')
     else:
         response.redirect('/')
-    
+    '''
+    response.write('posts')
     #display all posts
 
 def new_post_handler(response):
     #new post page
-    response.write(render_file(os.path.join('templates', 'addpost.html')), {})
+    response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
 
 def about_handler(response):
     #about page

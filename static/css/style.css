@@ -17,6 +17,7 @@ nav {
     width: 60px;
     margin-right: 40px;
     padding: 10px;
+    position: fixed;
 }
 
 .header-imgs{
@@ -35,7 +36,7 @@ a:hover {
   text-align: right;
 }
 
-main#container {
+div#main {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
