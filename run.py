@@ -63,19 +63,23 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file(os.path.join('templates', 'search.html')), {})
+    response.write(render_file(os.path.join('templates', 'search.html'), {}))
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    response.write(render_file(os.path.join('templates', 'profile.html')), {})
+    response.write(render_file(os.path.join('templates', 'profile.html'), {}))
    
 def own_profile_handler(response):
     #redirect to user's own profile page
+    '''
     userID = get_cookie()
     if userID:
         profile_handler(response, userID)
     else:
         response.redirect('/')
+    '''
+
+    response.write('profile')
 
 def edit_profile_handler(response, id):
     #edit profile with given id
@@ -83,7 +87,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {})
+    response.write(render_file(os.path.join('templates', 'create.html'), {}))
 
 def all_post_handler(response):
     userID = get_cookie()
@@ -101,7 +105,7 @@ def all_post_handler(response):
 
 def new_post_handler(response):
     #new post page
-    response.write(render_file(os.path.join('templates', 'addpost.html')), {})
+    response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
 
 def about_handler(response):
     #about page
