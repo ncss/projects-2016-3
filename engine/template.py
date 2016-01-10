@@ -1,5 +1,6 @@
 import re
 import os
+import html
 from collections import namedtuple
 ForTag = namedtuple('ForTag', ['iterator', 'iterable', 'child_group'])
 tokenising_expression = re.compile(r'(?:\{(?=%|\{))(.*?)(?:%|\})\}')
@@ -28,7 +29,7 @@ class TextNode(Node):
 
 class PythonNode(Node):
     def evaluate(self, context):
-        return eval(self.content, {}, context)
+        return html.escape(str(eval(self.content, {}, context)))
 
 
 class IncludeNode(Node):
