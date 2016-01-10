@@ -6,7 +6,7 @@ body {
   line-height: 24px;
 }
 
-div#test {
+div#body-test {
   background-color: #505050;
   position: static;
   margin: auto;

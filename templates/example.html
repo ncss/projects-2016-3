@@ -1,5 +1,7 @@
 {% include example_header.html %}
 <p>My name is {{ name }}</p>
-<p>{% for i in a_list %}{{ i }} {% end for %}</p>
+<p>{% for i in a_list %}{% if i % 2 == 0 %}
+{{ i }}, i is divisible by 2!
+{% else %}{{ i + 100 }}, i is not divisible by 2{% end if %}{% end for %}</p>
 {% include example_footer.html %}
 

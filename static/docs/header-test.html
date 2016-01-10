@@ -2,9 +2,8 @@
 <html>
   <head>
     <title> Page Title </title>
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/styleguide.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="styleguide.css">
   </head>
   <body>
     <header>
@@ -15,33 +14,51 @@
           </a>
         </div>
         <div class="header-icon">
-          <a href="/profile">
-            Profile
+          <a href="/profile">Profile
             <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">
           </a>
         </div>
         <div class="header-icon">
-          <a href="/posts">
-            Posts
+          <a href="/posts">Posts
             <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">
           </a>
         </div>
         <div class="header-icon">
-          <a href="/add">
-            Add Post
+          <a href="/add">Add Post
             <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">
           </a>
         </div>
         <div class="header-icon">
-          <a href="/search">
-            Search
+          <a href="/search">Search
             <img src="https://pbs.twimg.com/profile_images/586137164188004352/wTK4hjbl_normal.jpg">
           </a>
         </div>
-        <div class="float-right">
-          <p>Hello, Name</p>
-          <a href="/logout">Logout</a>
-        </div>
+        <div class="clear-floats"></div>
+      </nav>
+      <div id="user-details">
+        <p>Hello [Name]</p>
+        <a href="/logout">Logout</a>
+      </div>
       </nav>
     </header>
     <main id="container">
+      <form action="/send_to">
+        <fieldset>
+          <p>
+          <input type="text" name="search-query" placeholder="Enter">
+          </p>
+          <p>
+          <label>By Name: </label>
+          <input type="checkbox" name="name">
+          </p>
+          <p>
+          <label>By Location: </label>
+          <input type="checkbox" name="location">
+          </p>
+          <p>
+          <input type="submit" value="Search">
+          </p>
+        </fieldset>
+      </form>
+    </main>
+  </body>
