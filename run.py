@@ -25,7 +25,7 @@ def search_handler(response):
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    response.write(render_file('templates/profile.html', {}))    
+    response.write(render_file('templates\\profile.html', {}))    
     
    
 def own_profile_handler(response):
