@@ -86,7 +86,7 @@ def create_profile_handler(response):
     response.write(render_file(os.path.join('templates', 'create.html'), {})
 
 def all_post_handler(response):
-    userID = getCookie()
+    userID = get_cookie()
     if userID:
         posts = Post.get10()
         for post in posts:
