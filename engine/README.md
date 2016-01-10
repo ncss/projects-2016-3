@@ -3,7 +3,7 @@
 ##TEMPLATE ENGINE SYNTAX
 ###TAGS:
 
-- `{{ expr }}` This tag is used to output the result of any valid Python expression into the HTML document in place of the tag. The output should be properly escaped so invalid HTML is not produced. Ensure there is a space between `{{` and the Python expression and `}}`.
+- `{{ expr }}` This tag is used to output the result of any valid Python expression into the HTML document in place of the tag. The output should be properly escaped so invalid HTML is not produced. Ensure there is a space between `{{` and the Python expression and `}}`. If an expression is given that is not specified in the given context, the default error is a `ParseError`. The function `render_file` contains a keyword argument `strict` which is by default set to `True`. When `strict = False`, expressions that are not present in the context return an empty string in their place instead of throwing a `ParseError`.
   - e.g. `<h1>{{ person.name }}'s Profile</h1>`
   - e.g. `<li>{{ person.name }} is a doctor.</li>`
 
