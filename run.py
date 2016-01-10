@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from tornado.ncss import Server
 import pprint
+from engine import render_file, ParseError
 
 #user has id, email, fname, lname, location, password
 #post has userid, message, status, timestamp
@@ -23,13 +24,9 @@ def search_handler(response):
     response.write('Search!')
 
 def profile_handler(response, profile_id):
-    #displays profile of user with given id 
-    profile_id = int(profile_id)
-    print(profile_id)
-    if profile_id not in users:
-	    unknown_handler(response, 'User {} not found'.format(profile_id))
-    else:
-	    response.write(pprint.pformat(users[profile_id]).replace('\n', '<br>'))
+    #displays profile of user with given id
+    response.write(render_file('templates/profile.html', {}))    
+    
    
 def own_profile_handler(response):
     #redirect to user's own profile page
