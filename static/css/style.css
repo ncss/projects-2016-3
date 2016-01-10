@@ -36,7 +36,7 @@ a:hover {
   text-align: right;
 }
 
-main#container {
+div#main {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
