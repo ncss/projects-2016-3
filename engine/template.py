@@ -66,10 +66,10 @@ class IfNode(Node):
     
     def evaluate(self, context):
         if eval(self.predicate, {}, context):
-            return main_child.evaluate(context)
+            return self.main_child.evaluate(context)
         else:
-            if else_child is not None:
-                return else_child.evaluate(context)
+            if self.else_child is not None:
+                return self.else_child.evaluate(context)
             return ''
 
 
@@ -93,7 +93,8 @@ def _notFinished(parent, lookingAt, template):
         if lookingAt == '% end for ':
             return False
     if isinstance(parent, IfNode):
-        pass
+        if lookingAt == '% end if ' or lookingAt == '% else ':
+            return False
     return True
 
 
@@ -115,9 +116,14 @@ def _parse_template(template, upto, parent):
             group_node, offset = _parse_template(template, index + 1, token)
             token.child_group = group_node
         elif token.startswith('% if'):
-            if_token = re.match(if_tokenising)
-        elif token.startswith('% end if'):
-            pass
+            if_token = re.match(if_tokenising, token)
+            predicate = if_token.group(1).strip()
+            token = IfNode(root_node, predicate, None, None)
+            group_node, offset = _parse_template(template, index + 1, token)
+            token.main_child = group_node
+            if template[offset] == '% else ':
+                group_node, offset = _parse_template(template, offset + 1, token)
+                token.else_child = group_node
         else:
             token = TextNode(token, root_node)
 
