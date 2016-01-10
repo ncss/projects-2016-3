@@ -1,10 +1,10 @@
 import re
-
+import os
 tokenisingExpr = re.compile(r'(?:\{(?=%|\{))(.*?)(?:%|\})\}')
 
 class ParseError(Exception):
     def __init__(self, msg):
-        return super(msg)
+        return super().__init__(msg)
 
 class Node:
     def __init__(self, content, parent):
@@ -20,38 +20,62 @@ class TextNode(Node):
         
 class PythonNode(Node):
     def evaluate(self, context):
-        return eval(self.content, {}, self.context)
+        return eval(self.content, {}, context)
 
 class IncludeNode(Node):
     def evaluate(self, context):
         try:
             with open(self.content) as f:
-                return parse_template(f.read()).eval
-        except IOError():
-            raise ParseError('Failed to read file')
+                return render_template(f.read(), context)
+        except FileNotFoundError:
+            raise ParseError('\nIncluded file: {} is nonexistent'.format(self.content))
 
+class IfNode(Node):
+    def evaluate(self):
+        pass
+
+class GroupNode(Node):
+    def evaluate(self, context):
+        nodestr = []
+        for node in self.content:
+            nodestr.append(node.evaluate(context))
+        return ''.join(str(i) for i in nodestr)
+    
 def _tokenise(template):
-    print(re.split(tokenisingExpr, template))
+    return re.split(tokenisingExpr, template)
         
 def _parse_template(template, upto, parent):
-    pass
+    root_node = GroupNode([], parent)
+    tokenvalues = _tokenise(template)
+    content = []
+    for token in tokenvalues:
+        if token.startswith('{'):
+            token = PythonNode(token[1:].strip(), root_node)
+        elif token.startswith('% include'):
+            token = IncludeNode(token[len('% include '):-1], root_node)
+        else:
+            token = TextNode(token, root_node)
+        content.append(token)
+    root_node.content = content
+    return root_node
         
 def parse_template(template):
     return _parse_template(template, 0, None)
     
 def render_template(template, context):
-    pass
+    return parse_template(template).evaluate(context)
 
+def render_file(filename, context):
+    try:
+        with open(filename) as f:
+            currentDirectory = os.getcwd()
+            os.chdir(os.path.dirname(os.path.abspath(filename)))
+            rendered = render_template(f.read(), context)
+            os.chdir(currentDirectory)
+            return rendered
+
+    except FileNotFoundError:
+        raise ParseError('Tried to render nonexistent file')
 if __name__ == '__main__':
-    _tokenise("""{% include header.html %}
-<section id='profile'>
-<h1>{{ person.name }}</h1>
-<ul id='friends-list'>
-{% for f in person.friends %}
-<li class='friend'>
-{{ f.name.title() }} {{ f.age }} {% if f.gender == 'M' %}Male{% else %}Female{% end if %}
-</li>
-{% end for %}
-</ul>
-</section>
-{% include footer.html %}""")
+    render_file('test.html', {'person': 0, 'title':1, 'age':2})
+    print(render_template("""{{ a }} {% include test.html %} {{ title }}""", {'person': 0, 'title':1, 'age':2}))
