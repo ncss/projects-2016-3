@@ -2,6 +2,7 @@ import re
 import os
 import html
 from collections import namedtuple
+strictness = True
 ForTag = namedtuple('ForTag', ['iterator', 'iterable', 'child_group'])
 tokenising_expression = re.compile(r'(?:\{(?=%|\{))(.*?)(?:%|\})\}')
 for_tokenising = re.compile(r'% for (.*) in (.*)')
@@ -29,7 +30,12 @@ class TextNode(Node):
 
 class PythonNode(Node):
     def evaluate(self, context):
-        return html.escape(str(eval(self.content, {}, context)))
+        try:
+            return html.escape(str(eval(self.content, {}, context)))
+        except NameError:
+            if not strictness:
+                return ''
+            return html.escape(str(eval(self.content, {}, context)))
 
 
 class IncludeNode(Node):
@@ -145,7 +151,9 @@ def render_template(template, context):
     return parse_template(template)[0].evaluate(context)
 
 
-def render_file(filename, context):
+def render_file(filename, context, *, strict=True):
+    global strictness
+    strictness = strict
     try:
         with open(filename) as f:
             cur_directory = os.getcwd()
