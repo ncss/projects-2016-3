@@ -88,7 +88,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write('sign up')
+    response.write(render_file('templates\\create.html', {}))
 
 def all_post_handler(response):
     for i in posts:
