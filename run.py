@@ -15,12 +15,12 @@ users = {1:{'id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohi
         2:{'id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
         3:{'id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
 }
-
+'''
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         2:{'id': 2, 'userid': 1, 'message' : "I'm still ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
 }
-
+'''
 skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         2:{'id':2, 'skill name': 'emergency doctor', 'category id':1, 'rank':8},
         3:{'id':3, 'skill name': 'structural engineer', 'category id':2, 'rank':6}
@@ -36,7 +36,7 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        response.set_secure_cookie("userLoggedIn", User.getPerson(email).userID)
+        response.set_secure_cookie("userLoggedIn", User.getPerson(email).user_id)
         response.redirect('/')
     else:
         response.write("wrong login")
@@ -63,15 +63,15 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file('templates\\search.html', {}))
+    response.write(render_file(os.path.join('templates', 'search.html')), {})
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    response.write(render_file(os.path.join('templates', 'profile.html'), {}))
+    response.write(render_file(os.path.join('templates', 'profile.html')), {})
    
 def own_profile_handler(response):
     #redirect to user's own profile page
-    userID = getCookie()
+    userID = get_cookie()
     if userID:
         profile_handler(response, userID)
     else:
@@ -83,20 +83,25 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file('templates\\create.html', {}))
+    response.write(render_file(os.path.join('templates', 'create.html'), {})
 
 def all_post_handler(response):
-
-    for i in posts:
-        response.write(posts[i]['message'] + '<br>')
-        userName = user[posts[i]['userid']]['fname']
-        response.write('by' + userName + '<br>')
+    userID = getCookie()
+    if userID:
+        posts = Post.get10()
+        for post in posts:
+            response.write(post.message + '<br>')
+            userName = User.get_user(post.author_id).fname
+            response.write('by' + userName + '<br>')
+            response.write('all posts')
+    else:
+        response.redirect('/')
+    
     #display all posts
-    response.write('all posts')
 
 def new_post_handler(response):
     #new post page
-    response.write(render_file('templates\\addpost.html', {}))
+    response.write(render_file(os.path.join('templates', 'addpost.html')), {})
 
 def about_handler(response):
     #about page
