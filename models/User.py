@@ -1,14 +1,14 @@
 class User:
-	def __init__ (self, userID, email, fname, lname, age, location, gender, photo, contact):
-		self.userID = userID
-		self.email = email
-		self.fname = fname
-		self.lname = lname
-		self.age = age
-		self.location = location
-		self.gender = gender
-		self.photo = photo
-		self.contact = contact
+	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone):
+		self._user_id = user_id
+		self._email = email
+		self._fname = fname
+		self._lname = lname
+		self._DOB = DOB
+		self._location = location
+		self._gender = gender
+		self._photo = photo
+		self._phone = phone
 
 	def __str__(self):
 		return 'Obect for user {}'.format(self.name)
@@ -18,6 +18,85 @@ class User:
 	'''
 #********************************************************************************
 #********************************************************************************
+#Return fields
+#********************************************************************************
+#********************************************************************************
+	def get_user_id(self):
+		return self._user_id
+
+	def get_email(self):
+		return self._email
+
+	def get_first_name(self):
+		return self._fname
+
+	def get_last_name(self):
+		return self._lname
+
+	def get_DOB(self):
+		return self._DOB
+
+	def get_age(self):
+		#Calulate age from DOB
+		return self._DOB
+
+	def get_location(self):
+		#Split into long/lat
+		return self._location
+
+	def get_gender(self):
+		return self._gender
+
+	def get_photo(self):
+		#Ask Bruce
+		return self._photo
+
+	def get_phone(self):
+		return self._phone
+
+#********************************************************************************
+#********************************************************************************
+#Sign in and log in
+#********************************************************************************
+#********************************************************************************
+
+	def email_exists(email):
+		#TODO
+		if select(<email>):
+			return True
+		else:
+			return False	
+
+	@classmethod
+	def create_user(email, fname, lname, DOB, location, gender, password):
+		#TODO
+		newUser = insert(<fields>):
+			return newUser
+		else:
+			return None	
+
+	def get_person(user_id):
+		#TODO
+		return select(<user_id>)
+	
+	def get_person(email):
+		#TODO
+		return select(<email>)
+
+	def verify_password(email, password):
+		#TODO
+		if email == select(<email>):
+			if password == select(<password>):
+				return True
+			else:
+				return False #Incorrect password
+		else:
+			return False #Incorrect email
+
+
+#********************************************************************************
+#********************************************************************************
+#Fun stuff
 #********************************************************************************
 #********************************************************************************
 
