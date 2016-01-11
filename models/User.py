@@ -98,9 +98,13 @@ class User:
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
         person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')
-        print(person_list)
+        print('PERSON', person_list)
         #make above line into a dictionary
-        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
+        person_list, = person_list
+        new_user = User(person_list[0], person_list[1], person_list[2],
+                person_list[3], person_list[4], person_list[5],
+                person_list[6], person_list[7], person_list[8],
+                person_list[9])
         return new_user
 
     @classmethod
