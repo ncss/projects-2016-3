@@ -83,7 +83,7 @@ class User:
 		else:
 			return None	
 		'''
-        
+        @classmethod
 	def get_person(user_id):
 		#TODO
 		pass
