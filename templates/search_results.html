@@ -1,11 +1,12 @@
 {% include header.html %}
 <div>
   <h1>Search Results for: "{{ search_query }}"</h1>
+  <h1>From youngest posts to oldest: </h1>
 </div>
 <body class="search-results">
   <div class="post">
     <ol>
-      {% for i in reversed(search_found) %}
+      {% for i in list(search_results)[::-1] %}
         <h2>
           <li>"{{ i }}"</li>
         </h2>
