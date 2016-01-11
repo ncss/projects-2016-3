@@ -193,11 +193,12 @@ def new_post_handler(response):
         userID = get_cookie(response)
         response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))
 
-@login_required
 def about_handler(response):
-    #about page
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'about.html'), {'user':User.get_person_by_id(userID)}))
+    user = None
+    if userID != None:
+        user = User.get_person_by_id(userID)
+    response.write(render_file(os.path.join('templates', 'about.html'), {'user':user}))
 
 def styleguide_handler(response):
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
