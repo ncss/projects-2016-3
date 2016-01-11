@@ -210,12 +210,15 @@ def render_file(filename, context, *, strict=False):  # TODO: strict=None
         with open(filename) as f:
             cur_directory = os.getcwd()
             os.chdir(os.path.dirname(os.path.abspath(filename)))
-            rendered = render_template(f.read(), context)
-            os.chdir(cur_directory)
+            try:
+                rendered = render_template(f.read(), context)
+            except:
+                os.chdir(cur_directory)
+                raise
             return rendered
 
     except FileNotFoundError:
-        raise ParseError('Tried to render nonexistent file')
+        raise ParseError('Tried to render nonexistent file - ' + filename)
 
 if __name__ == '__main__':
     render_file('test.html', {'person': 0, 'title':1, 'age':2})

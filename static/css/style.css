@@ -1,8 +1,23 @@
 /* --- Base Infrastructure --- */
+header div#logo-wrapper {
+  float: left;
+}
+
+header div#logo-wrapper img {
+  width: 128px;
+  height: 128px;
+}
+
+header {
+  border-bottom: #242424;
+  border-style: solid;
+}
+
 header div.header-icon {
-  float:left;
+  float: left;
   padding-right: 20px;
 }
+
 header div.header-icon a {
   text-decoration: none;
 }
@@ -12,14 +27,18 @@ header div.header-icon img{
 }
 
 header div.user-greeting {
-  float:right;
+  float: right;
 }
+
 
 main#container {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px 10px;
+  padding: 20px;
+  border-style: solid;
+  border-top: 0px;
+  border-color: #3C3C3C;
 }
 
 footer {
@@ -30,6 +49,8 @@ footer a {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+
 
 
 /* --- Common layouts --- */
@@ -61,5 +82,5 @@ article.main-content {
 /* --- 404 Page --- */
 h1.404 {
   text-align: center;
-  
+
 }

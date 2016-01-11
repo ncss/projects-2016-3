@@ -1,12 +1,15 @@
 /* COLOUR PALETTE */
 
 .background-light-grey {
-  background-color: #505050;
+  background-color: #535353;
 }
 .background-med-grey {
   background-color: #3C3C3C;
 }
 .background-dark-grey {
+  background-color: #212121;
+}
+.background-darkest-grey {
   background-color: #181818;
 }
 .theme-primary {
@@ -24,7 +27,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Oswald";
-  font-weight: 500;
+  font-weight: 300;
   color: #CCCCCC;
   margin-top: 15px;
   margin-bottom: 0px;
