@@ -55,14 +55,13 @@ img#landing-bg {
   margin-right: auto;
   top: 0;
   width: 100vw;
-
 }
 
 fieldset.landing-login {
   text-align: center;
   background-color: rgba(0,0,0,0);
   position: absolute;
-  top: 75vh;
+  top: 73vh;
   left:0;
   right:0;
 }
@@ -85,13 +84,33 @@ fieldset.landing-login button {
   padding: 4px 10px;
   border-radius: 4px;
   border: 0px;
-  background-color: #E8640C;
+  background-color: #E83B0C;
   color: #FFFFFF;
   outline: none;
   /*padding-bottom: 10px;*/
 }
 
+p#sign-up-container {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 80vh;
+  left:0;
+  right:0;
+}
 
+a#sign-up {
+
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 36px;
+  padding: 7px 25px;
+  border-radius: 8px;
+  border: 0px;
+  background-color: #E83B0C;
+  color: #FFFFFF;
+}
 
 
 
@@ -150,6 +169,15 @@ h1.404 {
 
 
 /* --- View Posts --- */
+.post {
+  width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .low-threat {
   background-color: green;
   height: 20px;

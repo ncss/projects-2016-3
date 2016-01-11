@@ -1,7 +1,7 @@
 import sqlite3
 
 def select(table, where, *arg):
-    connect = sqlite3.connect('database.db')
+    connect = sqlite3.connect('db/database.db')
     cur = connect.cursor()
     if where:
         cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))
@@ -13,7 +13,7 @@ def select(table, where, *arg):
     return results
 
 def insert(table, columnvaluedict):
-    connect = sqlite3.connect('database.db')
+    connect = sqlite3.connect('db/database.db')
     cur = connect.cursor()
     keys = list(columnvaluedict.keys())
     columns = ', '.join(keys)

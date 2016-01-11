@@ -52,8 +52,6 @@ cur.execute("""
         fname text not null,
         lname text not null,
         DOB text not null,
-        lat real not null,
-        long real not null,
         gender text not null,
         photo blob null,
         password text not null,
@@ -101,7 +99,7 @@ cur.execute("""insert into  skills (category, specialisation, rank) values ( 'pr
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'professional', 'Engineer', 5); """)
 connect.commit()
 
-#insert into user values ('sofia123@mail.com', 'Sofia', 'HeLlo', '20/12/98', '40.7127, -74.0059', 'F', null, '56_ol%' 
+#insert into user values ('sofia123@mail.com', 'Sofia', 'HeLlo', '20/12/98', '40.7127, -74.0059', 'F', null, '56_ol%'
 
 
 # for row in cur:
@@ -109,5 +107,5 @@ connect.commit()
 
 #***************************************
 #Cleanup
-connect.close() 
+connect.close()
 #***************************************

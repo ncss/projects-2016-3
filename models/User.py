@@ -1,4 +1,3 @@
-
 from . import dbfunctions as db
 
 
@@ -16,7 +15,7 @@ class User:
         self._password = password
 
     def __str__(self):
-        return 'Object for user {}'.format(self.name)
+        return 'Object for user {}, {}'.format(self._fname, self._lname)
 
     '''
     Everything after this point needs to be updated in the database too!
@@ -70,23 +69,26 @@ class User:
     @classmethod
     def email_exists(klass, email):
         whereClause = 'email = \'{}\''.format(email)
+        print(db.select('user', whereClause, 'email'))
         if db.select('user', whereClause, 'email'):
             return True
         else:
             return False    
-
     @classmethod
     def create_user(klass, columnvaluedict):
-        db.insert('user', columnvaluedict)
-        newUser = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        if email_exits(columnvaluedict.get('email')):
+            return None
+        new_id = db.insert('user', columnvaluedict)
+        newUser = User(new_id, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return newUser
 
     @classmethod
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
-        person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        new_user = User(person_dict.get('user_id'), person_dict.get('email'), person_dict.get('fname'), person_dict.get('lname'), person_dict.get('DOB'), person_dict.get('location'), person_dict.get('gender'), person_dict.get('photo'), person_dict.get('phone'), person_dict.get('password'))
-        return new_user
+        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+        #make above line into a dictionary
+        print(person_list)
+        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7])
         
     @classmethod
     def get_person_by_email(klass, email):
@@ -98,9 +100,9 @@ class User:
     @classmethod
     def verify_password(klass, email, password):
         whereClause = 'email = \'{}\''.format(email)
-        inDb = select('user', whereClause, 'password')
+        inDb = db.select('user', whereClause, 'password')
         if inDb:
-            if password == inDb:
+            if password == inDb[0][0]:
                 return True
             else:
                 return False #Incorrect password
@@ -108,31 +110,22 @@ class User:
             return False #Incorrect email
 
 '''
-if User.email_exists('marksonn5@gmail.com'):
-    print ('True')
-else:
-    print('False')
+newUser = User.get_person_by_id(3)
+print(newUser)
 '''
-'''myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+'''
+myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
 newUser = User.create_user(myDictionary)
 print (newUser)
 
-myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
-newUser = User.get_person_by_id(myDictionary)
-print (newUser)
-
-myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
-newUser = User.get_person_by_email(myDictionary)
-print (newUser)
-
-print(User.verify_password('george.com', 'bob1'))'''
-
+#print(User.verify_password('george.com', 'bob1'))'''
+'''
 #********************************************************************************
 #********************************************************************************
 #Fun stuff
 #********************************************************************************
 #********************************************************************************
-'''
+
 #Name Modifications
     def updateName(self, newName):
         self.name = newName
