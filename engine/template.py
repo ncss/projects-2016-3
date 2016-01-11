@@ -71,15 +71,7 @@ class ForNode(Node):
         for_list = []
         for item in iterable:
             context = dict(context)
-            if isinstance(item, str) and len(item) > 1:
-                raise ParseError('Cannot unpack strings')
-            if isinstance(item, list) or isinstance(item, tuple):
-                if len(self.iterator) != len(item):
-                    raise ParseError('Failed to unpack: provided {} values to unpack to, provided {} values to unpack from'.format(len(self.iterator), len(item))) 
-            else:
-                item = [item]
-            for i in range(len(self.iterator)):
-                context[self.iterator[i]] = item[i]
+            exec(','.join(self.iterator) + '=' + str(item), {}, context)
             for_list.append(self.child_group.evaluate(context))
         return ''.join(str(i) for i in for_list)
 
