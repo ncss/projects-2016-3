@@ -30,16 +30,17 @@ def insert(table, columnvaluedict):
     cur.close()
     connect.close()
 
+'''
 insert('post', {
 	'message': 'hello world! 12',
 	'author_id': 76,
 	'status': 2,
 	'timestamp': '35/1/10/2016'
 })
-
+'''
 #def where, insert
 #check location, dob
-print(select('post', 'message = \'hi\'', 'message', 'timestamp'))
+#print(select('post', 'message = \'hi\'', 'message', 'timestamp'))
 newUser = User()
 if newUser.email_exists():
     print('Yay')
