@@ -54,7 +54,11 @@ p {
 }
 
 label {
-	display: block;
+  display: block;
+}
+
+input[type="radio"]~label {
+  display: inline;
 }
 
 figcaption {
