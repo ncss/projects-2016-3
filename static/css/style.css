@@ -8,16 +8,12 @@ header div.user-greeting {
   float:right;
 }
 
-/*nav {
-
-}*/
-
-/*main#container {
+main#container {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px 10px;
-}*/
+}
 
 footer {
   text-align: center;
@@ -45,6 +41,15 @@ article.main-content {
 
 
 /* --- Profile --- */
+
+/* --- Posts --- */
+div.post-box {
+  background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
 
 
 /* --- Utilities --- */

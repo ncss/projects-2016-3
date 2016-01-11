@@ -61,8 +61,8 @@ class User:
 	def get_phone(self):
 		return self._phone
 
-        def get_password(self):
-                return self._password
+	def get_password(self):
+		return self._password
 #********************************************************************************
 #********************************************************************************
 #Sign in and log in
