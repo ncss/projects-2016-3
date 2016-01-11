@@ -52,7 +52,7 @@ img#landing-bg {
   margin-right: auto;
   top: 0;
   width: 100vw;
-  
+
 }
 
 fieldset.landing-login {
@@ -147,6 +147,14 @@ h1.404 {
 
 
 /* --- View Posts --- */
+.post {
+  width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #3C3C3C;
+  padding-left: 15px;
+}
+
 .low-threat {
   background-color: green;
   height: 20px;
