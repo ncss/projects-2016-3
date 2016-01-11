@@ -58,11 +58,11 @@ def login_required(function):
 
 def return_403(response, *args, **kwargs):
     response.set_status(403)
-    response.write(render_file(os.path.join('templates', '403.html'), {}))
+    response.write(render_file(os.path.join('templates', '403.html'), {'user': None}))
 
 def return_404(response, *args, **kwargs):
     response.set_status(404)
-    response.write(render_file(os.path.join('templates', '404.html'), {}))
+    response.write(render_file(os.path.join('templates', '404.html'), {'user': None}))
 
 def login_handler(response):
     #database password check
