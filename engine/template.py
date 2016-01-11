@@ -215,7 +215,7 @@ def render_file(filename, context, *, strict=False):  # TODO: strict=None
             return rendered
 
     except FileNotFoundError:
-        raise ParseError('Tried to render nonexistent file')
+        raise ParseError('Tried to render nonexistent file - ' + filename)
 
 if __name__ == '__main__':
     render_file('test.html', {'person': 0, 'title':1, 'age':2})
