@@ -1,23 +1,25 @@
 {% include header.html %}
 
     <h1>Add Post</h1>
-    <p>Text:</p>
   <form action="send_to">
-    <p>
-      <input type="text" name="post" placeholder="Enter Text Here">
-    </p>
-    <p>
-      <!-- Remember to add images instead of labels -->
-      <label>Low: </label>
-      <input type="radio" name="threat" value="0">
-      <label>Medium: </label>
-      <input type="radio" name="threat" value="1">
-      <label>High: </label>
-      <input type="radio" name="threat" value="2">
-    </p>
-    <p>
-      <input type="submit" value="Submit">
-    </p>
+    <fieldset>
+      <p>
+        <label>Post: </label>
+        <input type="text" name="post" placeholder="Enter Text Here">
+      </p>
+      <p>
+        <!-- Remember to add images instead of labels -->
+        <label>Low: </label>
+        <input type="radio" name="threat" value="0" checked="checked">
+        <label>Medium: </label>
+        <input type="radio" name="threat" value="1">
+        <label>High: </label>
+        <input type="radio" name="threat" value="2">
+      </p>
+      <p>
+        <input type="submit" value="Submit">
+      </p>
+    </fieldset>
   </form>
 
 {% include footer.html %}
