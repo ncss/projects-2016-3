@@ -3,6 +3,11 @@
 {% for post in posts %}
 <div class="post">
   <h2>{{post.get_author_id()}}</h2>
+    <p>Threat level:
+      {% if post.get_status() == 0 %}Low<div class="low-threat"></div>{% end if %}
+      {% if post.get_status() == 1 %}Medium<div class="med-threat"></div>{% end if %}
+      {% if post.get_status() == 2 %}High<div class="high-threat"></div>{% end if %}
+    </p>
     <p>{{post.get_message()}}</p>
     <p>{{post.get_timestamp()}}</p>
   </div>

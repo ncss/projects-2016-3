@@ -52,8 +52,6 @@ cur.execute("""
         fname text not null,
         lname text not null,
         DOB text not null,
-        lat real not null,
-        long real not null,
         gender text not null,
         photo blob null,
         password text not null,
