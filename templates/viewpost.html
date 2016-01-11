@@ -14,22 +14,26 @@
     </h1>
 </div>
 
+<div class="background-med-grey text-center post">
+  <h2>List of posts from youngest to oldest: </h2>
+</div>
+
 {% if posts %}
 
-{% for post in posts %}
+{% for post in posts[::-1] %}
 <div class="background-med-grey post">
     {% if post.get_status() == 0 %}<div class="threat-post low"></div>{% end if %}
     {% if post.get_status() == 1 %}<div class="threat-post med"></div>{% end if %}
     {% if post.get_status() == 2 %}<div class="threat-post high"></div>{% end if %}
 
-  <h2>Name: {{ post.get_author().get_first_name() }}</h2>
-    <p>Threat level:
+  <h2>Name: {{ post.get_author().get_first_name() }}</h2><br>
+    <p>Threat Level:
       {% if post.get_status() == 0 %}Low{% end if %}
       {% if post.get_status() == 1 %}Medium{% end if %}
       {% if post.get_status() == 2 %}High{% end if %}
-    </p>
-    <p>{{post.get_message()}}</p>
-    <p>{{post.get_timestamp()}}</p>
+    </p><br>
+    <p>Message: "{{post.get_message()}}"</p><br>
+    <p>Time: {{post.get_timestamp()}}</p>
   </div>
 {% end for %}
 
