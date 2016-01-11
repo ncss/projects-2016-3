@@ -133,7 +133,7 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
-    response.write('about')
+    response.write(render_file(os.path.join('templates', 'about.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404

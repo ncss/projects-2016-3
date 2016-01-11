@@ -11,7 +11,7 @@ class User:
 		self._phone = phone
 
 	def __str__(self):
-		return 'Obect for user {}'.format(self.name)
+		return 'Object for user {}'.format(self.name)
 
 	'''
 	Everything after this point needs to be updated in the database too!
@@ -62,7 +62,7 @@ class User:
 
 	def email_exists(email):
 		#To check
-		if select(email, user):
+		if select(email, 'user'):
 			return True
 		else:
 			return False	
@@ -87,10 +87,9 @@ class User:
 
 	def get_person(email):
 		#TODO
-		pass
-		'''
-		return select(<email>)
-		'''
+		email = "email = " + email
+		return select(table='user', where=email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+		
 
 	def verify_password(email, password):
 		#TODO
@@ -110,7 +109,7 @@ class User:
 #Fun stuff
 #********************************************************************************
 #********************************************************************************
-
+'''
 #Name Modifications
 	def updateName(self, newName):
 		self.name = newName
@@ -125,12 +124,6 @@ class User:
 
 #Gender Modifications
 	def updateGender(self, newGender):
-		'''
-		Store gender as:
-			1. Boolean (i.e. True for male, False for female)
-			2. Int (i.e. 0 for male, 1 for female)
-			3. String (i.e. 'male'/'m' for male, 'female'/'f' for female)
-		'''
 		self.gender = newGender
 
 #Skills Modifications
@@ -147,4 +140,4 @@ class User:
 #Contact Modifications
 	def updateContact(self, newContact):
 		self.contact = newContact
-
+'''
