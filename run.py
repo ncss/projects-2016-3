@@ -242,5 +242,5 @@ server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
 server.set_default_handler(default_handler)
-
-server.run()
+if None:
+    server.run()
