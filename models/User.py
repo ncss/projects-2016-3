@@ -132,7 +132,7 @@ class User:
 
     @classmethod
     def updateGender(cls, user_id, newGender):
-        db.update('user', 'gender', newGender 'user_id = {}'.format(user_id))
+        db.update('user', 'gender', newGender, 'user_id = {}'.format(user_id))
 
     # TODO
     # @classmethod
