@@ -7,6 +7,9 @@ header {
 
 header div#logo-wrapper {
   float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 3px;
 }
 
 header div#logo-wrapper img {
@@ -17,6 +20,7 @@ header div#logo-wrapper img {
 header nav {
   text-align: center;
   display: inline-block;
+  padding-top: 20px;
 }
 
 header div.header-icon {
@@ -32,6 +36,8 @@ header div.header-icon img {
 
 header div.user-greeting {
   float: right;
+  padding-top: 20px;
+  padding-right: 10px;
 }
 
 div.centering {
