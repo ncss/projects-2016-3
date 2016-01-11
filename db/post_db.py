@@ -26,13 +26,6 @@ def insert(table, columnvaluedict):
     cur.close()
     connect.close()
 
-insert('post', {
-	'message': 'hello world! 12',
-	'author_id': 76,
-	'status': 2,
-	'timestamp': '35/1/10/2016'
-})
-
 #def where, insert
 #check location, dob
 
@@ -45,32 +38,17 @@ def get_all_posts():
 
 
 def get_all_user_posts(user_id):
-    connect = sqlite3.connect('database.db')
-    cur = connect.cursor()
-    cur.execute (''' select * from post where author_id = %d''' % user_id)
-    #print(cur.fetchall())
+    select(posts, user_id)
+    
+def create_post(columnvaluedict):
+    insert('post', columnvaluedict)
 
-    cur.close()
-    connect.close()
-
-
-#get_all_user_posts(0)
-
-
-
-
-def create_post(message, status, user_id):
-    connect = sqlite3.connect('database.db')
-    cur = connect.cursor()
-    cur.execute (''' insert into post (message, author_id, status, timestamp) values ('%s', %d, %d, '%s');''' % (message, user_id, status, ""))
-    connect.commit()
-    #print(cur.fetchall())
-
-    cur.close()
-    connect.close()
-
-
-create_post('The world is ending! Help me and my family pleazzzzzz!!111!!!', 2, 1)
+create_post({
+        'message': 'hello world! 12',
+        'author_id': 76,
+        'status': 2,
+        'timestamp': '35/1/10/2016'
+    })
 
 ## user test
 
