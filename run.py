@@ -141,7 +141,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {}))
+    response.write(render_file(os.path.join('templates', 'create.html'), {'user':None}))
 
 def process_profile_handler(response):
     print(response.request)
