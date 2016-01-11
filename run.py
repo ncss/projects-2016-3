@@ -127,19 +127,29 @@ def create_profile_handler(response):
 
 @login_required
 def all_post_handler(response):
-	# display all posts
-	userID = get_cookie(response)
+	#display all posts
+	#posts = Post.get10() function does not exist yet
+	posts = Post.get_all_posts()
+	for post in posts:
+		response.write(post.get_message())
+		response.write(str(post.get_author_id()) + '<br>')
+
+		#response.write(render_file(os.path.join('templates', 'viewposts.html'), Post.get_all_posts()))
+
+	'''
+		userID = get_cookie(response)
 	if userID:
-		#posts = Post.get10() function does not exist yet
 		for individualPost in post:
-			response.write(post[individualPost].get_message() + '<br>')
+			#pass in post list to template
+			#response.write(post[individualPost].get_message() + '<br>')
 			#userName = User.get_user(post.author_id).fname
 			#response.write('by' + userName + '<br>')
 			response.write('all posts')
 			######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-
+			
 	else:
 		response.redirect('/')
+		'''
 
 @login_required
 def new_post_handler(response):
