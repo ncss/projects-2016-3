@@ -35,7 +35,6 @@ def insert(table, columnvaluedict):
     connect.close()
     return inserted_id
 
-
 def update(table, field, value, whereClause):
     connect = sqlite3.connect('db/database.db')
     cur = connect.cursor()
