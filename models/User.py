@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from . import dbfunctions
-=======
 import dbfunctions as db
->>>>>>> e79ac429166b9f9c6e62b6c705e21ef659fef570
 
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
@@ -70,7 +66,7 @@ class User:
 #********************************************************************************
 	
 	@classmethod
-	def email_exists(email):
+	def email_exists(klass, email):
 		#To check
 		if select(email, 'user'):
 			return True
@@ -78,7 +74,7 @@ class User:
 			return False	
 
 	@classmethod
-	def create_user(email, fname, lname, DOB, location, gender, password):
+	def create_user(klass, email, fname, lname, DOB, location, gender, password):
 		#TODO
 		pass
 		'''
@@ -88,21 +84,20 @@ class User:
 			return None	
 		'''
 	@classmethod
-	def get_person(user_id):
-		#TODO
-		pass
+	def get_person(klass, user_id):	
+		return select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
 		
 		#return select(user_id, user)
 		
 	@classmethod
-	def get_person(email):
+	def get_person(klass, email):
 		#TODO
 		email = "email = " + email
 		return select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
 		
 
 	@classmethod
-	def verify_password(email, password):
+	def verify_password(klass, email, password):
 		#TODO
 		pass
 		'''	
