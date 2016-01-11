@@ -3,13 +3,14 @@ header {
   border-bottom: #242424;
   border-style: solid;
   text-align: center;
+  height: 120px;
 }
 
 header div#logo-wrapper {
-  float: left;
   padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 3px;
+  position: absolute;
 }
 
 header div#logo-wrapper img {
@@ -35,9 +36,11 @@ header div.header-icon img {
 }
 
 header div.user-greeting {
-  float: right;
   padding-top: 20px;
   padding-right: 10px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 
 div.centering {
@@ -52,7 +55,7 @@ img#landing-bg {
   margin-right: auto;
   top: 0;
   width: 100vw;
-  
+
 }
 
 fieldset.landing-login {
