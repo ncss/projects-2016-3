@@ -3,31 +3,14 @@
       <form action="/send_to">
         <tr>
           <p>
-            <td><label>Name: </label></td>
-            <td><input type="text" name="first-name" placeholder="First">
-            <input type="text" name="last-name" placeholder="Last"></td>
+            <td><input type="text" name="first-name" placeholder="First Name">
+            <input type="text" name="last-name" placeholder="Last Name"></td>
           </p>
         </tr>
         <tr>
           <p>
-            <td><label>Date Of Birth: </label></td>
-            <td><select id="form_dob_month" name="dob_month">
-            	<option value="-">-</option>
-            	<option value="1">January</option>
-            	<option value="2">Febuary</option>
-            	<option value="3">March</option>
-            	<option value="4">April</option>
-            	<option value="5">May</option>
-            	<option value="6">June</option>
-            	<option value="7">July</option>
-            	<option value="8">August</option>
-            	<option value="9">September</option>
-            	<option value="10">October</option>
-            	<option value="11">November</option>
-            	<option value="12">December</option>
-            </select>
-            <select id="form_dob_day" name="dob_day">
-            	<option value="-">-</option>
+            <td><select id="form_dob_day" name="dob_day">
+            	<option value="Day">Day</option>
             	<option value="1">1</option>
             	<option value="2">2</option>
             	<option value="3">3</option>
@@ -60,8 +43,23 @@
             	<option value="30">30</option>
             	<option value="31">31</option>
             </select>
+            <select id="form_dob_month" name="dob_month">
+            	<option value="Month">Month</option>
+            	<option value="1">January</option>
+            	<option value="2">Febuary</option>
+            	<option value="3">March</option>
+            	<option value="4">April</option>
+            	<option value="5">May</option>
+            	<option value="6">June</option>
+            	<option value="7">July</option>
+            	<option value="8">August</option>
+            	<option value="9">September</option>
+            	<option value="10">October</option>
+            	<option value="11">November</option>
+            	<option value="12">December</option>
+            </select>
             <select id="form_dob_year" name="dob_year">
-            	<option value="-">-</option>
+            	<option value="Year">Year</option>
               <option value="2016">2016</option>
               <option value="2015">2015</option>
               <option value="2014">2014</option>
@@ -125,27 +123,23 @@
         </tr>
         <tr>
           <p>
-            <td><label>Location: </label></td>
             <td><input type="text" name="latitude" placeholder="Latitude">
             <input type="text" name="longitude" placeholder="Longitude"></td>
           </p>
         </tr>
         <tr>
           <p>
-            <td><label>Email: </label></td>
-            <td><input type="email" name="email"></td>
+            <td><input type="email" name="email" placeholder="Email"></td>
           </p>
         </tr>
         <tr>
           <p>
-            <td><label>Password: </label></td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" name="password" placeholder="Password"></td>
           </p>
         </tr>
         <tr>
           <p>
-            <td><label>Confirm Password: </label></td>
-            <td><input type="password" name="confirm_password"></td>
+            <td><input type="password" name="confirm_password" placeholder="Confirm Password"></td>
           </p>
         </tr>
         <tr>

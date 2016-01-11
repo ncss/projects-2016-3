@@ -27,6 +27,12 @@ div.post-box {
   padding-bottom: 5px;
 }
 
+footer {
+  margin: auto;
+  margin-top: 15px;
+  text-align: center;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
