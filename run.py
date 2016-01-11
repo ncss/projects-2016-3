@@ -172,7 +172,7 @@ def styleguide_handler(response):
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
 
 def landing_handler(response):
-    response.write(render_file(os.path.join('templates', 'landing.html'), {})
+    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
