@@ -136,7 +136,6 @@
                             <option value="Scientist">Scientist</option>
                             <option value="Engineer">Engineer</option>
                         </select>
-                        <input type="submit" name="add-skill" value="Add skill">
                       </p>
                   </div>
                 </fieldset>
