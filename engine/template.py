@@ -102,12 +102,19 @@ class CommentNode(Node):
 		return ''
 
 
+class LetNode(Node):
+	def evaluate(self, context):
+		exec(self.content, {}, context)
+		return ''
+
+
 class GroupNode(Node):
 	def evaluate(self, context):
-		nodestr = []
+		group_list = []
+		context = dict(context)
 		for node in self.content:
-			nodestr.append(node.evaluate(context))
-		return ''.join(str(i) for i in nodestr)
+			group_list.append(node.evaluate(context))
+		return ''.join(str(i) for i in group_list)
 
 
 def _tokenise(template):
@@ -147,6 +154,8 @@ def _parse_template(template, upto, parent):
 			token = SafePythonNode(token[len('% safe '):-1], root_node)
 		elif token.startswith('% include'):
 			token = IncludeNode(token[len('% include '):-1], root_node)
+		elif token.startswith('% let '):
+			token = LetNode(token[len('% let '): -1], root_node)
 		elif token.startswith('% for'):
 			for_token = re.match(for_tokenising, token)
 			iterator, iterable = for_token.group(1).strip(), for_token.group(2).strip()
