@@ -104,13 +104,22 @@ def search_handler(response):
     response.write(render_file(os.path.join('templates', 'search.html'), {'user':User.get_person_by_id(userID)}))
 
 @login_required
-def send_to_handler(response):
-    pass
-    ''' relying on get_people
-    query = response.get_field('search-query')
-    results = User.get_people(name)
-    response.write(results)
-    '''
+def search_results_handler(response):
+
+    query = response.get_field('query')
+    criteria = response.get_field('criteria')
+    posts = Post.get_all_posts()
+    results = []
+    print(posts)
+    for post in posts:
+        userID = post.get_author_id()
+        user = User.get_person_by_id(userID)
+        name = user.get_last_name()
+        if name == query:
+            results.append(user)
+    
+    response.write(render_file(os.path.join('templates', 'search_results.html'), {'search_results':results, 'search_query':query, 'user':User.get_person_by_id(get_cookie(response))}))
+
 
 @login_required
 def profile_handler(response, profile_id):
@@ -164,14 +173,7 @@ def process_profile_handler(response):
 @login_required
 def all_post_handler(response):
     #display all posts
-    #posts = Post.get10() function does not exist yet
     posts = Post.get_all_posts()
-    for post in posts:
-        #response.write(post.get_message())
-        #response.write(str(post.get_author_id()) + '<br>')
-        pass
-
-    #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
     userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts(), 'user':User.get_person_by_id(userID)}))
 
@@ -217,6 +219,7 @@ server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/login', login_handler, url_name = 'login')
 server.register(r'/logout', logout_handler, url_name = 'logout')
 server.register(r'/search', search_handler, url_name = 'search')
+server.register(r'/search_results', search_results_handler, url_name = 'search')
 server.register(r'/profile/(\d+)', profile_handler, url_name = 'profile')
 server.register(r'/profile', own_profile_handler, url_name = 'own_profile')
 server.register(r'/profile/(\d+)/edit', edit_profile_handler, url_name = 'edit_profile')
