@@ -3,5 +3,6 @@
 <p>{% for i in a_list %}{% if i % 2 == 0 %}
 {{ i }}, i is divisible by 2!
 {% else %}{{ i + 100 }}, i is not divisible by 2{% end if %}{% end for %}</p>
-{% include example_footer.html %}
+{% for i in a_list %}{{ i }}{% empty %}Empty{% end for %}
 
+{% include example_footer.html %}

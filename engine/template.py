@@ -18,7 +18,7 @@ class Node:
     def __init__(self, content, parent):
         self.content = content
         self.parent = parent
-        
+
     def evaluate(self, context):
         raise NotImplementedError()
 
@@ -26,7 +26,7 @@ class Node:
 class TextNode(Node):
     def evaluate(self, context):
         return self.content
-        
+
 
 class PythonNode(Node):
     def evaluate(self, context):
@@ -60,14 +60,19 @@ class ForNode(Node):
     """
     iterator: list of strings
     """
-    def __init__(self, parent, iterator, iterable, child_group):
+    def __init__(self, parent, iterator, iterable, child_group, empty_group):
         self.parent = parent
         self.iterator = iterator
         self.iterable = iterable
         self.child_group = child_group
+        self.empty_group = empty_group
 
     def evaluate(self, context):
         iterable = eval(self.iterable, {}, context)
+        if len(iterable) == 0 and self.empty_group is not None:
+            return self.empty_group.evaluate(context)
+
+
         for_list = []
         for item in iterable:
             context = dict(context)
@@ -82,7 +87,7 @@ class IfNode(Node):
         self.predicate = predicate
         self.main_child = main_child
         self.else_child = else_child
-    
+
     def evaluate(self, context):
         if eval(self.predicate, {}, context):
             return self.main_child.evaluate(context)
@@ -98,7 +103,7 @@ class GroupNode(Node):
         for node in self.content:
             nodestr.append(node.evaluate(context))
         return ''.join(str(i) for i in nodestr)
-    
+
 
 def _tokenise(template):
     return re.split(tokenising_expression, template)
@@ -110,6 +115,8 @@ def _notFinished(parent, lookingAt, template):
     lookingAt = template[lookingAt]
     if isinstance(parent, ForNode):
         if lookingAt == '% end for ':
+            return False
+        if lookingAt == '% empty ':
             return False
     if isinstance(parent, IfNode):
         if lookingAt == '% end if ' or lookingAt == '% else ':
@@ -134,9 +141,12 @@ def _parse_template(template, upto, parent):
             for_token = re.match(for_tokenising, token)
             iterator, iterable = for_token.group(1).strip(), for_token.group(2).strip()
             iterator = [i.strip() for i in iterator.split(',')]
-            token = ForNode(root_node, iterator, iterable, None)
+            token = ForNode(root_node, iterator, iterable, None, None)
             group_node, offset = _parse_template(template, index + 1, token)
             token.child_group = group_node
+            if template[offset] == '% empty ':
+                empty_group, offset = _parse_template(template, offset + 1, token)
+                token.empty_group = empty_group
         elif token.startswith('% if'):
             if_token = re.match(if_tokenising, token)
             predicate = if_token.group(1).strip()
@@ -155,12 +165,12 @@ def _parse_template(template, upto, parent):
         index += 1
     root_node.content = content
     return (root_node, index)
-        
+
 
 def parse_template(template):
     tokenvalues = _tokenise(template)
     return _parse_template(tokenvalues, 0, None)
-    
+
 
 def render_template(template, context):
     return parse_template(template)[0].evaluate(context)
