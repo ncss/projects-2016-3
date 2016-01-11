@@ -1,4 +1,4 @@
-import dbfunctions as db
+from . import dbfunctions as db
 
 
 class User:
