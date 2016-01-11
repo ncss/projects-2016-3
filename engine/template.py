@@ -75,13 +75,13 @@ class ForNode(Node):
 
         for_list = []
         for item in iterable:
-            context = dict(context)
+            contextCopy = dict(context)
             if len(self.iterator) > 1:
                 for var_name, var_value in zip(self.iterator, item):
-                    context[var_name] = var_value
+                    contextCopy[var_name] = var_value
             else:
-                context[self.iterator[0]] = item
-            for_list.append(self.child_group.evaluate(context))
+                contextCopy[self.iterator[0]] = item
+            for_list.append(self.child_group.evaluate(contextCopy))
         return ''.join(str(i) for i in for_list)
 
 
