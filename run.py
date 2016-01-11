@@ -137,10 +137,12 @@ def all_post_handler(response):
     #posts = Post.get10() function does not exist yet
     posts = Post.get_all_posts()
     for post in posts:
-        response.write(post.get_message())
-        response.write(str(post.get_author_id()) + '<br>')
+        #response.write(post.get_message())
+        #response.write(str(post.get_author_id()) + '<br>')
+        pass
 
-        #response.write(render_file(os.path.join('templates', 'viewposts.html'), Post.get_all_posts()))
+    #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
 
     '''
         userID = get_cookie(response)
