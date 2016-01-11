@@ -8,14 +8,17 @@
                             <img src="/static/images/logo.png" height="128">
                         </span>
                             <div class="profile-info">
-                                <p>
-                                  <input id="firstname" type="text" name="fname" value="First Name"> <input type="text" name="lname" value="Last Name">
+                              <p>
+                                <label> Full Name:   </label>
+                                  <input id="firstname" type="text" name="fname" placeholder="First Name"> <input type="text" name="lname" placeholder="Last Name">
                               </p>
                                 <p>
+                                    <label> Location:   </label>
                                     <input type="text" name="location">
                                 </p>
                                 <p>
-                                  <select>
+                                  <label> Date Of Birth: </label>
+                                  <select id="form_dob_day" name="dob_day">
                                     <optgroup>Day</optgroup>
                                     {% for i in range(1, 31 + 1) %}
                                     <option value="{{ i }}">{{ i }}</option>
@@ -60,8 +63,25 @@
                         </p>
                         <p>
                         <select>
-                                <option> </option>
-                            </select>
+                            <option value="Acupuncturist">Acupuncturist</option>
+                            <option value="Nurse">Nurse</option>
+                            <option value="GP">GP</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Vet">Vet</option>
+                            <option value="Nutritionist">Nutritionist</option>
+                            <option value="Physiotherapist">Physiotherapist</option>
+                            <option value="Social Worker">Social Worker</option>
+                            <option value="Chef">Chef</option>
+                            <option value="Funeral Worker">Funeral Worker</option>
+                            <option value="Policeman">Policeman</option>
+                            <option value="Criminal">Criminal</option>
+                            <option value="Farmer">Farmer</option>
+                            <option value="Botanist">Botanist</option>
+                            <option value="Baker">Baker</option>
+                            <option value="Lawyer">Lawyer</option>
+                            <option value="Scientist">Scientist</option>
+                            <option value="Engineer">Engineer</option>
+                        </select>
                       </p>
                   </div>
                 </fieldset>

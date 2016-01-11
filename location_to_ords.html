@@ -1,0 +1,76 @@
+<html>
+<head>
+    <style>
+        #results {
+            display: none;
+        }
+        
+        #results > ul {
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+            top: 0;
+            left: 0;
+        } 
+        #results > ul > li {
+            border: 1px solid black;
+            font-size: 10px;
+            max-width: 200px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+<body>
+    <div>
+    <form>
+      Location:<br>
+      <input id="location" type="text" name="location" value=""><br>
+      <input id="lat" type="hidden" value="">
+      <input id="lon" type="hidden" value="">
+    </form>
+    </div>
+
+    <div  id="results">
+        <ul>
+        </ul> 
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script>
+    $( document ).ready(function() { 
+            
+        $("#location").keyup(_.debounce(function() {
+            var dest = "http://nominatim.openstreetmap.org/search.php?format=json&q=" + $("#location")
+            .val()
+            .split(' ')
+            .join('+')
+            $.ajax(dest)
+            .done(function(response) {
+                $("#results > ul").html("")
+                response.forEach(function(obj){
+                    new_item = document.createElement("li")
+                    $(new_item).text(obj.display_name)
+                    $(new_item).attr("data-lat",obj.lat)
+                    $(new_item).attr("data-lon",obj.lon)
+                    console.log($(new_item))
+                    $("#results > ul").append($(new_item))
+                })
+                $("#results").show()
+            })
+        }, 200))
+        $("#results > ul").click(function(event) {
+            $("#location").val($(event.target).text())
+            $("#results").hide()
+            $("#lat").val($(event.target).attr("data-lat"))
+            $("#lon").val($(event.target).attr("data-lon"))
+        })
+    })
+    </script>
+</body>
+
+</html>
