@@ -1,7 +1,7 @@
 {% include header.html %}
 
         <article>
-            <form method="POST" action="">
+            <form method="POST" action="/profile/{{ user.get_user_id() }}/edit">
             <div class="sidebar">
                     <fieldset name="account-info">
                         <span class="img-zone">
@@ -116,7 +116,7 @@
                             <h1 class="edit-titles"> Add skills </h1>
                         </p>
                         <p>
-                        <select>
+                        <select name="skills-value" id="skills-value">
                             <option value="Acupuncturist">Acupuncturist</option>
                             <option value="Nurse">Nurse</option>
                             <option value="GP">GP</option>

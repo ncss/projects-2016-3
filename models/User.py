@@ -61,12 +61,12 @@ class User:
         return [Skill.Skill(s[0], s[1], s[3], s[2]) for s in skills]
 
     def set_skills(self, skills):
-        db.delete('user_skills', 'user_id = %d' % self._user_id)
+        db.delete('user_skills', 'user_id = %d;' % self._user_id)
         for skill in skills:
             skill_id = db.select('skills', 'specialisation = \'%s\'' % skill, 'skill_id')
             if skill_id:
                 db.insert('user_skill', {
-                    'skill_id': skill_id,
+                    'skill_id': skill_id[0][0],
                     'user_id': self._user_id
                 })
 

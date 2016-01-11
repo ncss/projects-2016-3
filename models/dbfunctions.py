@@ -8,6 +8,8 @@ def select(table, where, *arg):
     connect = sqlite3.connect(get_db_path())
     cur = connect.cursor()
     if where:
+        query = '''select %s from %s where %s''' % (",".join(arg), table, where)
+        print(query)
         cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))
     else:
         cur.execute('''select %s from %s''' % (",".join(arg), table))
@@ -48,7 +50,7 @@ def update(table, field, value, whereClause):
 def delete(table, whereClause):
     connect = sqlite3.connect('db/database.db')
     cur = connect.cursor()
-    cur.execute('''delete from %s where %s;''' % (table, field, value, whereClause))
+    cur.execute('''delete from %s where %s;''' % (table, whereClause))
     connect.commit()
     cur.close()
     connect.close()

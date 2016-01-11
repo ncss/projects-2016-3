@@ -158,7 +158,10 @@ def edit_profile_handler(response, id):
         dob_year = response.get_argument('dob_year')
         DOB = '{}/{}/{}'.format(dob_day, dob_month, dob_year)
         User.updateDOB(userID, DOB)
-        gender = response.get_argument('gender')
+        gender = response.get_argument('gender')        
+        skills = response.get_field('skills-value')
+        user = User.get_person_by_id(userID)
+        user.set_skills([skills])
         User.updateGender(userID, gender)
         contact = response.get_argument('contact-info')
         User.updateContact(userID, contact)
@@ -185,6 +188,7 @@ def process_profile_handler(response):
         location = lat + ',' + long
         gender = ""
         photo = ""
+        skills = response.get_argument('skills')
         password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
         user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location,
                     'gender':gender, 'photo':photo, 'password':password}

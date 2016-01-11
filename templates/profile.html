@@ -29,8 +29,9 @@
             <p>
                 <h1 class="edit-titles">Skills </h1>
                 <ul>
-                  <li>Plumber</li>
-                  <li>Security Guard</li>
+                	{% for skill in user.get_skills() %}
+                  <li>{{ skill }}</li>
+                  	{% end for %}
                 </ul>
             </p>
         </div>
