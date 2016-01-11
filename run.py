@@ -55,6 +55,10 @@ def return_403(response, *args, **kwargs):
 	response.write("403")
 	#render(response, '403.html', {})
 
+def return_404(response, *args, **kwargs):
+  response.set_status(404)
+  response.write(render_file(os.path.join('templates', '404.html'), {}))
+
 def login_handler(response):
 	#database password check
 	#assume database stuff worked fine
