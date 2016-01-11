@@ -85,9 +85,10 @@ class User:
     @classmethod
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
-        person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        new_user = User(person_dict.get('user_id'), person_dict.get('email'), person_dict.get('fname'), person_dict.get('lname'), person_dict.get('DOB'), person_dict.get('location'), person_dict.get('gender'), person_dict.get('photo'), person_dict.get('phone'), person_dict.get('password'))
-        return new_user
+        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+        #make above line into a dictionary
+        print(person_list)
+        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7])
         
     @classmethod
     def get_person_by_email(klass, email):
@@ -108,9 +109,10 @@ class User:
         else:
             return False #Incorrect email
 
+'''
 newUser = User.get_person_by_id(3)
 print(newUser)
-
+'''
 '''
 myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
 newUser = User.create_user(myDictionary)
