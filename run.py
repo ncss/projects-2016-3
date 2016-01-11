@@ -13,11 +13,10 @@ from models.Post import Post
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
 #user passwords = 12345, qwerty, 98765
-user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
-		2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
-		3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
-		}
-
+user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+        2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5'),
+        3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Sydney', 'M', '', '67893456', '79737ac46dad121166483e084a0727e5d6769fb47fa9b0b627eba4107e696078')
+        }
 emails = {'evan@email.com':1, 'amy@email.com':2, 'aleks@email.com':3}
 
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},

@@ -1,7 +1,7 @@
 import sqlite3
 #***************************************
 #Setup
-connect = sqlite3.connect('database.db')
+connect = sqlite3.connect('../database.db')
 cur = connect.cursor()
 #***************************************
 
@@ -9,10 +9,10 @@ cur = connect.cursor()
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #DELETE THIS BEFORE TESTING AND PRODUCTION
 
-# cur.execute('drop table if exists skills;')
-# cur.execute('drop table if exists user_skills;')
-# cur.execute('drop table if exists user;')
-# cur.execute('drop table if exists post;')
+cur.execute('drop table if exists skills;')
+cur.execute('drop table if exists user_skills;')
+cur.execute('drop table if exists user;')
+cur.execute('drop table if exists post;')
 
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
