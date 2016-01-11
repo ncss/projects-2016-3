@@ -1,7 +1,6 @@
 /* --- Base Infrastructure --- */
 header div.header-icon {
   float:left;
-  padding-right: 20px;
 }
 header div.header-icon a {
   text-decoration: none;
@@ -49,18 +48,17 @@ article.main-content {
 
 /* --- Profile --- */
 
-/* --- Posts --- */
-div.post-box {
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
+
 
 
 /* --- Utilities --- */
 
 .clearfix {
   clear: both;
+}
+
+/* --- 404 Page --- */
+h1.404 {
+  text-align: center;
+  
 }
