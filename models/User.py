@@ -1,3 +1,5 @@
+import dbfunctions
+
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone):
 		self._user_id = user_id
@@ -59,7 +61,8 @@ class User:
 #Sign in and log in
 #********************************************************************************
 #********************************************************************************
-
+	
+	@classmethod
 	def email_exists(email):
 		#To check
 		if select(email, 'user'):
@@ -84,13 +87,14 @@ class User:
 		
 		#return select(user_id, user)
 		
-
+	@classmethod
 	def get_person(email):
 		#TODO
 		email = "email = " + email
 		return select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
 		
 
+	@classmethod
 	def verify_password(email, password):
 		#TODO
 		pass

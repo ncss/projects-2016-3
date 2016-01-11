@@ -1,3 +1,5 @@
+import dbfunctions as db
+
 class Post:
 	def __init__ (self, post_id, message, author_id, status, timestamp):
 		self._post_id = post_id
@@ -9,9 +11,7 @@ class Post:
 	def __str__(self):
 		return 'Obect for post {} by {}'.format(self.title, self.author)
 
-	'''
-	Everything after this point needs to be updated in the database too!
-	'''
+	
 
 #********************************************************************************
 #********************************************************************************
@@ -38,8 +38,22 @@ class Post:
 		pass
 		#return select(<recent 10 posts>)
 
+	@classmethod
+	def get_all_user_posts(user_id):
+		return db.select('post', 'author_id = %s' % user_id, '*')
+
+	@classmethod
+	def get_all_posts():
+		   results = db.select('post', '', '*')
+		   return results
+
+	@classmethod
+	def create_post(klass, columnvaluedict):
+	   	db.insert('post', columnvaluedict)
+
 	#def newPost(self, title, message, author, status):
 	#def Post(self, title, message, author, status):
+
 
 	def updateTitle(self, newTitle):
 		self.title = newTitle
@@ -49,3 +63,13 @@ class Post:
 
 	def updateStatus(self, newStatus):
 		self.status = newStatus
+
+
+
+
+Post.create_post({
+	'message': 'hello world! 12',
+	'author_id': 76,
+	'status': 2,
+	'timestamp': '35/1/10/2016'
+})
