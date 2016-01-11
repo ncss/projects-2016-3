@@ -6,7 +6,7 @@ body {
   line-height: 24px;
 }
 
-div.main {
+main#container {
   background-color: #505050;
   position: static;
   margin: auto;
@@ -26,6 +26,7 @@ div.post-box {
   padding-top: 10px;
   padding-bottom: 5px;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
@@ -66,6 +67,7 @@ figcaption {
 }
 
 
+
 a:hover {
   color: #CCCCCC;
 }
@@ -74,9 +76,11 @@ a:active {
 }
 
 
+
 mark {
   background-color: #FFFFFF;
 }
+
 
 
 ol, ul, dd {
@@ -94,21 +98,38 @@ hr {
 fieldset {
   /* border: 1px groove rgb(255,255,255); */
   border: 0px;
+  background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
+
 input, textarea {
   border: 0px;
   background-color: rgba(255, 255, 255, 0.25);
   color: #CCCCCC;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  height: 24px;
+  outline: none;
+  padding: auto;
+  padding-left: 5px;
 }
 input:disabled{
-    color: rgba(204, 204, 204, 0.25);
+    color: rgba(204, 204, 204, 0.5);
     /*border: 1px groove rgba(204, 204, 204, 0.75);*/
-}
-textarea {
-  font-family: inherit;
 }
 select {
   border: 0px;
   background-color: rgba(255, 255, 255, 0.25);
   color: #CCCCCC;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  height: 24px;
+  outline: none;
+  padding: auto;
+  padding-left: 5px;
 }
