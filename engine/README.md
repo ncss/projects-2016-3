@@ -10,9 +10,12 @@
 - `{% include path %}` This tag is used to include another template file in place of the tag. The `path` argument should be the path to the template HTML file. Does not require single quotes.
   - e.g. `{% include header.html %}`
 
-- `{% if predicate %}X{% end if %}` **NOT WORKING YET!** 
+- `{% for dest in src %}X{% end for %}` This tag is used to repeatedly execute the template code `X` for every element in the variable `src`. Every time `X` is executed, the current value of the variable `dest` is added to the context of `X`. Requires `{% end for %}` to close the `for` statement.
+  - e.g. `{% for friend in person.friends %}<li class='friend'>{% include friend.html %}</li>{% end for %}`
 
-- `{% for dest in src %}X{% end for %}` **NOT WORKING YET!** 
+- `{% if predicate %}X{% end if %}` **NOT WORKING YET!**
+
+
 
 
 ## `render_file` FUNCTION

@@ -34,14 +34,10 @@ def login_required(function):
         if get_cookie(response):
             return function(response, *args, **kwargs)
         else:
-            return return_403(response)
-    return inner
-
-def return_403(response, *args, **kwargs):
-    response.set_status(403)
-    response.write("403")
-    #render(response, '403.html', {})
-
+            response.set_status('403')
+            render(response, '404.html', {})
+        return inner
+    
 def login_handler(response):
     #database password check
     #assume database stuff worked fine

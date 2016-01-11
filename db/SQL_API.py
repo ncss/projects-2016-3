@@ -36,7 +36,7 @@ cur.execute('''
 		user_id integer not null,
 		skill_id integer not null,
 
-		foreign key (user_id) references user (user_id)
+		foreign key (user_id) references user (user_id),
 		foreign key (skill_id) references skills (skill_id)
 	);
 
@@ -49,9 +49,7 @@ cur.execute('''
 	    email text not null,
 	    fname text not null,
 	    lname text not null,
-	    day integer not null,
-	    month integer not null,
-	    year integer not null,
+	    DOB text not null,
 	    location text not null,
 	    gender text not null,
 	    photo blob null,
@@ -67,13 +65,13 @@ cur.execute('''
 cur.execute('''
 
 	create table post (
-		post_id integer not null,
+	    post_id integer not null ,
 	    message text not null,
 	    author_id integer not null,
 	    status integer not null,
 	    timestamp text not null,
 
-	    primary key (post_id)
+	    primary key (post_id) ,
 	    foreign key (author_id) references user (user_id)
 	);
 

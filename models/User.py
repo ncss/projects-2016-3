@@ -61,8 +61,8 @@ class User:
 #********************************************************************************
 
 	def email_exists(email):
-		#TODO
-		if select(<email>):
+		#To check
+		if select(email, user):
 			return True
 		else:
 			return False	
@@ -70,21 +70,32 @@ class User:
 	@classmethod
 	def create_user(email, fname, lname, DOB, location, gender, password):
 		#TODO
+		pass
+		'''
 		newUser = insert(<fields>):
 			return newUser
 		else:
 			return None	
+		'''
 
 	def get_person(user_id):
 		#TODO
-		return select(<user_id>)
-	
+		pass
+		
+		#return select(user_id, user)
+		
+
 	def get_person(email):
 		#TODO
+		pass
+		'''
 		return select(<email>)
+		'''
 
 	def verify_password(email, password):
 		#TODO
+		pass
+		'''	
 		if email == select(<email>):
 			if password == select(<password>):
 				return True
@@ -92,7 +103,7 @@ class User:
 				return False #Incorrect password
 		else:
 			return False #Incorrect email
-
+		'''
 
 #********************************************************************************
 #********************************************************************************

@@ -17,6 +17,7 @@ nav {
     width: 60px;
     margin-right: 40px;
     padding: 10px;
+    position: fixed;
 }
 
 .header-imgs{

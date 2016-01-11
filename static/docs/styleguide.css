@@ -6,7 +6,7 @@ body {
   line-height: 24px;
 }
 
-div#test {
+div.main {
   background-color: #505050;
   position: static;
   margin: auto;
@@ -14,9 +14,17 @@ div#test {
   width: 750px;
 }
 
-div#header-test {
+div.header-test {
   background-color: #353535;
   padding: 20px;
+}
+
+div.post-box {
+  background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -47,13 +55,7 @@ p {
 }
 
 
-section {
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+
 
 
 figcaption {
@@ -79,13 +81,14 @@ mark {
 
 ol, ul, dd {
   color: rgba(204, 204, 204, 0.75);
-
+  list-style-type: circle;
 }
-
 
 hr {
   border-color: #CCCCCC;
 }
+
+
 
 
 fieldset {
