@@ -85,14 +85,14 @@ class User:
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
         person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        new_user = User(person_dict.get('user_id'), person_dict.get('email'), person_dict.get('fname'), person_dict.get('lname'), person_dict.get('DOB'), person_dict.get('location'), person_dict.get('gender'), person_dict.get('photo'), person_dict.get('phone'), person_dict.get('password'))
         return new_user
         
     @classmethod
     def get_person_by_email(klass, email):
         whereClause = 'email = \'{}\''.format(email)
         person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        new_user = User(person_dict.get('user_id'), person_dict.get('email'), person_dict.get('fname'), person_dict.get('lname'), person_dict.get('DOB'), person_dict.get('location'), person_dict.get('gender'), person_dict.get('photo'), columnvaluedict.get('phone'), person_dict.get('password'))
         return new_user
 
     @classmethod
