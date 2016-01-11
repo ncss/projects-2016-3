@@ -78,8 +78,8 @@ class User:
     def create_user(klass, columnvaluedict):
         if email_exits(columnvaluedict.get('email')):
             return None
-        db.insert('user', columnvaluedict)
-        newUser = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        new_id = db.insert('user', columnvaluedict)
+        newUser = User(new_id, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return newUser
 
     @classmethod
