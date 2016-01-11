@@ -1,3 +1,4 @@
+import doctest
 import dbfunctions as db
 
 class User:

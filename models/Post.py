@@ -9,7 +9,7 @@ class Post:
         self._timestamp = timestamp
 
     def __str__(self):
-        return 'Obect for post {} by {}'.format(self._message, self._author_id)
+        return 'Object for post {} by {}'.format(self._message, self._author_id)
 
     
 
