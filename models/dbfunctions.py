@@ -6,7 +6,7 @@ def select(table, where, *arg):
     if where:
         cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))
     else:
-        cur.execute('''select %s from %s''' % (",".join(arg), table))   
+        cur.execute('''select %s from %s''' % (",".join(arg), table))
     results = cur.fetchall()
     cur.close()
     connect.close()
@@ -26,6 +26,7 @@ def insert(table, columnvaluedict):
     query = ''' insert into %s (%s) values (%s);''' % (table, columns, qmarks)
     cur.execute(query, value)
     connect.commit()
+    inserted_id = cur.lastrowid
     cur.close()
     connect.close()
-    
+    return inserted_id
