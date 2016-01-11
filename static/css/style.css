@@ -11,9 +11,11 @@ header div#logo-wrapper {
 header div#logo-wrapper img {
   width: 100px;
   height: 100px;
+  padding-left: 100px;
 }
 header nav{
 text-align:center;
+display:inline-block;
 }
 header div.header-icon {
   float: left;
@@ -32,6 +34,9 @@ header div.user-greeting {
   float: right;
 }
 
+.centering {
+  text-align: center;
+}
 
 main#container {
   width: 960px;
