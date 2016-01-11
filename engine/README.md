@@ -10,8 +10,9 @@
 - `{% include path %}` This tag is used to include another template file in place of the tag. The `path` argument should be the path to the template HTML file. Does not require single quotes.
   - e.g. `{% include header.html %}`
 
-- `{% for dest in src %}X{% end for %}` This tag is used to repeatedly execute the template code `X` for every element in the variable `src`. Every time `X` is executed, the current value of the variable `dest` is added to the context of `X`. Requires `{% end for %}` to close the `for` statement.
+- `{% for dest in src %}X{% end for %}` This tag is used to repeatedly execute the template code `X` for every element in the variable `src`. Every time `X` is executed, the current value of the variable `dest` is added to the context of `X`. Requires `{% end for %}` to close the `for` statement. Also extended the `for` tag to support the `empty` segment, which is executed if there are no items in `src` to iterate through. This has the same semantics as an `else` statement attached to a `for` loop in Python.
   - e.g. `{% for friend in person.friends %}<li class='friend'>{% include friend.html %}</li>{% end for %}`
+  - e.g. `{% for p, s in scores %}{{ p }} scored {{ score }}!{% empty %}No Scores.{% end for %}`
 
 - `{% for a, b, c in src %}X{% end for %}` Extended the `for` tag to support optional tuple-unpacking.
   - e.g. `{% for person, score in scores %}{{ person.name }} scored {{ score }} points!{% end for %}`
