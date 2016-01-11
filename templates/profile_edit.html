@@ -10,7 +10,7 @@
                             <div class="profile-info">
                               <p>
                                 <label> Full Name:   </label>
-                                  <input id="firstname" type="text" name="fname" placeholder="First Name"> <input type="text" name="lname" placeholder="Last Name">
+                                  <input id="firstname" type="text" name="fname" value="{{ user.get_first_name() }}"> <input type="text" name="lname" value="{{ user.get_last_name() }}">
                               </p>
                                 <p>
                                   <div>
