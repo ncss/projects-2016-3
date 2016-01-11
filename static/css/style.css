@@ -1,6 +1,7 @@
 /* --- Base Infrastructure --- */
 header div.header-icon {
   float:left;
+  padding-right: 20px;
 }
 header div.header-icon a {
   text-decoration: none;
