@@ -10,11 +10,60 @@
                             <div class="profile-info">
                               <p>
                                 <label> Full Name:   </label>
-                                  <input id="firstname" type="text" name="fname" placeholder="First Name"> <input type="text" name="lname" placeholder="Last Name">
+                                  <input id="firstname" type="text" name="fname" value="{{ user.get_first_name() }}"> <input type="text" name="lname" value="{{ user.get_last_name() }}">
                               </p>
                                 <p>
-                                    <label> Location:   </label>
-                                    <input type="text" name="location">
+                                  <div>
+                                  <form>
+                                    <p> Location: </p>
+                                    <input id="location" type="text" name="location" value=""><br>
+                                    <input id="lat" type="hidden" value="">
+                                    <input id="lon" type="hidden" value="">
+                                  </form>
+                                  </div>
+
+                                  <div id="results">
+                                      <ul>
+                                      </ul>
+                                  </div>
+                                  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+                                  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                                  <script src="http://underscorejs.org/underscore-min.js"></script>
+                                  <script>
+                                  $( document ).ready(function() {
+
+                                      $("#location").keyup(_.debounce(function() {
+                                          var dest = "http://nominatim.openstreetmap.org/search.php?format=json&q=" + $("#location")
+                                          .val()
+                                          .split(' ')
+                                          .join('+')
+                                          $.ajax(dest)
+                                          .done(function(response) {
+                                              $("#results > ul").html("")
+                                              if(response.length == 0) {
+                                                $('#results').hide();
+                                                return;
+                                              }
+
+                                              response.forEach(function(obj){
+                                                  new_item = document.createElement("li")
+                                                  $(new_item).text(obj.display_name)
+                                                  $(new_item).attr("data-lat",obj.lat)
+                                                  $(new_item).attr("data-lon",obj.lon)
+                                                  console.log($(new_item))
+                                                  $("#results > ul").append($(new_item))
+                                              })
+                                              $("#results").show()
+                                          })
+                                      }, 200))
+                                      $("#results > ul").click(function(event) {
+                                          $("#location").val($(event.target).text())
+                                          $("#results").hide()
+                                          $("#lat").val($(event.target).attr("data-lat"))
+                                          $("#lon").val($(event.target).attr("data-lon"))
+                                      })
+                                  })
+                                  </script>
                                 </p>
                                 <p>
                                   <label> Date Of Birth: </label>
@@ -52,6 +101,9 @@
                                 <p>
                                     <textarea name="contact-info">Hello, World!</textarea>
                                 </p>
+                                <div>
+                                  <input type="submit" name="HERE-BE-DRAGONS">
+                                </div>
                             </div>
                     </fieldset>
             </div>
@@ -86,7 +138,7 @@
                   </div>
                 </fieldset>
             </div>
-            <div class="user-posts">
+            <div class="user-posts clearfix">
             </div>
             </form>
         </article>

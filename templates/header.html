@@ -17,6 +17,7 @@
         </a>
       </div>
 
+      {% if user %}
       <nav>
         <div class="header-icon">
           <a href="/profile">
@@ -48,6 +49,12 @@
         <p>Hello, {{ user.get_first_name() }}</p>
         <a href="/logout">Logout</a>
       </div>
+      {% else %}
+      <div class="user-greeting">
+        <a href="/">Login</a>
+      </div>
+
+      {% end if %}
 
       <div class="clearfix">
       </div>

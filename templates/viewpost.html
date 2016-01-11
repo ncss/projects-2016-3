@@ -1,15 +1,38 @@
 {% include header.html %}
 
+<div class="background-med-grey text-center post">
+      <h1>Threat Level:
+      <script>
+        var myArray = [
+        	'<div class="threat-home low"><h2>Low</h2></div>', 
+        	'<div class="threat-home med"><h2>Medium</h2></div>', 
+        	'<div class="threat-home high"><h2>High</h2></div>'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+        document.write(rand)
+      </script></h1>
+</div>
+
+{% if posts %}
+
 {% for post in posts %}
-<div class="post">
-  <h2>Name: {{post.get_author_id()}}</h2>
+<div class="background-med-grey post">
+  <h2>Name: {{ post.get_author().get_first_name() }}</h2>
     <p>Threat level:
-      {% if post.get_status() == 0 %}Low<div class="low-threat"></div>{% end if %}
-      {% if post.get_status() == 1 %}Medium<div class="med-threat"></div>{% end if %}
-      {% if post.get_status() == 2 %}High<div class="high-threat"></div>{% end if %}
+      {% if post.get_status() == 0 %}Low<div class="threat-post low"></div>{% end if %}
+      {% if post.get_status() == 1 %}Medium<div class="threat-post med"></div>{% end if %}
+      {% if post.get_status() == 2 %}High<div class="threat-post high"></div>{% end if %}
     </p>
     <p>{{post.get_message()}}</p>
     <p>{{post.get_timestamp()}}</p>
   </div>
 {% end for %}
+
+{% else %}
+
+<p>There are no posts yet!</p>
+
+{% end if %}
+
+
+
 {% include footer.html %}

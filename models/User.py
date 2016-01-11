@@ -65,14 +65,15 @@ class User:
 #Sign in and log in
 #********************************************************************************
 #********************************************************************************
-    
+
     @classmethod
     def email_exists(klass, email):
         whereClause = 'email = \'{}\''.format(email)
         if db.select('user', whereClause, 'email'):
             return True
         else:
-            return False    
+            return False
+
 
     @classmethod
     def create_user(klass, columnvaluedict):
@@ -110,6 +111,7 @@ class User:
         else:
             return False #Incorrect email
 
+<<<<<<< HEAD
     def update_first_name(self, user_id, newName):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'fname', newName, whereClause)
@@ -134,11 +136,7 @@ class User:
 '''
     def appendSkill(self, newSkill):
         self.skills = self.skills.append(newSkill)
-
-#Photo Modifications
-    def updatePhoto(self, newPhoto):
-        self.photo = newPhoto
-
+        
 #Contact Modifications
     def updateContact(self, newContact):
         self.contact = newContact
@@ -153,3 +151,12 @@ newUser = User.get_person_by_email('george.com')
 print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
+=======
+    @classmethod
+    def updatePhoto(cls, user_id, newPhoto):
+        db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
+
+    @classmethod
+    def updateContact(cls, user_id, newContact):
+        db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+>>>>>>> 5dd4fe9acbf484f9310314864de6975e19f2cc21

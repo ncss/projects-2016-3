@@ -61,8 +61,8 @@ def return_403(response, *args, **kwargs):
     response.write(render_file(os.path.join('templates', '403.html'), {}))
 
 def return_404(response, *args, **kwargs):
-  response.set_status(404)
-  response.write(render_file(os.path.join('templates', '404.html'), {}))
+    response.set_status(404)
+    response.write(render_file(os.path.join('templates', '404.html'), {}))
 
 def login_handler(response):
     #database password check
@@ -86,11 +86,11 @@ def home_handler(response):
     #login(response, '2')
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
-    print(userLoggedIn)
+
     if userLoggedIn:
-        #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
-        response.write(render_file(os.path.join('templates', 'index.html'), {'user':User.get_person_by_id(userLoggedIn)}))
-        #response.write(user[userLoggedIn].get_first_name() + ' is logged in')
+        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn)}
+        print(user_post_dict)
+        response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
@@ -104,20 +104,28 @@ def search_handler(response):
     response.write(render_file(os.path.join('templates', 'search.html'), {'user':User.get_person_by_id(userID)}))
 
 @login_required
-def send_to_handler(response):
-    pass
-    ''' relying on get_people
-    query = response.get_field('search-query')
-    results = User.get_people(name)
-    response.write(results)
-    '''
+def search_results_handler(response):
+
+    query = response.get_field('query')
+    criteria = response.get_field('criteria')
+    posts = Post.get_all_posts()
+    results = []
+    print(posts)
+    for post in posts:
+        userID = post.get_author_id()
+        user = User.get_person_by_id(userID)
+        name = user.get_last_name()
+        if name.lower() == query.lower():
+            results.append(post.get_message())
+    
+    response.write(render_file(os.path.join('templates', 'search_results.html'), {'search_results':results, 'search_query':query, 'user':User.get_person_by_id(get_cookie(response))}))
+
 
 @login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    #personInfo = users[1]
     userID = int(profile_id)
-    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID)}))
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID), "posts": Post.get_all_user_posts(userID)}))
 
 @login_required
 def own_profile_handler(response):
@@ -133,7 +141,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {}))
+    response.write(render_file(os.path.join('templates', 'create.html'), {'user':None}))
 
 def process_profile_handler(response):
     print(response.request)
@@ -165,30 +173,10 @@ def process_profile_handler(response):
 @login_required
 def all_post_handler(response):
     #display all posts
-    #posts = Post.get10() function does not exist yet
     posts = Post.get_all_posts()
-    for post in posts:
-        #response.write(post.get_message())
-        #response.write(str(post.get_author_id()) + '<br>')
-        pass
+    userID = get_cookie(response)
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts(), 'user':User.get_person_by_id(userID)}))
 
-    #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts()}))
-
-    '''
-        userID = get_cookie(response)
-    if userID:
-        for individualPost in post:
-            #pass in post list to template
-            #response.write(post[individualPost].get_message() + '<br>')
-            #userName = User.get_user(post.author_id).fname
-            #response.write('by' + userName + '<br>')
-            response.write('all posts')
-            ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-
-    else:
-        response.redirect('/')
-        '''
 
 @login_required
 def new_post_handler(response):
@@ -202,19 +190,21 @@ def new_post_handler(response):
         Post.create_post(new_post_info)
         response.redirect('/post/all')
     else:
-        response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
+        userID = get_cookie(response)
+        response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))
 
-@login_required
 def about_handler(response):
-    #about page
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'about.html'), {'user':User.get_person_by_id(userID)}))
+    user = None
+    if userID != None:
+        user = User.get_person_by_id(userID)
+    response.write(render_file(os.path.join('templates', 'about.html'), {'user':user}))
 
 def styleguide_handler(response):
-    response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
+    response.write(render_file(os.path.join('templates', 'styleguide.html'), {'user': None}))
 
 def landing_handler(response):
-    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+    response.write(render_file(os.path.join('templates', 'landing.html'), {'user': None}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
@@ -230,6 +220,7 @@ server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/login', login_handler, url_name = 'login')
 server.register(r'/logout', logout_handler, url_name = 'logout')
 server.register(r'/search', search_handler, url_name = 'search')
+server.register(r'/search_results', search_results_handler, url_name = 'search')
 server.register(r'/profile/(\d+)', profile_handler, url_name = 'profile')
 server.register(r'/profile', own_profile_handler, url_name = 'own_profile')
 server.register(r'/profile/(\d+)/edit', edit_profile_handler, url_name = 'edit_profile')

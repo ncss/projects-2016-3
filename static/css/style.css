@@ -43,11 +43,6 @@ header div.user-greeting {
   top: 0px;
 }
 
-div.centering {
-  text-align: center;
-}
-
-
 
 img#landing-bg {
   display: block;
@@ -152,18 +147,14 @@ article.main-content {
 
 /* --- Profile --- */
 
-div.skills {
-
+div#results {
+  border: 1px solid #E8340C;
+  display: none;
 }
 
-
-/* --- Utilities --- */
-
-.clearfix {
-  clear: both;
-}
 
 /* --- 404 Page --- */
+
 h1.404 {
   text-align: center;
 
@@ -172,31 +163,50 @@ h1.404 {
 
 /* --- View Posts --- */
 .post {
-  width: 900px;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-.low-threat {
+.post h2 {
+  margin: 0;
+}
+
+.post p {
+  margin: 0;
+}
+
+.threat-post {
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.threat-home {
+  margin: auto;
+  padding: 5px;
+  width: 100px;
+}
+
+.low {
   background-color: green;
-  height: 20px;
-  width: 20px;
-  float: right;
 }
 
-.med-threat {
+.med {
   background-color: orange;
-  height: 20px;
-  width: 20px;
-  float: right;
 }
 
-.high-threat {
+.high {
   background-color: red;
-  height: 20px;
-  width: 20px;
-  float: right;
+}
+
+
+
+/* --- Utilities --- */
+
+.clearfix {
+  clear: both;
+}
+
+.text-center {
+  text-align: center;
 }
