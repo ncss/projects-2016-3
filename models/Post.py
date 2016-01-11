@@ -44,8 +44,8 @@ class Post:
 
 	@classmethod
 	def get_all_posts():
-		   results = db.select('post', '', '*')
-		   return results
+		results = db.select('post', '', '*')
+		return results
 
 	@classmethod
 	def create_post(klass, columnvaluedict):
@@ -63,8 +63,7 @@ class Post:
 
 	def updateStatus(self, newStatus):
 		self.status = newStatus
-
-
+		
 
 
 Post.create_post({
