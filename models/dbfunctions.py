@@ -31,11 +31,11 @@ def insert(table, columnvaluedict):
     connect.close()
     return inserted_id
 
-def update(table, feild, value):
+def update(table, field, value, whereClause):
     connect = sqlite3.connect('db/database.db')
     cur = connect.cursor()
-    cur.execute('''update %s set %s = %s''' % (table, field, value))
+    cur.execute('''update %s set %s = '%s' where %s;''' % (table, field, value, whereClause))
     results = cur.fetchall()
+    connect.commit()
     cur.close()
     connect.close()
-    return results
