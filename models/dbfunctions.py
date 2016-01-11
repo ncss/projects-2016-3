@@ -43,3 +43,4 @@ def update(table, feild, value):
     connect.commit()
     cur.close()
     connect.close()
+    return results

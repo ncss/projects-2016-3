@@ -1,4 +1,4 @@
-import dbfunctions as db
+from . import dbfunctions as db
 
 
 class User:
@@ -111,29 +111,40 @@ class User:
         else:
             return False #Incorrect email
 
-    def update_first_name(self, user_id, newName):
+    @classmethod
+    def updateFName(cls, user_id, newName):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'fname', newName, whereClause)
 
-    def updateDOB(self, user_id, newDOB):
+    @classmethod
+    def updateLName(cls, user_id, newName):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'lname', newName, whereClause)
+
+    @classmethod
+    def updateDOB(cls, user_id, newDOB):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'DOB', newDOB, whereClause)
 
-    def updateLocation(self, user_id, newLocation):
+    @classmethod
+    def updateLocation(cls, user_id, newLocation):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'Location', newLocation, whereClause)
 
-#Gender Modifications
-    def updateGender(self, user_id, newGender):
+    @classmethod
+    def updateGender(cls, user_id, newGender):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'Gender', newGender, whereClause)
 
-#Skills Modifications
-    def updateSkills(self, user_id, newSkills):
+    @classmethod
+    def updateSkills(cls, user_id, newSkills):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'DOB', newSkills, whereClause)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8354c9a1ac8439bd29c59d44b1c2061064a59ee7
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
         db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
@@ -141,6 +152,7 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+<<<<<<< HEAD
 
 '''
     def appendSkill(self, newSkill):
@@ -161,3 +173,5 @@ print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
     
+=======
+>>>>>>> 8354c9a1ac8439bd29c59d44b1c2061064a59ee7
