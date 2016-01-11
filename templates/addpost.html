@@ -1,27 +1,26 @@
 {% include header.html %}
 
-    <h1>Add Post</h1>
-  <form action="/post/create" method="POST">
-    <fieldset>
-      <p>
-        <label>Post: </label>
-        <textarea type="text" name="post" placeholder="Enter Text Here"></textarea>
-      </p>
-<p>Threat Level:</p>
-      <p>
+<h1>Add Post</h1>
+  <form action="/post/create" method="POST" id="add-post">
+
+      <textarea type="text" name="post" placeholder="What's happening in your apocalypse?"></textarea>
+     
+      <h3>Threat Level:</h3>
+      
         <!-- Remember to add images instead of labels -->
 
-        <label>Low: </label>
         <input type="radio" name="threat" value="0" checked="checked">
-        <label>Medium: </label>
+        <label>Low</label>
+        <br>
         <input type="radio" name="threat" value="1">
-        <label>High: </label>
+        <label>Medium</label>
+        <br>
         <input type="radio" name="threat" value="2">
-      </p>
-      <p>
-        <input type="submit" value="Submit">
-      </p>
-    </fieldset>
-  </form>
+        <label>High</label>
+
+        <br>
+        <input type="submit" value="Submit" id="submit">
+      
+</form>
 
 {% include footer.html %}

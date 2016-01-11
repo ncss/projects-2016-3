@@ -163,13 +163,6 @@ div.skills{
 }
 
 
-/* --- Utilities --- */
-
-.clearfix {
-  clear: both;
-}
-
-
 /* --- 404 Page --- */
 
 h1.404 {
@@ -177,52 +170,65 @@ h1.404 {
 
 }
 
+/* --- Add Post --- */
+
+form#add-post textarea {
+  width: calc(100% - 20px); /* width - padding */
+  min-height: 200px;
+}
+form#add-post input#submit {
+  margin-top: 20px;
+}
+
 
 /* --- View Posts --- */
+
 .post {
-  width: 900px;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-.low-threat {
+.post h2 {
+  margin: 0;
+}
+
+.post p {
+  margin: 0;
+}
+
+.threat-post {
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.threat-home {
+  margin: auto;
+  padding: 5px 15px;
+  width: 100px;
+  color: #fff;
+}
+
+.low {
   background-color: green;
-  height: 20px;
-  width: 20px;
-  float: right;
 }
 
-.low-threat-home {
-  background-color: green;
-  height: 50px;
-  width: 100px;
-}
-
-.med-threat {
+.med {
   background-color: orange;
-  height: 20px;
-  width: 20px;
-  float: right;
 }
 
-.med-threat-home {
-  background-color: orange;
-  height: 50px;
-  width: 100px;
-}
-
-.high-threat {
+.high {
   background-color: red;
-  height: 20px;
-  width: 20px;
-  float: right;
 }
 
-.high-threat-home {
-  background-color: red;
-  height: 50px;
-  width: 100px;
+
+
+/* --- Utilities --- */
+
+.clearfix {
+  clear: both;
+}
+
+.text-center {
+  text-align: center;
 }

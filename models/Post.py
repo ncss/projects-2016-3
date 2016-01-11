@@ -39,9 +39,15 @@ class Post:
     def get_author(self):
         return User.get_person_by_id(self._author_id)
 
-
+    @classmethod
     def get_recent_10(self):
-        pass
+        postList = []
+        postData = db.raw_sql('select post_id, message, author_id, status, timestamp from post ORDER BY post_id DESC LIMIT 10')
+        print(postData)
+        for line in postData:
+            newPost = Post(line[0], line[1], line[2], line[3], line[4])
+            postList.append(newPost)
+        return postList
         #return select(<recent 10 posts>)
 
     @classmethod

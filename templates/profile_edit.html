@@ -1,7 +1,7 @@
 {% include header.html %}
 
         <article>
-            <form>
+            <form method="POST" action="">
             <div class="sidebar">
                     <fieldset name="account-info">
                         <span class="img-zone">
@@ -74,7 +74,7 @@
                                     <option value="{{ i }}">{{ i }}</option>
                                     {% end for %}
                                   </select>
-                                  <select>
+                                  <select name="dob_month">
                                       <optgroup>Month</optgroup>
                                       <option value="1">January</option>
                                       <option value="2">Febuary</option>
@@ -89,7 +89,7 @@
                                       <option value="11">November</option>
                                       <option value="12">December</option>
                                   </select>
-                                  <select>
+                                  <select name="dob_year">
                                     <optgroup>Year</optgroup>
                                     {% for i in range(2016, 1959 - 1, -1) %}
                                     <option value="{{ i }}">{{ i }}</option>
@@ -101,7 +101,7 @@
                                   <input type="text" name="gender" value="{{ user.get_gender() }}">
                                 </p>
                                 <p>
-                                    <textarea name="contact-info">Hello, World!</textarea>
+                                    Contact Info: <textarea name="contact-info">Hello, World!</textarea>
                                 </p>
                                 <div>
                                   <input type="submit" name="HERE-BE-DRAGONS">
