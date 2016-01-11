@@ -4,13 +4,15 @@ header div#logo-wrapper {
 }
 
 header div#logo-wrapper img {
-  width: 128px;
-  height: 128px;
+  width: 100px;
+  height: 100px;
 }
-
+header nav{
+text-align:center;  
+}
 header div.header-icon {
   float: left;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 header div.header-icon a {
