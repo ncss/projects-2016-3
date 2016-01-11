@@ -88,7 +88,7 @@ class User:
 	def get_person(email):
 		#TODO
 		email = "email = " + email
-		return select(table='user', where=email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+		return select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
 		
 
 	def verify_password(email, password):
