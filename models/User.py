@@ -73,26 +73,22 @@ class User:
         else:
             return False    
 
-    @classmethod
-    def create_user(klass, email, fname, lname, DOB, location, gender, password):
-        #TODO
-        pass
-        '''
-        newUser = insert(<fields>):
-            return newUser
-        else:
-            return None    
-        '''
+	@classmethod
+	def create_user(klass, columnvaluedict):
+		#To check
+		db.insert('user', columnvaluedict)
+	   	newUser = Post(None, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+	   	return newUser
 
     @classmethod
-    def get_person(klass, user_id):    
+    def get_person_by_id(klass, user_id):    
         person_dict = db.select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
         new_user = User(person_dict[''])
 
         #newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
         
     @classmethod
-    def get_person(klass, email):
+    def get_person_by_email(klass, email):
         #TODO
         email = "email = " + email
         return db.select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
