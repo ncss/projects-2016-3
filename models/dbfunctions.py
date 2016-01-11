@@ -1,7 +1,9 @@
 import sqlite3
+import os
 
 def select(table, where, *arg):
-    connect = sqlite3.connect('db/database.db')
+    db_path = os.path.join(os.path.dirname(__file__), '../db/database.db')
+    connect = sqlite3.connect(db_path)
     cur = connect.cursor()
     if where:
         cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))

@@ -1,4 +1,5 @@
 from . import dbfunctions as db
+from .User import User
 from datetime import datetime
 
 class Post:
@@ -34,6 +35,9 @@ class Post:
 
     def get_timestamp(self):
         return self._timestamp
+
+    def get_author(self):
+        return User.get_person_by_id(self._author_id)
 
 
     def get_recent_10(self):

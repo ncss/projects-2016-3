@@ -132,8 +132,9 @@ print(newUser)
 #********************************************************************************
 '''
 #Name Modifications
-    def updateName(self, user_id, newName):
-        pass
+
+def updateName(self, user_id, newName):
+    pass
 
 #Age Modifications    
     def updateAge(self, newAge):

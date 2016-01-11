@@ -86,11 +86,11 @@ def home_handler(response):
     #login(response, '2')
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
-    print(userLoggedIn)
+
     if userLoggedIn:
-        #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
-        response.write(render_file(os.path.join('templates', 'index.html'), {'user':User.get_person_by_id(userLoggedIn)}))
-        #response.write(user[userLoggedIn].get_first_name() + ' is logged in')
+        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn)}
+        print(user_post_dict)
+        response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
@@ -176,20 +176,6 @@ def all_post_handler(response):
     userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts(), 'user':User.get_person_by_id(userID)}))
 
-    '''
-        userID = get_cookie(response)
-    if userID:
-        for individualPost in post:
-            #pass in post list to template
-            #response.write(post[individualPost].get_message() + '<br>')
-            #userName = User.get_user(post.author_id).fname
-            #response.write('by' + userName + '<br>')
-            response.write('all posts')
-            ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-
-    else:
-        response.redirect('/')
-        '''
 
 @login_required
 def new_post_handler(response):
