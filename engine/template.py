@@ -97,9 +97,16 @@ class IfNode(Node):
             return ''
 
 
+class LetNode(Node):
+    def evaluate(self, context):
+        exec(self.content, {}, context)
+        return ''
+
+
 class GroupNode(Node):
     def evaluate(self, context):
         nodestr = []
+        context = dict(context)
         for node in self.content:
             nodestr.append(node.evaluate(context))
         return ''.join(str(i) for i in nodestr)
@@ -156,6 +163,8 @@ def _parse_template(template, upto, parent):
             if template[offset] == '% else ':
                 group_node, offset = _parse_template(template, offset + 1, token)
                 token.else_child = group_node
+        elif token.startswith('% let '):
+            token = LetNode(token[len('% let '): -1], root_node)
         else:
             token = TextNode(token, root_node)
 
