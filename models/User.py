@@ -61,15 +61,11 @@ class User:
 #********************************************************************************
 
 	def email_exists(email):
-		#TODO
-		pass
-
-		'''
-		if select(<email>):
+		#To check
+		if select(email, user):
 			return True
 		else:
 			return False	
-		'''
 
 	@classmethod
 	def create_user(email, fname, lname, DOB, location, gender, password):
@@ -85,9 +81,9 @@ class User:
 	def get_person(user_id):
 		#TODO
 		pass
-		'''
-		return select(<user_id>)
-		'''
+		
+		#return select(user_id, user)
+		
 
 	def get_person(email):
 		#TODO

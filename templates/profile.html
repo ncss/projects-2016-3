@@ -6,17 +6,17 @@
 	</span>
 	<div class="profile-info">
 		<p>
-			{{ fname }} {{ lname }}
+			{{ user.get_first_name() }} {{ user.get_last_name() }}
 		</p>
 		<p>
-			{{ location }}
+			{{ user.get_location() }}
 		</p>
 		<p>
-			{{ age }}
+			{{ user.get_age() }}
 		</p>
-		  {{ gender }}
+		  {{ user.get_gender() }}
 		<p>
-			{{ email}}
+			{{ user.get_email() }}
 		</p>
 	</div>
 </aside>
