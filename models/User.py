@@ -67,7 +67,8 @@ class User:
     
     @classmethod
     def email_exists(klass, email):
-        if db.select(email, None, 'user'):
+        whereClause = 'email = \'{}\''.format(email)
+        if db.select('user', whereClause, 'email'):
             return True
         else:
             return False    
@@ -80,21 +81,21 @@ class User:
 
     @classmethod
     def get_person_by_id(klass, user_id):
-        whereClause = 'user_id = ' + user_id
+        whereClause = 'user_id = \'{}\''.format(user_id)
         person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
         new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return new_user
         
     @classmethod
     def get_person_by_email(klass, email):
-        whereClause = 'email = ' + email
+        whereClause = 'email = \'{}\''.format(email)
         person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
         new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return new_user
 
     @classmethod
     def verify_password(klass, email, password):
-        whereClause = 'email = ' + email
+        whereClause = 'email = \'{}\''.format(email)
         inDb = select('user', whereClause, 'password')
         if inDb:
             if password == inDb:
@@ -104,13 +105,25 @@ class User:
         else:
             return False #Incorrect email
 
+'''
+if User.email_exists('marksonn5@gmail.com'):
+    print ('True')
+else:
+    print('False')
+'''
+'''myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+newUser = User.create_user(myDictionary)
+print (newUser)
 
-# print (User.email_exists('george.com'))
+myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+newUser = User.get_person_by_id(myDictionary)
+print (newUser)
 
-# myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : -4.999, 78.908, 'gender' : 'M', 'photo': , phone, password}
-# newUser = User.create_user(myDictionary)
-# print (newUser)
+myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+newUser = User.get_person_by_email(myDictionary)
+print (newUser)
 
+print(User.verify_password('george.com', 'bob1'))'''
 
 #********************************************************************************
 #********************************************************************************
