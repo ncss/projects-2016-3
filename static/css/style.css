@@ -2,18 +2,22 @@
 header {
   border-bottom: #242424;
   border-style: solid;
+  text-align: center;
+  padding: 10px;
 }
 
 header div#logo-wrapper {
-  float: left;
+  position: absolute;
+  left: 0;
 }
 
 header div#logo-wrapper img {
   width: 100px;
   height: 100px;
 }
-header nav{
-text-align:center;
+header nav {
+  display: inline-block;
+  text-align: center;
 }
 header div.header-icon {
   float: left;
@@ -29,7 +33,9 @@ header div.header-icon img{
 }
 
 header div.user-greeting {
-  float: right;
+  position: absolute;
+  right: 0;
+  display: inline-block;
 }
 
 canvas {
@@ -92,5 +98,4 @@ article.main-content {
 /* --- 404 Page --- */
 h1.404 {
   text-align: center;
-
 }
