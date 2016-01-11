@@ -1,4 +1,4 @@
-import dbfunctions as db
+from . import dbfunctions as db
 
 class Post:
 	def __init__ (self, post_id, message, author_id, status, timestamp):
@@ -39,7 +39,7 @@ class Post:
 		#return select(<recent 10 posts>)
 
 	@classmethod
-	def get_all_user_posts(user_id):
+	def get_all_user_posts(klass, user_id):
 		postList = []
 		postData = db.select('post', 'author_id = %s' % user_id, 'post_id', 'message', 'author_id', 'status', 'timestamp')
 		for line in postData:
@@ -48,7 +48,7 @@ class Post:
 		return postList
 
 	@classmethod
-	def get_all_posts():
+	def get_all_posts(klass):
 		postList = []
 		postData = db.select('post', None, 'post_id', 'message', 'author_id', 'status', 'timestamp')
 		for line in postData:
@@ -85,5 +85,5 @@ newPost = Post.create_post({
 	'timestamp': '35/1/10/2016'
 })
 
-print(Post.get_all_user_posts())
-print(Post.get_all_posts())
+print(Post.get_all_user_posts(2))
+#print(Post.get_all_posts())

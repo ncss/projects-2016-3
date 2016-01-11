@@ -1,4 +1,4 @@
-import dbfunctions
+from . import dbfunctions
 
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone):
