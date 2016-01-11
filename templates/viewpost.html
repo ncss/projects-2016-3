@@ -1,6 +1,20 @@
 {% include header.html %}
 
+<div>
+  <fieldset>
+    <center>
+      <h1>Threat Level:
+      <script>
+        var myArray = ['<div class="low-threat-home"><h2>Low</h2></div>', '<div class="med-threat-home"><h2>Medium</h2></div>', '<div class="high-threat-home"><h2>High</h2></div>'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+        document.write(rand)
+      </script></h1>
+    </center>
+  </fieldset>
+</div>
+
 {% if posts %}
+
 {% for post in posts %}
 <div class="post">
   <h2>Name: {{ post.get_author().get_first_name() }}</h2>

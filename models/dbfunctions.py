@@ -1,9 +1,11 @@
 import sqlite3
 import os
 
+def get_db_path():
+    return os.path.join(os.path.dirname(__file__), '../db/database.db')
+
 def select(table, where, *arg):
-    db_path = os.path.join(os.path.dirname(__file__), '../db/database.db')
-    connect = sqlite3.connect(db_path)
+    connect = sqlite3.connect(get_db_path())
     cur = connect.cursor()
     if where:
         cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))
@@ -15,7 +17,7 @@ def select(table, where, *arg):
     return results
 
 def insert(table, columnvaluedict):
-    connect = sqlite3.connect('db/database.db')
+    connect = sqlite3.connect(get_db_path())
     cur = connect.cursor()
     keys = list(columnvaluedict.keys())
     columns = ', '.join(keys)
@@ -34,7 +36,7 @@ def insert(table, columnvaluedict):
     return inserted_id
 
 def update(table, feild, value):
-    connect = sqlite3.connect('db/database.db')
+    connect = sqlite3.connect(get_db_path())
     cur = connect.cursor()
     cur.execute('''update %s set %s = %s''' % (table, field, value))
     results = cur.fetchall()
