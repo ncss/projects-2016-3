@@ -58,11 +58,11 @@ def login_required(function):
 
 def return_403(response, *args, **kwargs):
     response.set_status(403)
-    response.write(render_file(os.path.join('templates', '403.html'), {}))
+    response.write(render_file(os.path.join('templates', '403.html'), {'user': None}))
 
 def return_404(response, *args, **kwargs):
     response.set_status(404)
-    response.write(render_file(os.path.join('templates', '404.html'), {}))
+    response.write(render_file(os.path.join('templates', '404.html'), {'user': None}))
 
 def login_handler(response):
     #database password check
@@ -88,13 +88,22 @@ def home_handler(response):
     userLoggedIn = get_cookie(response)
 
     if userLoggedIn:
-        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn)}
-        print(user_post_dict)
         response.redirect('/post/all')
-        response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
+        #response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+
+def calculate_threat_level():
+    posts = Post.get_all_posts()
+    levels = []
+    for post in posts:
+        levels.append(post.get_status())
+    if len(levels):
+        arraySum = sum(levels)
+        avThreat = round(arraySum/len(levels))
+        return avThreat
+    return 0
 
 
 @login_required
@@ -192,7 +201,7 @@ def process_profile_handler(response):
 def all_post_handler(response):
     #display all posts
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_recent_10(), 'user':User.get_person_by_id(userID)}))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_recent_10(), 'user':User.get_person_by_id(userID), 'threat_level': calculate_threat_level()}))
 
 
 @login_required
@@ -205,7 +214,7 @@ def new_post_handler(response):
         userid = get_cookie(response)
         new_post_info = {'message': message, 'status': status, 'timestamp': time, 'author_id': userid}
         Post.create_post(new_post_info)
-        response.redirect('/post/all')
+        response.redirect('/')
     else:
         userID = get_cookie(response)
         response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))

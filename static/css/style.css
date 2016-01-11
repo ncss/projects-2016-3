@@ -183,8 +183,9 @@ h1.404 {
 
 .threat-home {
   margin: auto;
-  padding: 5px;
+  padding: 5px 15px;
   width: 100px;
+  color: #fff;
 }
 
 .low {

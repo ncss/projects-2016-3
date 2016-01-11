@@ -137,9 +137,9 @@ class User:
         db.update('user', 'Gender', newGender, whereClause)
 
     @classmethod
-    def updateSkills(cls, user_id, newSkills):
-        whereClause = 'user_id = \'{}\''.format(user_id)
-        db.update('user', 'DOB', newSkills, whereClause)
+    def updateSkills(cls, user_id, newskill_id):
+        columnvaluedict = {'skill_id': newskill_id}
+        db.insert('user_skills', columnvaluedict)
 
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
@@ -148,3 +148,22 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+
+'''
+    def appendSkill(self, newSkill):
+        self.skills = self.skills.append(newSkill)
+
+#Contact Modifications
+    def updateContact(self, newContact):
+        self.contact = newContact
+'''
+
+'''
+myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+newUser = User.create_user(myDictionary)
+print (newUser)
+
+newUser = User.get_person_by_email('george.com')
+print(newUser)
+#print(User.verify_password('george.com', 'bob1'))
+'''
