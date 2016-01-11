@@ -160,8 +160,19 @@ h1.404 {
 
 }
 
+/* --- Add Post --- */
+
+form#add-post textarea {
+  width: calc(100% - 20px); /* width - padding */
+  min-height: 200px;
+}
+form#add-post input#submit {
+  margin-top: 20px;
+}
+
 
 /* --- View Posts --- */
+
 .post {
   padding: 15px;
   margin-bottom: 20px;
