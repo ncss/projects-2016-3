@@ -61,8 +61,8 @@ def return_403(response, *args, **kwargs):
     response.write(render_file(os.path.join('templates', '403.html'), {}))
 
 def return_404(response, *args, **kwargs):
-  response.set_status(404)
-  response.write(render_file(os.path.join('templates', '404.html'), {}))
+    response.set_status(404)
+    response.write(render_file(os.path.join('templates', '404.html'), {}))
 
 def login_handler(response):
     #database password check
@@ -115,7 +115,6 @@ def send_to_handler(response):
 @login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    #personInfo = users[1]
     userID = int(profile_id)
     response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID)}))
 
@@ -228,5 +227,5 @@ server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
 server.set_default_handler(default_handler)
-if None:
-    server.run()
+
+server.run()
