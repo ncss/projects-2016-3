@@ -89,6 +89,8 @@ def own_profile_handler(response):
     '''
 
     response.write('profile')
+    #response.write(render_file(os.path.join('templates', 'profile.html'), {}))
+
 
 def edit_profile_handler(response, id):
     #edit profile with given id
@@ -113,6 +115,7 @@ def all_post_handler(response):
     '''
     response.write('posts')
     #display all posts
+    #response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
 
 def new_post_handler(response):
     #new post page
@@ -120,7 +123,8 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
-    response.write('about')
+    #Needs "about.html" file to be made
+    response.write(render_file(os.path.join('templates', 'about.html'), {}))
 
 server = Server()
 server.register(r'/', home_handler, url_name = 'name')
