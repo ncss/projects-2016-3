@@ -1,3 +1,4 @@
+import doctest
 from . import dbfunctions as db
 
 class User:
@@ -67,46 +68,42 @@ class User:
     
     @classmethod
     def email_exists(klass, email):
-        #To check
-        if db.select(email, 'user'):
+        if db.select(email, None, 'user'):
             return True
         else:
             return False    
 
     @classmethod
     def create_user(klass, columnvaluedict):
-        #To check
         db.insert('user', columnvaluedict)
-        newUser = Post(None, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        newUser = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return newUser
 
     @classmethod
-    def get_person_by_id(klass, user_id):    
-        person_dict = db.select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
-        new_user = User(person_dict[''])
-
-        #newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
+    def get_person_by_id(klass, user_id):
+        whereClause = 'user_id = ' + user_id
+        person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+        new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        return new_user
         
     @classmethod
     def get_person_by_email(klass, email):
-        #TODO
-        email = "email = " + email
-        return db.select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        
+        whereClause = 'email = ' + email
+        person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+        new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        return new_user
 
     @classmethod
     def verify_password(klass, email, password):
-        #TODO
-        pass
-        '''    
-        if email == select(<email>):
-            if password == select(<password>):
+        whereClause = 'email = ' + email
+        inDb = select('user', whereClause, 'password')
+        if inDb:
+            if password == inDb:
                 return True
             else:
                 return False #Incorrect password
         else:
             return False #Incorrect email
-        '''
 
 #********************************************************************************
 #********************************************************************************
