@@ -8,6 +8,11 @@ header div#logo-wrapper img {
   height: 128px;
 }
 
+header {
+  border-bottom: #242424;
+  border-style: solid;
+}
+
 header div.header-icon {
   float: left;
   padding-right: 20px;
@@ -25,11 +30,15 @@ header div.user-greeting {
   float: right;
 }
 
+
 main#container {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px 10px;
+  padding: 20px;
+  border-style: solid;
+  border-top: 0px;
+  border-color: #3C3C3C;
 }
 
 footer {
