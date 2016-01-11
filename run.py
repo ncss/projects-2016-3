@@ -52,8 +52,7 @@ def login_required(function):
 
 def return_403(response, *args, **kwargs):
     response.set_status(403)
-    response.write("403")
-    #render(response, '403.html', {})
+    response.write(render_file(os.path.join('templates', '403.html'), {}))
 
 def return_404(response, *args, **kwargs):
   response.set_status(404)
@@ -89,7 +88,7 @@ def home_handler(response):
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
         response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
-        response.write('Not logged in!')
+        response.write(render_file(os.path.join('templates', 'index.html'), {}))
     response.write('Home!')
 
 @login_required
@@ -124,7 +123,7 @@ def own_profile_handler(response):
 @login_required
 def edit_profile_handler(response, id):
     #edit profile with given id
-    response.write('edit profile {}'.format(id))
+    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {}))
 
 @login_required
 def create_profile_handler(response):
@@ -137,10 +136,12 @@ def all_post_handler(response):
     #posts = Post.get10() function does not exist yet
     posts = Post.get_all_posts()
     for post in posts:
-        response.write(post.get_message())
-        response.write(str(post.get_author_id()) + '<br>')
+        #response.write(post.get_message())
+        #response.write(str(post.get_author_id()) + '<br>')
+        pass
 
-        #response.write(render_file(os.path.join('templates', 'viewposts.html'), Post.get_all_posts()))
+    #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
 
     '''
         userID = get_cookie(response)
@@ -164,6 +165,7 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
+    userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
 
 def styleguide_handler(response):
