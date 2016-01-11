@@ -3,22 +3,26 @@
     <title> Page Title </title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
-    <link rel="stylesheet" type="text/css" href="reset.css"> <!-- fix -->
-    <link rel="stylesheet" type="text/css" href="styleguide.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css"> <!-- fix -->
+    <link rel="stylesheet" type="text/css" href="/static/css/styleguide.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
   </head>
 
-    <body>
+    <body class="landing-body">
 
-        <div class="landing">
-            <img id="landing-bg" src="landing-bg.jpg">
-            <p class"landing-login">
+        
+        <img id="landing-bg" src="/static/images/landing-bg.jpg">
+        
+        <form action="/login" method = "post">    
+            <fieldset class="landing-login">
                 <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">
-            </p>
-        </div>
-        <main id="container" class="background-light-grey">
-        </main>
+                <button type="submit">Login</button>
+            </fieldset>
+        </form>
+
+        <!-- <main id="container" class="background-light-grey">
+        </main> -->
     </body>
 
 <!-- {% include footer.html %} -->
