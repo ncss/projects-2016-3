@@ -1,4 +1,12 @@
 /* --- Base Infrastructure --- */
+header div#logo-wrapper {
+  float: left;
+}
+
+header div#logo-wrapper img {
+  width: 128px;
+  height: 128px;
+}
 
 header div.header-icon {
   float: left;
@@ -34,6 +42,8 @@ footer a {
 }
 
 
+
+
 /* --- Common layouts --- */
 
 aside.sidebar {
@@ -63,5 +73,5 @@ article.main-content {
 /* --- 404 Page --- */
 h1.404 {
   text-align: center;
-  
+
 }
