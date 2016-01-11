@@ -89,7 +89,7 @@ def home_handler(response):
     print(userLoggedIn)
     if userLoggedIn:
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
-        response.write("user" + str(userLoggedIn) + "is logged in")
+        response.write(render_file(os.path.join('templates', 'index.html'), {}))
         #response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
