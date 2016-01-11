@@ -31,7 +31,7 @@ class Skill:
     @classmethod
     def get_all_skills(cls):
         skill_list = []
-        skill_data = db.select('skills', None, 'skill_id', 'category', 'specialisation', 'rank')
+        skill_data = db.select('skills', None, 'skill_id', 'category', 'rank', 'specialisation')
         for line in skill_data:
             new_skill = Skill(line[0], line[1], line[2], line[3])
             skill_list.append(new_skill)
