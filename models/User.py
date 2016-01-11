@@ -1,5 +1,5 @@
 import doctest
-import dbfunctions as db
+import models.dbfunctions as db
 
 class User:
     def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
