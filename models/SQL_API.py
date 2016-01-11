@@ -2,7 +2,7 @@ import sqlite3
 import datetime, time
 #***************************************
 #Setup
-connect = sqlite3.connect('../database.db')
+connect = sqlite3.connect('../db/database.db')
 cur = connect.cursor()
 #***************************************
 
@@ -51,8 +51,6 @@ cur.execute('''
         fname text not null,
         lname text not null,
         DOB text not null,
-        lat real not null,
-        long real not null,
         gender text not null,
         photo blob null,
         password text not null,
