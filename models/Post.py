@@ -79,13 +79,13 @@ class Post:
 '''
 
 
+if __name__ == '__main__':
+    newPost = Post.create_post({
+        'message': 'hello!',
+        'author_id': 23,
+        'status': 1,
+        'timestamp': datetime.now()
+    })
 
-newPost = Post.create_post({
-    'message': 'hello!',
-    'author_id': 23,
-    'status': 1,
-    'timestamp': datetime.now()
-})
-
-print(Post.get_all_user_posts(23))
-#print(Post.get_all_posts())
+    print(Post.get_all_user_posts(23))
+    #print(Post.get_all_posts())
