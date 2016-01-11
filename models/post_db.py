@@ -1,10 +1,5 @@
 import sqlite3
-from .models.User import User
-
-import os
-current_path = abspath(getsourcefile(lambda:0))
-current_dir = os.path.dirname(current_path)
-parent_dir = current_dir[:current_dir.rfind(os.path.sep)]
+from User import User
 
 def select(table, where, *arg):
     connect = sqlite3.connect('database.db')
