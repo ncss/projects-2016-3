@@ -2,6 +2,13 @@
 header div.header-icon {
   float:left;
 }
+header div.header-icon a {
+  text-decoration: none;
+}
+
+header div.header-icon img{
+  height: 40px;
+}
 
 header div.user-greeting {
   float:right;
