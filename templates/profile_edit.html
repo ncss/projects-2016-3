@@ -15,7 +15,7 @@
                                 <p>
                                   <div>
                                   <form>
-                                    <p> Location:
+                                    <p> <label>Location:</label>
                                       <input id="location" type="text" name="location" value="{{ user.get_location() }}">
                                       <input type="hidden" id="lat" name="lat">
                                       <input type="hidden" id="lng" name="lng">
@@ -101,7 +101,8 @@
                                   <input type="text" name="gender" value="{{ user.get_gender() }}">
                                 </p>
                                 <p>
-                                    Contact Info: <textarea name="contact-info">Hello, World!</textarea>
+                                        <label>Contact Info:</label>
+                                        <textarea name="contact-info">Hello, World!</textarea>
                                 </p>
                                 <div>
                                   <input type="submit" name="HERE-BE-DRAGONS">
