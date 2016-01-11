@@ -53,7 +53,9 @@ p {
   margin-bottom: 10px;
 }
 
-
+label {
+	display: block;
+}
 
 figcaption {
   font-weight: 500;
