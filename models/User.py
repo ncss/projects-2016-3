@@ -137,9 +137,9 @@ class User:
         db.update('user', 'Gender', newGender, whereClause)
 
     @classmethod
-    def updateSkills(cls, user_id, newSkills):
-        whereClause = 'user_id = \'{}\''.format(user_id)
-        db.update('user', 'DOB', newSkills, whereClause)
+    def updateSkills(cls, user_id, newskill_id):
+        columnvaluedict = {'skill_id': newskill_id}
+        db.insert('user_skills', columnvaluedict)
 
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
