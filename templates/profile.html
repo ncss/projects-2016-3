@@ -2,21 +2,23 @@
 
 <aside class="sidebar">
     <span class="img-zone">
-        <img src="images/cat.jpg" height="128px"></img>
+        <img src="/static/images/logo.png" height="128px"></img>
     </span>
     <div class="profile-info">
         <p>
-            {{ user.get_first_name() }} {{ user.get_last_name() }}
+            Name: {{ user.get_first_name() }} {{ user.get_last_name() }}
         </p>
         <p>
-            {{ user.get_location() }}
+            Location: {{ user.get_location() }}
         </p>
         <p>
-            {{ user.get_age() }}
+            DOB: {{ user.get_age() }}
         </p>
-          {{ user.get_gender() }}
         <p>
-            {{ user.get_email() }}
+          Gender: {{ user.get_gender() }}
+        </p>
+        <p>
+            Contact: {{ user.get_email() }}
         </p>
     </div>
 </aside>
@@ -26,6 +28,12 @@
         <div>
             <p>
                 <h1 class="edit-titles">Skills </h1>
+            </p>
+            <p>
+              - Builder
+            <p>
+            <p>
+              - Part Time Security Guard
             </p>
 
         </div>
