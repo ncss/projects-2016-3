@@ -73,12 +73,12 @@ class User:
         else:
             return False    
 
-	@classmethod
-	def create_user(klass, columnvaluedict):
-		#To check
-		db.insert('user', columnvaluedict)
-	   	newUser = Post(None, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
-	   	return newUser
+    @classmethod
+    def create_user(klass, columnvaluedict):
+        #To check
+        db.insert('user', columnvaluedict)
+        newUser = Post(None, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
+        return newUser
 
     @classmethod
     def get_person_by_id(klass, user_id):    
