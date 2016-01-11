@@ -38,12 +38,55 @@
             {% end for %}
           </select>
         </p>
-        <p>
-          <label>Location: </label>
-          <input type="text" name="latitude" placeholder="Latitude">
-          <input type="text" name="longitude" placeholder="Longitude">
+        <p> Location:
+          <input id="location" type="text" name="location">
         </p>
-        <p>
+      </form>
+      </div>
+
+      <div id="results">
+          <ul>
+          </ul>
+      </div>
+      <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+      <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+      <script src="http://underscorejs.org/underscore-min.js"></script>
+      <script>
+      $( document ).ready(function() {
+
+          $("#location").keyup(_.debounce(function() {
+              var dest = "http://nominatim.openstreetmap.org/search.php?format=json&q=" + $("#location")
+              .val()
+              .split(' ')
+              .join('+')
+              $.ajax(dest)
+              .done(function(response) {
+                  $("#results > ul").html("")
+                  if(response.length == 0) {
+                    $('#results').hide();
+                    return;
+                  }
+
+                  response.forEach(function(obj){
+                      new_item = document.createElement("li")
+                      $(new_item).text(obj.display_name)
+                      $(new_item).attr("data-lat",obj.lat)
+                      $(new_item).attr("data-lon",obj.lon)
+                      console.log($(new_item))
+                      $("#results > ul").append($(new_item))
+                  })
+                  $("#results").show()
+              })
+          }, 200))
+          $("#results > ul").click(function(event) {
+              $("#location").val($(event.target).text())
+              $("#results").hide()
+              $("#lat").val($(event.target).attr("data-lat"))
+              $("#lon").val($(event.target).attr("data-lon"))
+          })
+      })
+      </script>
+      {% let user.get_location = '#location' %}
           <label>Email: </Label>
           <input type="email" name="email" placeholder="Email">
         </p>

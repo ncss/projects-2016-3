@@ -152,6 +152,16 @@ div#results {
   display: none;
 }
 
+div.sidebar{
+  float: left;
+  width: 49.5%;
+}
+
+div.skills{
+  float: right;
+  width: 49.5%
+}
+
 
 /* --- Utilities --- */
 
