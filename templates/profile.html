@@ -38,12 +38,16 @@
             <h1>Posts</h1>
             {% if posts %}
                 {% for post in posts %}
-                <article class="background-med-grey post">
+	                <article class="background-med-grey post">
+					{% if post.get_status() == 0 %}<div class="threat-post low"></div>{% end if %}
+					{% if post.get_status() == 1 %}<div class="threat-post med"></div>{% end if %}
+					{% if post.get_status() == 2 %}<div class="threat-post high"></div>{% end if %}
+
                     <h2>Name: {{ post.get_author().get_first_name() }}</h2>
                     <p>Threat level:
-                      {% if post.get_status() == 0 %}Low<div class="threat-post low"></div>{% end if %}
-                      {% if post.get_status() == 1 %}Medium<div class="threat-post med"></div>{% end if %}
-                      {% if post.get_status() == 2 %}High<div class="threat-post high"></div>{% end if %}
+				      {% if post.get_status() == 0 %}Low{% end if %}
+				      {% if post.get_status() == 1 %}Medium{% end if %}
+				      {% if post.get_status() == 2 %}High{% end if %}
                     </p>
                     <p>{{post.get_message()}}</p>
                     <p>{{post.get_timestamp()}}</p>
