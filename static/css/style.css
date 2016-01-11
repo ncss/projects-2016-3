@@ -52,6 +52,10 @@ img#landing-bg {
   width: 100vw;
 }
 
+form#login input {
+  height: 24px;
+}
+
 fieldset.landing-login {
   text-align: center;
   background-color: rgba(0,0,0,0);
