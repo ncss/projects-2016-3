@@ -8,6 +8,7 @@ import os
 from engine import render_file, ParseError
 from models.User import User
 from models.Post import Post
+from models.Skill import Skill
 
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
