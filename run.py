@@ -153,8 +153,8 @@ def process_profile_handler(response):
         dob_month = response.get_argument('dob_month')
         dob_year = response.get_argument('dob_year')
         DOB = dob_day + '/' + dob_month + '/' + dob_year
-        lat = response.get_argument('latitude')
-        long = response.get_argument('longitude')
+        lat = response.get_argument('lat')
+        long = response.get_argument('lng')
         location = lat + ',' + long
         gender = ""
         photo = ""

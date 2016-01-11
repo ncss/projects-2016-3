@@ -15,10 +15,11 @@
                                 <p>
                                   <div>
                                   <form>
-                                    <p> Location: </p>
-                                    <input id="location" type="text" name="location" value=""><br>
-                                    <input id="lat" type="hidden" value="">
-                                    <input id="lon" type="hidden" value="">
+                                    <p> Location:
+                                      <input id="location" type="text" name="location" value="{{ user.get_location() }}">
+                                      <input type="hidden" id="lat" name="lat">
+                                      <input type="hidden" id="lng" name="lng">
+                                    </p>
                                   </form>
                                   </div>
 
@@ -60,7 +61,7 @@
                                           $("#location").val($(event.target).text())
                                           $("#results").hide()
                                           $("#lat").val($(event.target).attr("data-lat"))
-                                          $("#lon").val($(event.target).attr("data-lon"))
+                                          $("#lng").val($(event.target).attr("data-lon"))
                                       })
                                   })
                                   </script>
@@ -96,7 +97,8 @@
                                   </select>
                                 </p>
                                 <p>
-                                  <input type="text" name="gender">
+                                  <label>Gender: </label>
+                                  <input type="text" name="gender" value="{{ user.get_gender() }}">
                                 </p>
                                 <p>
                                     <textarea name="contact-info">Hello, World!</textarea>

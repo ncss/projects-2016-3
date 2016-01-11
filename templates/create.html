@@ -40,6 +40,8 @@
         </p>
         <p> Location:
           <input id="location" type="text" name="location">
+          <input type="hidden" id="lat" name="lat">
+          <input type="hidden" id="lng" name="lng">
         </p>
       </form>
       </div>
@@ -82,11 +84,10 @@
               $("#location").val($(event.target).text())
               $("#results").hide()
               $("#lat").val($(event.target).attr("data-lat"))
-              $("#lon").val($(event.target).attr("data-lon"))
+              $("#lng").val($(event.target).attr("data-lon"))
           })
       })
       </script>
-      {% let user.get_location = '#location' %}
           <label>Email: </Label>
           <input type="email" name="email" placeholder="Email">
         </p>
