@@ -165,6 +165,7 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
+    userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
 
 def styleguide_handler(response):
