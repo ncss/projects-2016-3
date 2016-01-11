@@ -71,8 +71,8 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        userID = emails[email] #fix this once db is integrated
-        response.set_secure_cookie("userLoggedIn", str(user[userID].get_user_id()))
+        person = User.get_person_by_email(email)
+        response.set_secure_cookie("userLoggedIn", str(person.get_user_id()))
         response.redirect('/')
     else:
         response.write("wrong login")
@@ -119,8 +119,7 @@ def profile_handler(response, profile_id):
     #displays profile of user with given id
     #personInfo = users[1]
     userID = int(profile_id)
-    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
-    #response.write(render_file(os.path.join('templates', 'profile.html'), {User.get_person_by_id(userID)}))
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID)}))
 
 @login_required
 def own_profile_handler(response):

@@ -85,16 +85,19 @@ class User:
     @classmethod
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
-        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')[0]
         #make above line into a dictionary
         print(person_list)
-        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7])
-        
+        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
+        return new_user
+
     @classmethod
     def get_person_by_email(klass, email):
         whereClause = 'email = \'{}\''.format(email)
-        person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
-        new_user = User(person_dict.get('user_id'), person_dict.get('email'), person_dict.get('fname'), person_dict.get('lname'), person_dict.get('DOB'), person_dict.get('location'), person_dict.get('gender'), person_dict.get('photo'), columnvaluedict.get('phone'), person_dict.get('password'))
+        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')[0]
+        #make above line into a dictionary
+        print(person_list)
+        new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
         return new_user
 
     @classmethod
