@@ -1,10 +1,10 @@
 #from User import User
 
 create_post({
-	'message': 'hello world! 12',
-	'author_id': 76,
-	'status': 2,
-	'timestamp': '35/1/10/2016'
+    'message': 'hello world! 12',
+    'author_id': 76,
+    'status': 2,
+    'timestamp': '35/1/10/2016'
 })
 '''
 #def where, insert
