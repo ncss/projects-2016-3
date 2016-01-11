@@ -1,4 +1,5 @@
 from . import dbfunctions as db
+from datetime import datetime
 
 class Post:
     def __init__ (self, post_id, message, author_id, status, timestamp):
@@ -78,13 +79,13 @@ class Post:
 '''
 
 
+if __name__ == '__main__':
+    newPost = Post.create_post({
+        'message': 'hello!',
+        'author_id': 23,
+        'status': 1,
+        'timestamp': datetime.now()
+    })
 
-newPost = Post.create_post({
-    'message': 'hello!',
-    'author_id': 23,
-    'status': 1,
-    'timestamp': '35/1/10/2016'
-})
-
-print(Post.get_all_user_posts(2))
-#print(Post.get_all_posts())
+    print(Post.get_all_user_posts(23))
+    #print(Post.get_all_posts())
