@@ -37,6 +37,12 @@ class Skill:
             skill_list.append(new_skill)
         return skill_list
 
+    @classmethod
+    def get_skill_by_id(cls, skill_id):
+        where_clause = 'skill_id = {}'.format(skill_id)
+        skill_dict = db.select('skills', where_clause, 'skill_id', 'category', 'specialisation', 'rank')
+        new_skill = Skill(skill_dict.get('skill_id'), skill_dict.get('category'), skill_dict.get('specialisation'), skill_dict.get('rank'))
+        return new_skill
 
 if __name__ == '__main__':
     print(str(Skill(0, 1, 2)))
