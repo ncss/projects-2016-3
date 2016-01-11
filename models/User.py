@@ -1,4 +1,3 @@
-import doctest
 from . import dbfunctions as db
 
 class User:
@@ -104,6 +103,14 @@ class User:
                 return False #Incorrect password
         else:
             return False #Incorrect email
+
+
+# print (User.email_exists('george.com'))
+
+# myDictionary = {'user_id' : 3, 'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : -4.999, 78.908, 'gender' : 'M', 'photo': , phone, password}
+# newUser = User.create_user(myDictionary)
+# print (newUser)
+
 
 #********************************************************************************
 #********************************************************************************
