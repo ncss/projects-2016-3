@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title> Page Title </title>
+    <title> The Human Survival Co. </title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
@@ -10,45 +10,48 @@
   </head>
   <body class="background-dark-grey">
     <header class="background-darkest-grey">
+
       <div id="logo-wrapper">
         <a href="/">
           <img src="/static/images/logo.png">
         </a>
       </div>
 
-      <div class='centering'>
-        <nav>
-          <div class="header-icon">
-            <a href="/profile">
-              Profile<br>
-              <img src="/static/images/profile-icon.png">
-            </a>
-          </div>
-          <div class="header-icon">
-            <a href="/post/all">
-              Posts<br>
-              <img src="/static/images/viewposts-icon.png">
-            </a>
-          </div>
-          <div class="header-icon">
-            <a href="/post/create">
-              Add Post<br>
-              <img src="/static/images/addpost-icon.png">
-            </a>
-          </div>
-          <div class="header-icon">
-            <a href="/search">
-              Search<br>
-              <img src="/static/images/search-icon.png">
-            </a>
-          </div>
+      <nav>
+        <div class="header-icon">
+          <a href="/profile">
+            Profile<br>
+            <img src="/static/images/profile-icon.png">
+          </a>
+        </div>
+        <div class="header-icon">
+          <a href="/post/all">
+            Posts<br>
+            <img src="/static/images/viewposts-icon.png">
+          </a>
+        </div>
+        <div class="header-icon">
+          <a href="/post/create">
+            Add Post<br>
+            <img src="/static/images/addpost-icon.png">
+          </a>
+        </div>
+        <div class="header-icon">
+          <a href="/search">
+            Search<br>
+            <img src="/static/images/search-icon.png">
+          </a>
+        </div>
       </nav>
-    </div>
-    <div class="user-greeting">
-      <p>Hello, {{ name }}</p>
-      <a href="/logout">Logout</a>
-    </div>
-    <div class="clearfix">
-    </div>
-  </header>
-  <main id="container" class="background-light-grey">
+
+      <div class="user-greeting">
+        <p>Hello, {{ name }}</p>
+        <a href="/logout">Logout</a>
+      </div>
+
+      <div class="clearfix">
+      </div>
+
+    </header>
+
+    <main id="container" class="background-light-grey">
