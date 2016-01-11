@@ -38,8 +38,9 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         }
 
 def get_cookie(response):
-    return 1
-    #return response.get_secure_cookie("userLoggedIn")
+    #return 1
+    print(response.get_secure_cookie("userLoggedIn"))
+    return response.get_secure_cookie("userLoggedIn")
 
 def login_required(function):
     #login decorator
@@ -84,12 +85,15 @@ def home_handler(response):
     #login(response, '2')
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
-    if userLoggedIn:
-        userLoggedIn = int(userLoggedIn)
+    print(userLoggedIn)
+    if userLoggedIn is not b'None':
+        userLoggedIn = int(str(userLoggedIn))
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
         response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
-        response.write(render_file(os.path.join('templates', 'index.html'), {}))
+        #response.write(render_file(os.path.join('templates', 'index.html'), {}))
+        response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+
 
 @login_required
 def search_handler(response):
@@ -120,16 +124,41 @@ def own_profile_handler(response):
     userID = get_cookie(response)
     profile_handler(response, userID)
 
-
 @login_required
 def edit_profile_handler(response, id):
     #edit profile with given id
     response.write(render_file(os.path.join('templates', 'profile_edit.html'), {}))
 
-@login_required
 def create_profile_handler(response):
     #signup page
     response.write(render_file(os.path.join('templates', 'create.html'), {}))
+
+def process_profile_handler(response):
+    print(response.request)
+    if response.request.method == 'POST':
+        email = response.get_argument('email')
+        fname = response.get_argument('first-name')
+        lname = response.get_argument('last-name')
+        dob_day = response.get_argument('dob_day')
+        dob_month = response.get_argument('dob_month')
+        dob_year = response.get_argument('dob_year')
+        DOB = dob_day + '/' + dob_month + '/' + dob_year
+        lat = response.get_argument('latitude')
+        long = response.get_argument('longitude')
+        #location = latitude + ',' + longitude
+        gender = ""
+        photo = ""
+        password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
+        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB, 'lat':lat, 'long':long, 
+                        'gender':gender, 'photo':photo, 'password':password, 'user_id':1}
+        user = User.create_user(user_dict)
+        print(user.get_user_id())
+        response.set_secure_cookie("userLoggedIn", str(user.get_user_id()))
+        response.redirect('/')
+    else:
+        return return_403(response)
+
+
 
 @login_required
 def all_post_handler(response):
@@ -183,7 +212,7 @@ def styleguide_handler(response):
 
 def landing_handler(response):
     response.write(render_file(os.path.join('templates', 'landing.html'), {}))
-
+    
 def default_handler(response, method, *args, **kwargs):
     #default 404
     return return_404(response)
@@ -202,12 +231,11 @@ server.register(r'/profile/(\d+)', profile_handler, url_name = 'profile')
 server.register(r'/profile', own_profile_handler, url_name = 'own_profile')
 server.register(r'/profile/(\d+)/edit', edit_profile_handler, url_name = 'edit_profile')
 server.register(r'/profile/create', create_profile_handler, url_name = 'create_profile')
+server.register(r'/profile/create/process', process_profile_handler, url_name = 'process_profile')
 server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
-server.register(r'/landing', landing_handler, url_name = 'landing')
-server.register(r'/send-to', send_to_handler, url_name = 'send-to')
 server.set_default_handler(default_handler)
 
 server.run()
