@@ -90,7 +90,7 @@ class User:
     @classmethod
     def get_person_by_email(klass, email):
         #TODO
-        email = "email = " + email
+        email = "email = '" + email + "'"
         return db.select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
         
 
