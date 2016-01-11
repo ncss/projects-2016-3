@@ -1,38 +1,19 @@
 
 body {
-  background-color: #262626;
   font-family: "Roboto";
   font-size: 16px;
   line-height: 24px;
 }
 
-main#container {
+.background-light-grey {
   background-color: #505050;
-  position: static;
-  margin: auto;
-  padding: 20px;
-  width: 750px;
 }
-
-header {
+.background-med-grey {
+  background-color: #262626;
+}
+.background-dark-grey {
   background-color: #202020;
-  padding: 20px;
 }
-
-div.post-box {
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
-
-footer {
-  margin: auto;
-  margin-top: 15px;
-  text-align: center;
-}
-
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
