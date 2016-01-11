@@ -18,14 +18,8 @@ class User:
     def __str__(self):
         return 'Object for user {}, {}'.format(self._fname, self._lname)
 
-    '''
-    Everything after this point needs to be updated in the database too!
-    '''
-#********************************************************************************
-#********************************************************************************
-#Return fields
-#********************************************************************************
-#********************************************************************************
+    # Everything after this point needs to be updated in the database too!
+
     def get_user_id(self):
         return self._user_id
 
@@ -103,7 +97,8 @@ class User:
     @classmethod
     def get_person_by_id(klass, user_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
-        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')[0]
+        person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')
+        print(person_list)
         #make above line into a dictionary
         new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
         return new_user
@@ -158,9 +153,6 @@ class User:
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'user_skills', newskill_id, whereClause)
 
-        #columnvaluedict = {'skill_id': newskill_id}
-        #db.insert('user_skills', columnvaluedict)
-
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
         db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
@@ -168,26 +160,3 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
-
-
-
-'''
-    def appendSkill(self, newSkill):
-        self.skills = self.skills.append(newSkill)
-
-#Contact Modifications
-    def updateContact(self, newContact):
-        self.contact = newContact
-'''
-
-'''
-myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
-newUser = User.create_user(myDictionary)
-print (newUser)
-
-newUser = User.get_person_by_email('george.com')
-print(newUser)
-#print(User.verify_password('george.com', 'bob1'))
-'''
-user = User.get_person_by_id(1)
-print(user.get_skills())
