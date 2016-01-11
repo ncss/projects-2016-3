@@ -4,17 +4,19 @@ import pprint
 import hashlib
 import os
 from engine import render_file, ParseError
-from models import User
+from models.User import User
 
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
 #status is 0-2
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
-users = {1:{'user_id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2', 'age':'18', 'gender':'Male'},
-        2:{'user_id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
-        3:{'user_id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
-}
+user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
+        2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
+        3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
+        }
+
+
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         2:{'id': 2, 'userid': 1, 'message' : "I'm still ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
@@ -25,7 +27,8 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         }
 
 def get_cookie(response):
-    return response.get_secure_cookie("userLoggedIn")
+    return 1
+    #return response.get_secure_cookie("userLoggedIn")
 
 def login_required(function):
     #login decorator
@@ -79,8 +82,9 @@ def search_handler(response):
 @login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    personInfo = users[1]
-    response.write(render_file(os.path.join('templates', 'profile.html'), personInfo))
+    #personInfo = users[1]
+    userID = int(profile_id)
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'User':user[userID]}))
   
 def own_profile_handler(response):
     #redirect to user's own profile page

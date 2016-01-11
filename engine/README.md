@@ -1,9 +1,9 @@
-# README.md
+#README.md
 
-## TEMPLATE ENGINE SYNTAX
+##TEMPLATE ENGINE SYNTAX
 ###TAGS:
 
-- `{{ expr }}` This tag is used to output the result of any valid Python expression into the HTML document in place of the tag. The output should be properly escaped so invalid HTML is not produced. Ensure there is a space between `{{` and the Python expression and `}}`.
+- `{{ expr }}` This tag is used to output the result of any valid Python expression into the HTML document in place of the tag. The output should be properly escaped so invalid HTML is not produced. Ensure there is a space between `{{` and the Python expression and `}}`. If an expression is given that is not specified in the given context, the default error is a `ParseError`. The function `render_file` contains a keyword argument `strict` which is by default set to `True`. When `strict = False`, expressions that are not present in the context return an empty string in their place instead of throwing a `ParseError`.
   - e.g. `<h1>{{ person.name }}'s Profile</h1>`
   - e.g. `<li>{{ person.name }} is a doctor.</li>`
 
@@ -13,7 +13,8 @@
 - `{% for dest in src %}X{% end for %}` This tag is used to repeatedly execute the template code `X` for every element in the variable `src`. Every time `X` is executed, the current value of the variable `dest` is added to the context of `X`. Requires `{% end for %}` to close the `for` statement.
   - e.g. `{% for friend in person.friends %}<li class='friend'>{% include friend.html %}</li>{% end for %}`
 
-- `{% if predicate %}X{% end if %}` **NOT WORKING YET!**
+- `{% if predicate %}X{% end if %}` This tag is used to conditionally output values. The template code `X` will only be executed if `predicate` evaluates to `True`.
+  - e.g. `{% if person.friends %}{{ person.name }} has {{ len(person.friends) }} friends!{% end if %}`
 
 
 
