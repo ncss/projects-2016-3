@@ -65,7 +65,7 @@ class User:
 #Sign in and log in
 #********************************************************************************
 #********************************************************************************
-    
+
     @classmethod
     def email_exists(klass, email):
         whereClause = 'email = \'{}\''.format(email)
@@ -73,7 +73,8 @@ class User:
         if db.select('user', whereClause, 'email'):
             return True
         else:
-            return False    
+            return False
+
 
     @classmethod
     def create_user(klass, columnvaluedict):
@@ -113,53 +114,35 @@ class User:
         else:
             return False #Incorrect email
 
+    @classmethod
+    def updateFName(cls, user_id, newName):
+        db.update('user', 'fname', newName, 'user_id = {}'.format(user_id))
 
+    @classmethod
+    def updateLName(cls, user_id, newName):
+        db.update('user', 'lname', newName, 'user_id = {}'.format(user_id))
 
+    @classmethod
+    def updateDOB(cls, user_id, newDOB):
+        db.update('user', 'DOB', newName, 'user_id = {}'.format(user_id))
 
-'''
-myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
-newUser = User.create_user(myDictionary)
-print (newUser)
+    @classmethod
+    def updateLocation(cls, user_id, newLocation):
+        db.update('user', 'location', newLocation, 'user_id = {}'.format(user_id))
 
-newUser = User.get_person_by_email('george.com')
-print(newUser)
-#print(User.verify_password('george.com', 'bob1'))'''
+    @classmethod
+    def updateGender(cls, user_id, newGender):
+        db.update('user', 'gender', newGender, 'user_id = {}'.format(user_id))
 
-#********************************************************************************
-#********************************************************************************
-#Fun stuff
-#********************************************************************************
-#********************************************************************************
-'''
-#Name Modifications
+    # TODO
+    # @classmethod
+    # def appendSkill(cls, user_id, newSkill):
+    #     db.update('user',  ,'user_id = {}'.format(user_id))
 
-def updateName(self, user_id, newName):
-    pass
+    @classmethod
+    def updatePhoto(cls, user_id, newPhoto):
+        db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
 
-#Age Modifications    
-    def updateAge(self, newAge):
-        self.age = newAge
-
-#Location Modifications
-    def updateLocation(self, newLocation):
-        self.location = newLocation
-
-#Gender Modifications
-    def updateGender(self, newGender):
-        self.gender = newGender
-
-#Skills Modifications
-    def updateSkills(self, newSkills):
-        self.skills = newSkills
-
-    def appendSkill(self, newSkill):
-        self.skills = self.skills.append(newSkill)
-
-#Photo Modifications
-    def updatePhoto(self, newPhoto):
-        self.photo = newPhoto
-
-#Contact Modifications
-    def updateContact(self, newContact):
-        self.contact = newContact
-'''
+    @classmethod
+    def updateContact(cls, user_id, newContact):
+        db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))

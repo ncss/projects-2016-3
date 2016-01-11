@@ -115,8 +115,8 @@ def search_results_handler(response):
         userID = post.get_author_id()
         user = User.get_person_by_id(userID)
         name = user.get_last_name()
-        if name == query:
-            results.append(user)
+        if name.lower() == query.lower():
+            results.append(post.get_message())
     
     response.write(render_file(os.path.join('templates', 'search_results.html'), {'search_results':results, 'search_query':query, 'user':User.get_person_by_id(get_cookie(response))}))
 
@@ -141,7 +141,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {}))
+    response.write(render_file(os.path.join('templates', 'create.html'), {'user':None}))
 
 def process_profile_handler(response):
     print(response.request)
@@ -193,17 +193,18 @@ def new_post_handler(response):
         userID = get_cookie(response)
         response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))
 
-@login_required
 def about_handler(response):
-    #about page
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'about.html'), {'user':User.get_person_by_id(userID)}))
+    user = None
+    if userID != None:
+        user = User.get_person_by_id(userID)
+    response.write(render_file(os.path.join('templates', 'about.html'), {'user':user}))
 
 def styleguide_handler(response):
-    response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
+    response.write(render_file(os.path.join('templates', 'styleguide.html'), {'user': None}))
 
 def landing_handler(response):
-    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+    response.write(render_file(os.path.join('templates', 'landing.html'), {'user': None}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
