@@ -34,7 +34,7 @@ class PythonNode(Node):
             return html.escape(str(eval(self.content, {}, context)))
         except NameError:
             if not strictness:
-                return ''
+                return '{{}}'
             return html.escape(str(eval(self.content, {}, context)))
 
 
@@ -44,7 +44,7 @@ class SafePythonNode(Node):
             return str(eval(self.content, {}, context))
         except NameError:
             if not strictness:
-                return ''
+                return '{{}}'
             return str(eval(self.content, {}, context))
 
 class IncludeNode(Node):
@@ -174,8 +174,10 @@ def render_template(template, context):
     return parse_template(template)[0].evaluate(context)
 
 
-def render_file(filename, context, *, strict=True):
+def render_file(filename, context, *, strict=False):  # TODO: strict=None
     global strictness
+    # if strict is None:
+    #     raise ParseError('Strictness must be specified')
     strictness = strict
     try:
         with open(filename) as f:
