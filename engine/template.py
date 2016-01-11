@@ -98,6 +98,9 @@ class IfNode(Node):
 
 
 class CommentNode(Node):
+	def __init__(self, parent):
+		self.parent = parent
+
 	def evaluate(self, context):
 		return ''
 
@@ -176,8 +179,8 @@ def _parse_template(template, upto, parent):
 				else_child, offset = _parse_template(template, offset + 1, token)
 				token.else_child = else_child
 		elif token.startswith('% comment'):
-			token = CommentNode(None, parent)
-			group_node, offset = _parse_template(template, index + 1, token)
+			token = CommentNode(parent)
+			_, offset = _parse_template(template, index + 1, token)
 		else:
 			token = TextNode(token, root_node)
 
