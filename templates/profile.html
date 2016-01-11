@@ -37,13 +37,17 @@
         </div>
         <section>
             <h1>Posts</h1>
-            <article>
-              <p>
-                Example post |
-                time |
-                Alert
-              </p>
-            </article>
+            {% if posts %}
+            	{% for post in posts %}
+            	<article>
+            	  <p>
+            	    {{ post.get_message() }}
+            	  </p>
+            	</article>
+            	{% end for %}
+            {% else %}
+            	<p>You don't have any posts yet!</p>
+            {% end if %}
         </section>
     </div>
 </article>
