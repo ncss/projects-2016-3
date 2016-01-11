@@ -89,7 +89,6 @@ def home_handler(response):
         response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         response.write(render_file(os.path.join('templates', 'index.html'), {}))
-    response.write('Home!')
 
 @login_required
 def search_handler(response):
@@ -112,6 +111,7 @@ def profile_handler(response, profile_id):
     #personInfo = users[1]
     userID = int(profile_id)
     response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
+    #response.write(render_file(os.path.join('templates', 'profile.html'), {User.get_person_by_id(userID)}))
 
 @login_required
 def own_profile_handler(response):
