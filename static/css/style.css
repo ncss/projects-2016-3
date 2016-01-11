@@ -144,3 +144,26 @@ h1.404 {
   text-align: center;
 
 }
+
+
+/* --- View Posts --- */
+.low-threat {
+  background-color: green;
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.med-threat {
+  background-color: orange;
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.high-threat {
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  float: right;
+}
