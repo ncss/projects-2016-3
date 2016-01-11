@@ -5,7 +5,7 @@
 <body class="search-results">
   <div class="post">
     <ol>
-      {% for i in search_results %}
+      {% for i in reversed(search_found) %}
         <h2>
           <li>"{{ i }}"</li>
         </h2>

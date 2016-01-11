@@ -52,3 +52,7 @@ def delete(table, whereClause):
     connect.commit()
     cur.close()
     connect.close()
+
+def raw_sql(statement):
+    return sqlite3.connect('db/database.db').cursor().execute(statement).fetchall()
+

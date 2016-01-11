@@ -52,6 +52,10 @@ img#landing-bg {
   width: 100vw;
 }
 
+form#login input {
+  height: 24px;
+}
+
 fieldset.landing-login {
   text-align: center;
   background-color: rgba(0,0,0,0);
@@ -152,6 +156,16 @@ div#results {
   display: none;
 }
 
+div.sidebar{
+  float: left;
+  width: 49.5%;
+}
+
+div.skills{
+  float: right;
+  width: 49.5%
+}
+
 
 /* --- 404 Page --- */
 
@@ -160,8 +174,19 @@ h1.404 {
 
 }
 
+/* --- Add Post --- */
+
+form#add-post textarea {
+  width: calc(100% - 20px); /* width - padding */
+  min-height: 200px;
+}
+form#add-post input#submit {
+  margin-top: 20px;
+}
+
 
 /* --- View Posts --- */
+
 .post {
   padding: 15px;
   margin-bottom: 20px;

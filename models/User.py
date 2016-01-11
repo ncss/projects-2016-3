@@ -154,9 +154,12 @@ class User:
         db.update('user', 'Gender', newGender, whereClause)
 
     @classmethod
-    def updateSkills(cls, user_id, newSkills):
+    def updateSkills(cls, user_id, newskill_id):
         whereClause = 'user_id = \'{}\''.format(user_id)
-        db.update('user', 'DOB', newSkills, whereClause)
+        db.update('user', 'user_skills', newskill_id, whereClause)
+
+        #columnvaluedict = {'skill_id': newskill_id}
+        #db.insert('user_skills', columnvaluedict)
 
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
@@ -165,6 +168,8 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+
+
 
 '''
     def appendSkill(self, newSkill):
@@ -184,6 +189,5 @@ newUser = User.get_person_by_email('george.com')
 print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
-
 user = User.get_person_by_id(1)
 print(user.get_skills())
