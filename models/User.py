@@ -132,6 +132,16 @@ class User:
     def updateSkills(self, user_id, newSkills):
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'DOB', newSkills, whereClause)
+
+
+    @classmethod
+    def updatePhoto(cls, user_id, newPhoto):
+        db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
+
+    @classmethod
+    def updateContact(cls, user_id, newContact):
+        db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+
 '''
     def appendSkill(self, newSkill):
         self.skills = self.skills.append(newSkill)
@@ -150,10 +160,4 @@ newUser = User.get_person_by_email('george.com')
 print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
-    @classmethod
-    def updatePhoto(cls, user_id, newPhoto):
-        db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
-
-    @classmethod
-    def updateContact(cls, user_id, newContact):
-        db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+    
