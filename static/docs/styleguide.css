@@ -14,7 +14,7 @@ main#container {
   width: 750px;
 }
 
-div.header-test {
+header {
   background-color: #353535;
   padding: 20px;
 }
