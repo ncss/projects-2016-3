@@ -14,8 +14,8 @@ main#container {
   width: 750px;
 }
 
-div.header-test {
-  background-color: #353535;
+header {
+  background-color: #202020;
   padding: 20px;
 }
 
@@ -25,6 +25,12 @@ div.post-box {
   padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 5px;
+}
+
+footer {
+  margin: auto;
+  margin-top: 15px;
+  text-align: center;
 }
 
 

@@ -11,16 +11,17 @@ from models import User
 #status is 0-2
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
-users = {1:{'user_id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2', 'age':'18', 'gender':'Male'},
-        2:{'user_id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty'},
-        3:{'user_id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
-}
-'''
+user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
+        2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
+        3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
+        }
+
+
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         2:{'id': 2, 'userid': 1, 'message' : "I'm still ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
 }
-'''
+
 skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         2:{'id':2, 'skill name': 'emergency doctor', 'category id':1, 'rank':8},
         3:{'id':3, 'skill name': 'structural engineer', 'category id':2, 'rank':6}
@@ -29,6 +30,21 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
 def get_cookie(response):
     return response.get_secure_cookie("userLoggedIn")
 
+def login_required(function):
+    #login decorator
+    #check if user is logged in, if not redirect to home
+    def inner(response, *args, **kwargs):
+        if get_cookie(response):
+            return function(response, *args, **kwargs)
+        else:
+            return return_403(response)
+    return inner
+
+def return_403(response, *args, **kwargs):
+    response.set_status(403)
+    response.write("403")
+    #render(response, '403.html', {})
+
 def login_handler(response):
     #database password check
     #assume database stuff worked fine
@@ -36,7 +52,7 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        response.set_secure_cookie("userLoggedIn", User.getPerson(email).get_user_id())
+        response.set_secure_cookie("userLoggedIn", User.getPerson(email).user_id)
         response.redirect('/')
     else:
         response.write("wrong login")
@@ -63,20 +79,15 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file(os.path.join('templates', 'search.html'), {}))
+    response.write(render_file(os.path.join('templates', 'search.html'), {"name": "WildCats!"}))
 
 
 
 
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    personInfo = users[1]
-    response.write(render_file(os.path.join('templates', 'profile.html'), personInfo))
-  
-
-
-
-
+    userID = int(profile_id)
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'User':user[userID]}))
 
 def own_profile_handler(response):
     #redirect to user's own profile page
@@ -92,14 +103,14 @@ def own_profile_handler(response):
 
 def edit_profile_handler(response, id):
     #edit profile with given id
-    response.write('edit profile {}'.format(id))
+    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {}))
+    #response.write('edit profile {}'.format(id))
 
 def create_profile_handler(response):
     #signup page
     response.write(render_file(os.path.join('templates', 'create.html'), {}))
 
 def all_post_handler(response):
-    '''
     userID = get_cookie()
     if userID:
         posts = Post.get10()
@@ -110,9 +121,6 @@ def all_post_handler(response):
             response.write('all posts')
     else:
         response.redirect('/')
-    '''
-    response.write('posts')
-    #display all posts
 
 def new_post_handler(response):
     #new post page
@@ -121,6 +129,10 @@ def new_post_handler(response):
 def about_handler(response):
     #about page
     response.write(render_file(os.path.join('templates', 'about.html'), {}))
+
+def default_handler(response, method, *args, **kwargs):
+    #default 404
+    return return_404(response)
 
 server = Server()
 server.register(r'/', home_handler, url_name = 'name')
