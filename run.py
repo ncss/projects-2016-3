@@ -105,7 +105,6 @@ def search_handler(response):
 
 @login_required
 def search_results_handler(response):
-
     query = response.get_field('query')
     criteria = response.get_field('criteria')
     posts = Post.get_all_posts()
@@ -117,7 +116,7 @@ def search_results_handler(response):
         name = user.get_last_name()
         if name.lower() == query.lower():
             results.append(post.get_message())
-    
+
     response.write(render_file(os.path.join('templates', 'search_results.html'), {'search_results':results, 'search_query':query, 'user':User.get_person_by_id(get_cookie(response))}))
 
 
@@ -137,7 +136,25 @@ def own_profile_handler(response):
 def edit_profile_handler(response, id):
     #edit profile with given id
     userID = int(id)
-    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {'user':User.get_person_by_id(userID)}))
+    if response.request.method == 'POST':
+        fname = response.get_argument('fname')
+        User.updateFName(userID, fname)
+        lname = response.get_argument('lname')
+        User.updateLName(userID, lname)
+        location = response.get_argument('location')
+        User.updateLocation(userID, location)
+        dob_day = response.get_argument('dob_day')
+        dob_month = response.get_argument('dob_month')
+        dob_year = response.get_argument('dob_year')
+        DOB = '{}/{}/{}'.format(dob_day, dob_month, dob_year)
+        User.updateDOB(userID, DOB)
+        gender = response.get_argument('gender')
+        User.updateGender(userID, gender)
+        contact = response.get_argument('contact-info')
+        User.updateContact(userID, contact)
+        response.redirect('/profile')
+    else:
+        response.write(render_file(os.path.join('templates', 'profile_edit.html'), {'user':User.get_person_by_id(userID), 'all_skills': Skill.get_all_skills()}))
 
 def create_profile_handler(response):
     #signup page
