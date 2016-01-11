@@ -11,6 +11,11 @@ from models.User import User
 #status is 0-2
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
+users = {1:{'user_id': 1, 'email' : 'evan@email.com', 'fname': 'Evan', 'lname': 'Kohilas', 'location': 'Sydney', 'password': 'A1B2', 'age':'18', 'gender':'Male'},
+        2:{'user_id': 2, 'email' : 'aleks@email.com', 'fname': 'Aleks', 'lname': 'Bricknell', 'location': 'Mount Gambier', 'password': 'qwerty', 'age':'18', 'gender':'Male'},
+        3:{'user_id': 3, 'email' : 'katherine@email.com', 'fname': 'Katherine', 'lname': 'Allen', 'location': 'Sydney', 'password': 'hello1'}
+}
+
 user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
         2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
         3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
@@ -45,6 +50,21 @@ def return_403(response, *args, **kwargs):
     response.write("403")
     #render(response, '403.html', {})
 
+def login_required(function):
+    #login decorator
+    #check if user is logged in, if not redirect to home
+    def inner(response, *args, **kwargs):
+        if get_cookie(response):
+            return function(response, *args, **kwargs)
+        else:
+            return return_403(response)
+    return inner
+
+def return_403(response, *args, **kwargs):
+    response.set_status(403)
+    response.write("403")
+    #render(response, '403.html', {})
+
 def login_handler(response):
     #database password check
     #assume database stuff worked fine
@@ -52,7 +72,7 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        response.set_secure_cookie("userLoggedIn", User.getPerson(email).get_user_id())
+        response.set_secure_cookie("userLoggedIn", User.getPerson(email).user_id)
         response.redirect('/')
     else:
         response.write("wrong login")
@@ -77,15 +97,14 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file(os.path.join('templates', 'search.html'), {}))
+    response.write(render_file(os.path.join('templates', 'search.html'), {"name": "WildCats!"}))
 
 @login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
-    #personInfo = users[1]
     userID = int(profile_id)
-    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
-  
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'User':user[userID]}))
+
 def own_profile_handler(response):
     #redirect to user's own profile page
     userID = get_cookie()
@@ -97,7 +116,8 @@ def own_profile_handler(response):
 @login_required
 def edit_profile_handler(response, id):
     #edit profile with given id
-    response.write('edit profile {}'.format(id))
+    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {}))
+    #response.write('edit profile {}'.format(id))
 
 @login_required
 def create_profile_handler(response):
@@ -117,6 +137,8 @@ def all_post_handler(response):
             response.write('all posts')
     else:
         response.redirect('/')
+    #display all posts
+    #response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
 
 @login_required
 def new_post_handler(response):
@@ -125,7 +147,8 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
-    response.write('about')
+    #Needs "about.html" file to be made
+    response.write(render_file(os.path.join('templates', 'about.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
