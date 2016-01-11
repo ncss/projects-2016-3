@@ -141,10 +141,6 @@ class User:
         whereClause = 'user_id = \'{}\''.format(user_id)
         db.update('user', 'DOB', newSkills, whereClause)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8354c9a1ac8439bd29c59d44b1c2061064a59ee7
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
         db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
@@ -152,7 +148,6 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
-<<<<<<< HEAD
 
 '''
     def appendSkill(self, newSkill):
@@ -172,6 +167,3 @@ newUser = User.get_person_by_email('george.com')
 print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
-    
-=======
->>>>>>> 8354c9a1ac8439bd29c59d44b1c2061064a59ee7
