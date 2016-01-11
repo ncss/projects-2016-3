@@ -90,7 +90,7 @@ cur.execute("""insert into  skills (category, specialisation, rank) values ( 'so
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'social', 'Chef', 3); """)
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'social', 'Funeral Worker', 2); """)
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'social', 'Policeman', 7); """)
-cur.execute("""insert into  skills (category, specialisation, rank) values ( 'social', 'Criminal', 10); """)
+cur.execute("""insert into  skills (category, specialisation, rank) values ( 'social', 'Criminal', 7); """)
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'food related', 'Farmer', 7); """)
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'food related', 'Botanist', 7); """)
 cur.execute("""insert into  skills (category, specialisation, rank) values ( 'food related', 'Baker', 4); """)

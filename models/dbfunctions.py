@@ -44,3 +44,11 @@ def update(table, field, value, whereClause):
     cur.close()
     connect.close()
     return results
+
+def delete(table, whereClause):
+    connect = sqlite3.connect('db/database.db')
+    cur = connect.cursor()
+    cur.execute('''delete from %s where %s;''' % (table, field, value, whereClause))
+    connect.commit()
+    cur.close()
+    connect.close()

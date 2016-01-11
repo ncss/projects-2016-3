@@ -1,4 +1,5 @@
 from . import dbfunctions as db
+from . import Skill
 
 
 class User:
@@ -60,6 +61,22 @@ class User:
 
     def get_password(self):
         return self._password
+
+    def get_skills(self):
+        skills = db.select('skills s inner join user_skills us', 'us.user_id = %d' % (self._user_id), 's.skill_id', 's.category', 's.specialisation', 's.rank')
+        return [Skill.Skill(s[0], s[1], s[3], s[2]) for s in skills]
+
+    def set_skills(self, skills):
+        db.delete('user_skills', 'user_id = %d' % self._user_id)
+        for skill in skills:
+            skill_id = db.select('skills', 'specialisation = \'%s\'' % skill, 'skill_id')
+            if skill_id:
+                db.insert('user_skill', {
+                    'skill_id': skill_id,
+                    'user_id': self._user_id
+                })
+
+
 #********************************************************************************
 #********************************************************************************
 #Sign in and log in
@@ -167,3 +184,6 @@ newUser = User.get_person_by_email('george.com')
 print(newUser)
 #print(User.verify_password('george.com', 'bob1'))
 '''
+
+user = User.get_person_by_id(1)
+print(user.get_skills())
