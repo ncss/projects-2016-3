@@ -89,7 +89,8 @@ class User:
         
     @classmethod
     def get_person_by_email(klass, email):
-        whereClause = 'email = ' + email
+        #TODO
+        whereClause = "email = '" + email + "'"
         person_dict = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
         new_user = User(columnvaluedict.get('user_id'), columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
         return new_user

@@ -170,9 +170,10 @@ def about_handler(response):
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
 
 def styleguide_handler(response):
-    #about page
-    #Needs "about.html" file to be made
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
+
+def landing_handler(response):
+    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
@@ -196,6 +197,7 @@ server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
+server.register(r'/landing', landing_handler, url_name = 'landing')
 server.register(r'/send-to', send_to_handler, url_name = 'send-to')
 server.set_default_handler(default_handler)
 
