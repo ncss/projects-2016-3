@@ -7,6 +7,9 @@ header {
 
 header div#logo-wrapper {
   float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 3px;
 }
 
 header div#logo-wrapper img {
@@ -17,6 +20,7 @@ header div#logo-wrapper img {
 header nav {
   text-align: center;
   display: inline-block;
+  padding-top: 20px;
 }
 
 header div.header-icon {
@@ -32,6 +36,8 @@ header div.header-icon img {
 
 header div.user-greeting {
   float: right;
+  padding-top: 20px;
+  padding-right: 10px;
 }
 
 div.centering {
@@ -46,7 +52,7 @@ img#landing-bg {
   margin-right: auto;
   top: 0;
   width: 100vw;
-  
+
 }
 
 fieldset.landing-login {
@@ -137,4 +143,36 @@ article.main-content {
 h1.404 {
   text-align: center;
 
+}
+
+
+/* --- View Posts --- */
+.post {
+  width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #3C3C3C;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.low-threat {
+  background-color: green;
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.med-threat {
+  background-color: orange;
+  height: 20px;
+  width: 20px;
+  float: right;
+}
+
+.high-threat {
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  float: right;
 }
