@@ -1,21 +1,23 @@
 /* --- Base Infrastructure --- */
-header div#logo-wrapper {
-  float: left;
-}
-
-header div#logo-wrapper img {
-  width: 128px;
-  height: 128px;
-}
-
 header {
   border-bottom: #242424;
   border-style: solid;
 }
 
+header div#logo-wrapper {
+  float: left;
+}
+
+header div#logo-wrapper img {
+  width: 100px;
+  height: 100px;
+}
+header nav{
+text-align:center;
+}
 header div.header-icon {
   float: left;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 header div.header-icon a {

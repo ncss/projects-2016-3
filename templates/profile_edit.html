@@ -15,25 +15,39 @@
                                     <input type="text" name="location">
                                 </p>
                                 <p>
-                                    <input type="text" name="date-of-birth" value="31/12/1999">
-                                    <select>
-                                        <option>01</option>
-                                        <option>02</option>
-                                        <option>03</option>
-                                        <option>04</option>
-                                        <option>05</option>
-                                        <option>06</option>
-                                        <option>07</option>
-                                        <option>08</option>
-                                        <option>09</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                    </select>
+                                  <select>
+                                    <optgroup>Day</optgroup>
+                                    {% for i in range(1, 31 + 1) %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                    {% end for %}
+                                  </select>
+                                  <select>
+                                      <optgroup>Month</optgroup>
+                                      <option value="1">January</option>
+                                      <option value="2">Febuary</option>
+                                      <option value="3">March</option>
+                                      <option value="4">April</option>
+                                      <option value="5">May</option>
+                                      <option value="6">June</option>
+                                      <option value="7">July</option>
+                                      <option value="8">August</option>
+                                      <option value="9">September</option>
+                                      <option value="10">October</option>
+                                      <option value="11">November</option>
+                                      <option value="12">December</option>
+                                  </select>
+                                  <select>
+                                    <optgroup>Year</optgroup>
+                                    {% for i in range(2016, 1959 - 1, -1) %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                    {% end for %}
+                                  </select>
                                 </p>
-                                    <input type="text" name="gender">
                                 <p>
-                                    <textarea rows="6" name="contact-info">Hello, World!</textarea>
+                                  <input type="text" name="gender">
+                                </p>
+                                <p>
+                                    <textarea name="contact-info">Hello, World!</textarea>
                                 </p>
                             </div>
                     </fieldset>

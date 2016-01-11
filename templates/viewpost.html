@@ -1,8 +1,10 @@
 {% include header.html %}
-<div class="post">
-  <h2>{{First name}} {{Last name}}</h2>
-    <p>Post text</p>
-    <p>Time of post, Date of post</p>
-  </div>
 
+{% for post in posts %}
+<div class="post">
+  <h2>{{post.get_author_id()}}</h2>
+    <p>{{post.get_message()}}</p>
+    <p>{{post.get_timestamp()}}</p>
+  </div>
+{% end for %}
 {% include footer.html %}

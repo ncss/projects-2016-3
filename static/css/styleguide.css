@@ -115,6 +115,11 @@ input, textarea {
   padding: auto;
   padding-left: 5px;
 }
+
+textarea {
+  resize: vertical;
+}
+
 input:disabled{
     color: rgba(204, 204, 204, 0.5);
     /*border: 1px groove rgba(204, 204, 204, 0.75);*/
