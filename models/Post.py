@@ -9,7 +9,7 @@ class Post:
 		self._timestamp = timestamp
 
 	def __str__(self):
-		return 'Obect for post {} by {}'.format(self.title, self.author)
+		return 'Obect for post {} by {}'.format(self._message, self._author_id)
 
 	
 
@@ -40,16 +40,27 @@ class Post:
 
 	@classmethod
 	def get_all_user_posts(user_id):
-		return db.select('post', 'author_id = %s' % user_id, '*')
+		postList = []
+		postData = db.select('post', 'author_id = %s' % user_id, 'post_id', 'message', 'author_id', 'status', 'timestamp')
+		for line in postData:
+			newPost = Post(line[0], line[1], line[2], line[3], line[4])
+			postList.append(newPost)
+		return postList
 
 	@classmethod
 	def get_all_posts():
-		   results = db.select('post', '', '*')
-		   return results
+		postList = []
+		postData = db.select('post', None, 'post_id', 'message', 'author_id', 'status', 'timestamp')
+		for line in postData:
+			newPost = Post(line[0], line[1], line[2], line[3], line[4])
+			postList.append(newPost)
+		return postList
 
 	@classmethod
 	def create_post(klass, columnvaluedict):
 	   	db.insert('post', columnvaluedict)
+	   	newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
+	   	return newPost
 
 	#def newPost(self, title, message, author, status):
 	#def Post(self, title, message, author, status):
@@ -67,9 +78,12 @@ class Post:
 
 
 
-Post.create_post({
-	'message': 'hello world! 12',
-	'author_id': 76,
-	'status': 2,
+newPost = Post.create_post({
+	'message': 'hello!',
+	'author_id': 23,
+	'status': 1,
 	'timestamp': '35/1/10/2016'
 })
+
+print(Post.get_all_user_posts())
+print(Post.get_all_posts())
