@@ -65,7 +65,7 @@ class Post:
 	#def newPost(self, title, message, author, status):
 	#def Post(self, title, message, author, status):
 
-
+'''
 	def updateTitle(self, newTitle):
 		self.title = newTitle
 	
@@ -74,7 +74,7 @@ class Post:
 
 	def updateStatus(self, newStatus):
 		self.status = newStatus
-
+'''
 
 
 

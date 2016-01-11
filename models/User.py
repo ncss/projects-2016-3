@@ -1,4 +1,4 @@
-import dbfunctions as db
+from . import dbfunctions as db
 
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
@@ -68,7 +68,7 @@ class User:
 	@classmethod
 	def email_exists(klass, email):
 		#To check
-		if select(email, 'user'):
+		if db.select(email, 'user'):
 			return True
 		else:
 			return False	
@@ -83,19 +83,19 @@ class User:
 		else:
 			return None	
 		'''
+
 	@classmethod
 	def get_person(klass, user_id):	
-		person_dict = select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
+		person_dict = db.select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
 		new_user = User(person_dict[''])
 
 		#newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
-		#return select(user_id, user)
 		
 	@classmethod
 	def get_person(klass, email):
 		#TODO
 		email = "email = " + email
-		return select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
+		return db.select('user', email, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone')
 		
 
 	@classmethod
