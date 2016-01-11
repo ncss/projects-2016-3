@@ -197,6 +197,12 @@ h1.404 {
   float: right;
 }
 
+.low-threat-home {
+  background-color: green;
+  height: 50px;
+  width: 100px;
+}
+
 .med-threat {
   background-color: orange;
   height: 20px;
@@ -204,9 +210,21 @@ h1.404 {
   float: right;
 }
 
+.med-threat-home {
+  background-color: orange;
+  height: 50px;
+  width: 100px;
+}
+
 .high-threat {
   background-color: red;
   height: 20px;
   width: 20px;
   float: right;
+}
+
+.high-threat-home {
+  background-color: red;
+  height: 50px;
+  width: 100px;
 }
