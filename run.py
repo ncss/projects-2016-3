@@ -88,12 +88,23 @@ def home_handler(response):
     userLoggedIn = get_cookie(response)
 
     if userLoggedIn:
-        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn)}
-        print(user_post_dict)
+        threat_level = calculate_threat_level()
+        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn), 'threat_level':threat_level}
         response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+
+def calculate_threat_level():
+    posts = Post.get_all_posts()
+    levels = []
+    for post in posts:
+        levels.append(post.get_status())
+    if len(levels):
+        arraySum = sum(levels)
+        avThreat = round(arraySum/len(levels))
+        return avThreat
+    return 0
 
 
 @login_required
@@ -205,7 +216,7 @@ def new_post_handler(response):
         userid = get_cookie(response)
         new_post_info = {'message': message, 'status': status, 'timestamp': time, 'author_id': userid}
         Post.create_post(new_post_info)
-        response.redirect('/post/all')
+        response.redirect('/')
     else:
         userID = get_cookie(response)
         response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))
