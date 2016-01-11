@@ -34,7 +34,7 @@ class PythonNode(Node):
             return html.escape(str(eval(self.content, {}, context)))
         except NameError:
             if not strictness:
-                return ''
+                return '{{}}'
             return html.escape(str(eval(self.content, {}, context)))
 
 
@@ -44,7 +44,7 @@ class SafePythonNode(Node):
             return str(eval(self.content, {}, context))
         except NameError:
             if not strictness:
-                return ''
+                return '{{}}'
             return str(eval(self.content, {}, context))
 
 class IncludeNode(Node):
@@ -57,6 +57,9 @@ class IncludeNode(Node):
 
 
 class ForNode(Node):
+    """
+    iterator: list of strings
+    """
     def __init__(self, parent, iterator, iterable, child_group):
         self.parent = parent
         self.iterator = iterator
@@ -68,7 +71,15 @@ class ForNode(Node):
         for_list = []
         for item in iterable:
             context = dict(context)
-            context[self.iterator] = item
+            if isinstance(item, str) and len(item) > 1:
+                raise ParseError('Cannot unpack strings')
+            if isinstance(item, list) or isinstance(item, tuple):
+                if len(self.iterator) != len(item):
+                    raise ParseError('Failed to unpack: provided {} values to unpack to, provided {} values to unpack from'.format(len(self.iterator), len(item))) 
+            else:
+                item = [item]
+            for i in range(len(self.iterator)):
+                context[self.iterator[i]] = item[i]
             for_list.append(self.child_group.evaluate(context))
         return ''.join(str(i) for i in for_list)
 
@@ -130,6 +141,7 @@ def _parse_template(template, upto, parent):
         elif token.startswith('% for'):
             for_token = re.match(for_tokenising, token)
             iterator, iterable = for_token.group(1).strip(), for_token.group(2).strip()
+            iterator = [i.strip() for i in iterator.split(',')]
             token = ForNode(root_node, iterator, iterable, None)
             group_node, offset = _parse_template(template, index + 1, token)
             token.child_group = group_node
@@ -162,8 +174,10 @@ def render_template(template, context):
     return parse_template(template)[0].evaluate(context)
 
 
-def render_file(filename, context, *, strict=True):
+def render_file(filename, context, *, strict=False):  # TODO: strict=None
     global strictness
+    # if strict is None:
+    #     raise ParseError('Strictness must be specified')
     strictness = strict
     try:
         with open(filename) as f:

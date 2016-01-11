@@ -13,6 +13,9 @@
 - `{% for dest in src %}X{% end for %}` This tag is used to repeatedly execute the template code `X` for every element in the variable `src`. Every time `X` is executed, the current value of the variable `dest` is added to the context of `X`. Requires `{% end for %}` to close the `for` statement.
   - e.g. `{% for friend in person.friends %}<li class='friend'>{% include friend.html %}</li>{% end for %}`
 
+- `{% for a, b, c in src %}X{% end for %}` Extended the `for` tag to support optional tuple-unpacking.
+  - e.g. `{% for person, score in scores %}{{ person.name }} scored {{ score }} points!{% end for %}`
+
 - `{% if predicate %}X{% end if %}` This tag is used to conditionally output values. The template code `X` will only be executed if `predicate` evaluates to `True`.
   - e.g. `{% if person.friends %}{{ person.name }} has {{ len(person.friends) }} friends!{% end if %}`
 

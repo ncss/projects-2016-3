@@ -1,9 +1,13 @@
 import sqlite3
+from User import User
 
-def select(fields, table):
+def select(table, where, *arg):
     connect = sqlite3.connect('database.db')
     cur = connect.cursor()
-    cur.execute('''select %s from %s''' % (",".join(fields), table))
+    if where:
+        cur.execute('''select %s from %s where %s''' % (",".join(arg), table, where))
+    else:
+        cur.execute('''select %s from %s''' % (",".join(arg), table))   
     results = cur.fetchall()
     cur.close()
     connect.close()
@@ -35,13 +39,19 @@ insert('post', {
 
 #def where, insert
 #check location, dob
-
+print(select('post', 'message = \'hi\'', 'message', 'timestamp'))
+newUser = User()
+if newUser.email_exists():
+    print('Yay')
+else:
+    print('Nay')
 #query(('message','author_id'), 'post')
 
 def get_all_posts():
     results = select(('*',), 'post')
     return results
 
+#get_all_posts()
 
 
 def get_all_user_posts(user_id):
