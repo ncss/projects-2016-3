@@ -152,7 +152,7 @@ def process_profile_handler(response):
         gender = ""
         photo = ""
         password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
-        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location, 
+        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location,
                     'gender':gender, 'photo':photo, 'password':password}
         user = User.create_user(user_dict)
         print(user.get_user_id())
@@ -204,18 +204,23 @@ def new_post_handler(response):
         response.redirect('/post/all')
     else:
         response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
-
+@login_required
 def about_handler(response):
     #about page
     userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
+
+def about_handler(response):
+    #about page
+    userID = get_cookie(response)
+    response.write(render_file(os.path.join('templates', 'about.html'), {}))
 
 def styleguide_handler(response):
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
 
 def landing_handler(response):
     response.write(render_file(os.path.join('templates', 'landing.html'), {}))
-    
+
 def default_handler(response, method, *args, **kwargs):
     #default 404
     return return_404(response)
