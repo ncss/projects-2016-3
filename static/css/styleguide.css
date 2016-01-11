@@ -13,7 +13,7 @@
   background-color: #181818;
 }
 .theme-primary {
-  color: #E8640C;
+  color: #E83B0C;
 }
 
 
@@ -67,7 +67,7 @@ figcaption {
 
 
 a:hover {
-  color: #E8640C;
+  color: #E83B0C;
 }
 a:active {
   color: rgba(204, 204, 204, 0.25);
@@ -93,7 +93,7 @@ ul, dd {
 }
 
 hr {
-  border-color: #E8640C;
+  border-color: #E83B0C;
 }
 
 
