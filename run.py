@@ -5,6 +5,7 @@ import hashlib
 import os
 from engine import render_file, ParseError
 from models.User import User
+from models.Post import Post
 
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
@@ -21,6 +22,12 @@ posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         2:{'id': 2, 'userid': 1, 'message' : "I'm still ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
 }
+
+post = {1:Post(1, "I'm in trouble", 1, 2, 12), 
+        2:Post(2, "I'm ok", 2, 0, 13),
+        3:Post(3, "I'm not in trouble, but not ok", 3, 1, 14)}
+
+
 skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
         2:{'id':2, 'skill name': 'emergency doctor', 'category id':1, 'rank':8},
         3:{'id':3, 'skill name': 'structural engineer', 'category id':2, 'rank':6}
@@ -68,7 +75,8 @@ def home_handler(response):
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
     if userLoggedIn:
-        response.write(User.getPerson(int(userLoggedIn)).fname + ' is logged in')
+        #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
+        response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         response.write('Not logged in!')
     response.write('Home!')
@@ -107,13 +115,13 @@ def create_profile_handler(response):
 @login_required
 def all_post_handler(response):
     # display all posts
-    userID = get_cookie()
+    userID = get_cookie(response)
     if userID:
-        posts = Post.get10()
-        for post in posts:
-            response.write(post.message + '<br>')
-            userName = User.get_user(post.author_id).fname
-            response.write('by' + userName + '<br>')
+        #posts = Post.get10() function does not exist yet
+        for individualPost in post:
+            response.write(post[individualPost].get_message() + '<br>')
+            #userName = User.get_user(post.author_id).fname
+            #response.write('by' + userName + '<br>')
             response.write('all posts')
     else:
         response.redirect('/')
