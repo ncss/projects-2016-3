@@ -142,3 +142,7 @@ select {
   padding: auto;
   padding-left: 5px;
 }
+
+option {
+  background-color: #535353;
+}

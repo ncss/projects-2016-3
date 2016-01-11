@@ -73,10 +73,7 @@ def login_handler(response):
     if User.verify_password(email, password):
         person = User.get_person_by_email(email)
         response.set_secure_cookie("userLoggedIn", str(person.get_user_id()))
-        response.redirect('/')
-    else:
-        response.write("wrong login")
-
+    response.redirect('/')
 
 
 def logout_handler(response):
@@ -103,7 +100,8 @@ def home_handler(response):
 def search_handler(response):
     #display search page
     #do search later
-    response.write(render_file(os.path.join('templates', 'search.html'), {}))
+    userID = get_cookie(response)
+    response.write(render_file(os.path.join('templates', 'search.html'), {'user':User.get_person_by_id(userID)}))
 
 @login_required
 def send_to_handler(response):
@@ -130,7 +128,8 @@ def own_profile_handler(response):
 @login_required
 def edit_profile_handler(response, id):
     #edit profile with given id
-    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {}))
+    userID = int(id)
+    response.write(render_file(os.path.join('templates', 'profile_edit.html'), {'user':User.get_person_by_id(userID)}))
 
 def create_profile_handler(response):
     #signup page
@@ -152,7 +151,7 @@ def process_profile_handler(response):
         gender = ""
         photo = ""
         password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
-        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location, 
+        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location,
                     'gender':gender, 'photo':photo, 'password':password}
         user = User.create_user(user_dict)
         print(user.get_user_id())
@@ -191,17 +190,18 @@ def new_post_handler(response):
     else:
         response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
 
+@login_required
 def about_handler(response):
     #about page
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
+    response.write(render_file(os.path.join('templates', 'about.html'), {'user':User.get_person_by_id(userID)}))
 
 def styleguide_handler(response):
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
 
 def landing_handler(response):
     response.write(render_file(os.path.join('templates', 'landing.html'), {}))
-    
+
 def default_handler(response, method, *args, **kwargs):
     #default 404
     return return_404(response)
