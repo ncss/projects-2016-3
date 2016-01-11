@@ -1,12 +1,11 @@
 {% include header.html %}
 
     <h1>Add Post</h1>
-  <form action="send_to">
+  <form action="/post/create" method="POST">
     <fieldset>
       <p>
         <label>Post: </label>
-        <textarea type="text" name="post" placeholder="Enter Text Here">
-        </textarea>
+        <textarea type="text" name="post" placeholder="Enter Text Here"></textarea>
       </p>
 <p>Threat Level:</p>
       <p>

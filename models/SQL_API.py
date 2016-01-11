@@ -58,6 +58,7 @@ cur.execute('''
         password text not null,
         phone text null,
         other text null,
+        location text null,
         primary key(user_id)
     );
 
