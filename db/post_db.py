@@ -3,11 +3,35 @@ import sqlite3
 def select(fields, table):
     connect = sqlite3.connect('database.db')
     cur = connect.cursor()
-    cur.execute('''select %s from %s''' % (",".join(fields), table))   
+    cur.execute('''select %s from %s''' % (",".join(fields), table))
     results = cur.fetchall()
     cur.close()
     connect.close()
     return results
+
+def insert(table, columnvaluedict):
+    connect = sqlite3.connect('database.db')
+    cur = connect.cursor()
+    keys = list(columnvaluedict.keys())
+    columns = ', '.join(keys)
+    value = []
+    qmarks = []
+    for key in keys:
+        value.append(columnvaluedict[key])
+        qmarks.append('?')
+    qmarks = ', '.join(qmarks)
+    query = ''' insert into %s (%s) values (%s);''' % (table, columns, qmarks)
+    cur.execute(query, value)
+    connect.commit()
+    cur.close()
+    connect.close()
+
+insert('post', {
+	'message': 'hello world! 12',
+	'author_id': 76,
+	'status': 2,
+	'timestamp': '35/1/10/2016'
+})
 
 #def where, insert
 #check location, dob
@@ -15,39 +39,51 @@ def select(fields, table):
 #query(('message','author_id'), 'post')
 
 def get_all_posts():
-    select(('*',), 'post')
-    return 
+    results = select(('*',), 'post')
+    return results
 
-get_all_posts()
 
 
 def get_all_user_posts(user_id):
     connect = sqlite3.connect('database.db')
     cur = connect.cursor()
-    cur.execute (''' select * from post where author_id = %d''' % user_id)
-    #print(cur.fetchall())
-
-    cur.close()
-    connect.close()
-
-
-#get_all_user_posts(0)
-
-
-
-
-def create_post(message, status, user_id):
-    connect = sqlite3.connect('database.db')
-    cur = connect.cursor()
-    cur.execute (''' insert into post (message, author_id, status, timestamp) values ('%s', %d, %d, '%s');''' % (message, user_id, status, ""))
+    keys = list(columnvaluedict.keys())
+    columns = ', '.join(keys)
+    value = []
+    qmarks = []
+    for key in keys:
+        value.append(columnvaluedict[key])
+        qmarks.append('?')
+    qmarks = ', '.join(qmarks)
+    query = ''' insert into %s (%s) values (%s);''' % (table, columns, qmarks)
+    cur.execute(query, value)
     connect.commit()
-    #print(cur.fetchall())
-
     cur.close()
     connect.close()
 
+#def where, insert
+#check location, dob
 
-create_post('The world is ending! Help me and my family pleazzzzzz!!111!!!', 2, 1)
+#query(('message','author_id'), 'post')
+
+def get_all_posts():
+    results = select(('*',), 'post')
+    return results
+
+
+
+def get_all_user_posts(user_id):
+    select(posts, user_id)
+
+def create_post(columnvaluedict):
+    insert('post', columnvaluedict)
+
+create_post({
+        'message': 'hello world! 12',
+        'author_id': 76,
+        'status': 2,
+        'timestamp': '35/1/10/2016'
+    })
 
 ## user test
 
