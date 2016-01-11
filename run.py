@@ -26,7 +26,7 @@ posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
 }
 
-post = {1:Post(1, "I'm in trouble", 1, 2, 12), 
+post = {1:Post(1, "I'm in trouble", 1, 2, 12),
         2:Post(2, "I'm ok", 2, 0, 13),
         3:Post(3, "I'm not in trouble, but not ok", 3, 1, 14)}
 
@@ -113,7 +113,7 @@ def profile_handler(response, profile_id):
     userID = int(profile_id)
     response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
 
-@login_required  
+@login_required
 def own_profile_handler(response):
     #redirect to user's own profile page
     userID = get_cookie(response)
@@ -141,7 +141,7 @@ def all_post_handler(response):
         pass
 
     #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts()}))
 
     '''
         userID = get_cookie(response)
@@ -153,7 +153,7 @@ def all_post_handler(response):
             #response.write('by' + userName + '<br>')
             response.write('all posts')
             ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-            
+
     else:
         response.redirect('/')
         '''
