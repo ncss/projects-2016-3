@@ -85,8 +85,10 @@ class User:
 		'''
 	@classmethod
 	def get_person(klass, user_id):	
-		return select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
-		
+		person_dict = select('user','user_id = %s' % user_id, 'user_id', 'fname', 'lname', 'DOB', 'location', 'gender', 'phone', 'password')
+		new_user = User(person_dict[''])
+
+		#newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
 		#return select(user_id, user)
 		
 	@classmethod
