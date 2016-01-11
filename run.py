@@ -39,8 +39,12 @@ skills = {1:{'id':1, 'skill name': 'first aider', 'category id':1, 'rank':1},
 
 def get_cookie(response):
     #return 1
-    print(response.get_secure_cookie("userLoggedIn"))
-    return response.get_secure_cookie("userLoggedIn")
+    cookie = response.get_secure_cookie("userLoggedIn")
+    if (cookie == b'None') or (cookie is None):
+        return None
+    cookie = cookie.decode("utf-8")
+    cookie = int(cookie)
+    return cookie
 
 def login_required(function):
     #login decorator
@@ -86,10 +90,10 @@ def home_handler(response):
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
     print(userLoggedIn)
-    if userLoggedIn is not b'None':
-        userLoggedIn = int(str(userLoggedIn))
+    if userLoggedIn:
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
-        response.write(user[userLoggedIn].get_first_name() + ' is logged in')
+        response.write("user" + str(userLoggedIn) + "is logged in")
+        #response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
@@ -150,7 +154,7 @@ def process_profile_handler(response):
         photo = ""
         password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
         user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB, 'lat':lat, 'long':long, 
-                        'gender':gender, 'photo':photo, 'password':password, 'user_id':1}
+                    'gender':gender, 'photo':photo, 'password':password}
         user = User.create_user(user_dict)
         print(user.get_user_id())
         response.set_secure_cookie("userLoggedIn", str(user.get_user_id()))
