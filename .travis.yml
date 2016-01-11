@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.4"
+install:
+  - echo
+script:
+  - echo
+deploy:
+  provider: heroku
+  api_key:
+    secure: CHvdVkKs+mSVo2nnOa9R5xRAatrojtwq6VlQ5/eYNANzgA1OxCIATUYXYMg22gtIHgXZppeB/XVzg/gFsWaFgYF5VFarghFOQxj8UHzfDQ7Hw6HBNjlrTfG/8eqCabgjnO9SCc5YIroiySNlBuvzUEQP5ZAeRKdG+AMqOUtcQ4c4HabJAx1ydxHwmKtOb5pyFeLARuLhK0V/9zrDB9+Rh1PK1eYmkJGstCraNAHp5Qivzuc6F/iUXbjCf+JJU8FlQObxJv/p6gqHdJPoHXTziyxHPZp/d+sLLaGqv/yXoBD0kGII2pj+79ZQD1oWL7xuZZF7OU3lrZ8M5QFltYe2cvMgx5S+BXCqwUVa34kA6J47DOxsGLBLQMhhAjlmhVggGHBmB4a5cJt7j4ff7xPeDa4nvTYPoa7mQtLDmPi2WcLWuNYGN/j64MjWHtSGHlODlBo1cXI3tWan0fZ9993o/sW1CynmGOwfGPPCWsEoKoi4tLjrA6VCTvjOvhjS6PMhr+alA2NCmZ5Bx4PAWPmv3CS1W/zDR3/GfxnhqQtJi/phNXbJvbDM16FEDQFyXwT7BQPXMQm+E5/oDBF+GSjkf3vWr+VqG4WjZr2WT5gqyXTyxomLhnkV93BFASIIV+b2JP5YuT4mfIiZikhjHP+FP3QCwgDi6Q4P6aJo2/t2Jrw=
+  app: group3-2016
+  on:
+    repo: ncss/projects-2016-3

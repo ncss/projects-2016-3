@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import os
+
 from tornado.ncss import Server
 import pprint
 import hashlib
@@ -169,7 +171,12 @@ def default_handler(response, method, *args, **kwargs):
 	#default 404
 	return return_404(response)
 
-server = Server()
+port = os.getenv('PORT')
+if port:
+  server = Server(port=int(port))
+else:
+  server = Server()
+
 server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/login', login_handler, url_name = 'login')
 server.register(r'/logout', logout_handler, url_name = 'logout')
