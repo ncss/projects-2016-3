@@ -1,23 +1,28 @@
 /* --- Base Infrastructure --- */
+
 header div.header-icon {
-  float:left;
+  float: left;
   padding-right: 20px;
 }
 
-header div.user-greeting {
-  float:right;
+header div.header-icon a {
+  text-decoration: none;
 }
 
-/*nav {
+header div.header-icon img{
+  height: 40px;
+}
 
-}*/
+header div.user-greeting {
+  float: right;
+}
 
-/*main#container {
+main#container {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px 10px;
-}*/
+}
 
 footer {
   text-align: center;
@@ -47,8 +52,16 @@ article.main-content {
 /* --- Profile --- */
 
 
+
+
 /* --- Utilities --- */
 
 .clearfix {
   clear: both;
+}
+
+/* --- 404 Page --- */
+h1.404 {
+  text-align: center;
+  
 }

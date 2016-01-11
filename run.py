@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import os
+
 from tornado.ncss import Server
 import pprint
 import hashlib
@@ -13,11 +15,10 @@ from models.Post import Post
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
 #user passwords = 12345, qwerty, 98765
-user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
-        2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
-        3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
+user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+        2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5'),
+        3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Sydney', 'M', '', '67893456', '79737ac46dad121166483e084a0727e5d6769fb47fa9b0b627eba4107e696078')
         }
-
 emails = {'evan@email.com':1, 'amy@email.com':2, 'aleks@email.com':3}
 
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
@@ -53,6 +54,10 @@ def return_403(response, *args, **kwargs):
     response.set_status(403)
     response.write("403")
     #render(response, '403.html', {})
+
+def return_404(response, *args, **kwargs):
+  response.set_status(404)
+  response.write(render_file(os.path.join('templates', '404.html'), {}))
 
 def login_handler(response):
     #database password check
@@ -128,19 +133,29 @@ def create_profile_handler(response):
 
 @login_required
 def all_post_handler(response):
-    # display all posts
-    userID = get_cookie(response)
+    #display all posts
+    #posts = Post.get10() function does not exist yet
+    posts = Post.get_all_posts()
+    for post in posts:
+        response.write(post.get_message())
+        response.write(str(post.get_author_id()) + '<br>')
+
+        #response.write(render_file(os.path.join('templates', 'viewposts.html'), Post.get_all_posts()))
+
+    '''
+        userID = get_cookie(response)
     if userID:
-        #posts = Post.get10() function does not exist yet
         for individualPost in post:
-            response.write(post[individualPost].get_message() + '<br>')
+            #pass in post list to template
+            #response.write(post[individualPost].get_message() + '<br>')
             #userName = User.get_user(post.author_id).fname
             #response.write('by' + userName + '<br>')
             response.write('all posts')
             ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-
+            
     else:
         response.redirect('/')
+        '''
 
 @login_required
 def new_post_handler(response):
@@ -160,7 +175,12 @@ def default_handler(response, method, *args, **kwargs):
     #default 404
     return return_404(response)
 
-server = Server()
+port = os.getenv('PORT')
+if port:
+  server = Server(port=int(port))
+else:
+  server = Server()
+
 server.register(r'/', home_handler, url_name = 'name')
 server.register(r'/login', login_handler, url_name = 'login')
 server.register(r'/logout', logout_handler, url_name = 'logout')

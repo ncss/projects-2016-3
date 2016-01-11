@@ -1,40 +1,29 @@
+/* COLOUR PALETTE */
+
+.background-light-grey {
+  background-color: #505050;
+}
+.background-med-grey {
+  background-color: #3C3C3C;
+}
+.background-dark-grey {
+  background-color: #181818;
+}
+.theme-primary {
+  color: #E8640C;
+}
+
+
 
 body {
-  background-color: #262626;
   font-family: "Roboto";
   font-size: 16px;
   line-height: 24px;
 }
 
-main#container {
-  background-color: #505050;
-  position: static;
-  margin: auto;
-  padding: 20px;
-  width: 750px;
-}
-
-header {
-  background-color: #202020;
-  padding: 20px;
-}
-
-div.post-box {
-  background-color: #3C3C3C;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
-
-footer {
-  margin: auto;
-  margin-top: 15px;
-  text-align: center;
-}
-
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald";
   font-weight: 500;
   color: #CCCCCC;
   margin-top: 15px;
@@ -75,7 +64,7 @@ figcaption {
 
 
 a:hover {
-  color: #CCCCCC;
+  color: #E8640C;
 }
 a:active {
   color: rgba(204, 204, 204, 0.25);
@@ -95,7 +84,7 @@ ol, ul, dd {
 }
 
 hr {
-  border-color: #CCCCCC;
+  border-color: #E8640C;
 }
 
 

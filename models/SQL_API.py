@@ -1,7 +1,7 @@
 import sqlite3
 #***************************************
 #Setup
-connect = sqlite3.connect('database.db')
+connect = sqlite3.connect('../database.db')
 cur = connect.cursor()
 #***************************************
 
@@ -19,62 +19,62 @@ cur.execute('drop table if exists post;')
 
 cur.execute('''
 
-	create table skills (
-		skill_id integer not null,
-		category text not null,
-		specialisation text not null,
-		rank integer not null,
+    create table skills (
+        skill_id integer not null,
+        category text not null,
+        specialisation text not null,
+        rank integer not null,
 
-		primary key (skill_id)
-	);
-
-''')
-
-cur.execute('''
-
-	create table user_skills (
-		user_id integer not null,
-		skill_id integer not null,
-
-		foreign key (user_id) references user (user_id),
-		foreign key (skill_id) references skills (skill_id)
-	);
+        primary key (skill_id)
+    );
 
 ''')
 
 cur.execute('''
 
-	create table user (
-		user_id integer not null,
-	    email text not null,
-	    fname text not null,
-	    lname text not null,
-	    DOB text not null,
-	    lat real not null,
+    create table user_skills (
+        user_id integer not null,
+        skill_id integer not null,
+
+        foreign key (user_id) references user (user_id),
+        foreign key (skill_id) references skills (skill_id)
+    );
+
+''')
+
+cur.execute('''
+
+    create table user (
+        user_id integer not null,
+        email text not null,
+        fname text not null,
+        lname text not null,
+        DOB text not null,
+        lat real not null,
         long real not null,
-	    gender text not null,
-	    photo blob null,
-	    password text not null,
-	    phone text null,
-	    other text null,
-	    primary key(user_id)
-	);
+        gender text not null,
+        photo blob null,
+        password text not null,
+        phone text null,
+        other text null,
+        primary key(user_id)
+    );
 
 
 ''')
 
 cur.execute('''
 
-	create table post (
-	    post_id integer not null ,
-	    message text not null,
-	    author_id integer not null,
-	    status integer not null,
-	    timestamp text not null,
+    create table post (
+        post_id integer not null ,
+        message text not null,
+        author_id integer not null,
+        status integer not null,
+        timestamp text not null,
 
-	    primary key (post_id) ,
-	    foreign key (author_id) references user (user_id)
-	);
+        primary key (post_id) ,
+        foreign key (author_id) references user (user_id)
+    );
 
 ''')
 
@@ -83,7 +83,7 @@ cur.execute('''
 
 
 # for row in cur:
-# 	cur.fetchone()
+#     cur.fetchone()
 
 #***************************************
 #Cleanup

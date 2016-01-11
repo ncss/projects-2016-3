@@ -97,12 +97,27 @@ class IfNode(Node):
             return ''
 
 
+class CommentNode(Node):
+    def __init__(self, parent):
+        self.parent = parent
+
+    def evaluate(self, context):
+        return ''
+
+
+class LetNode(Node):
+    def evaluate(self, context):
+        exec(self.content, {}, context)
+        return ''
+
+
 class GroupNode(Node):
     def evaluate(self, context):
-        nodestr = []
+        group_list = []
+        context = dict(context)
         for node in self.content:
-            nodestr.append(node.evaluate(context))
-        return ''.join(str(i) for i in nodestr)
+            group_list.append(node.evaluate(context))
+        return ''.join(str(i) for i in group_list)
 
 
 def _tokenise(template):
@@ -119,7 +134,12 @@ def _notFinished(parent, lookingAt, template):
         if lookingAt == '% empty ':
             return False
     if isinstance(parent, IfNode):
-        if lookingAt == '% end if ' or lookingAt == '% else ':
+        if lookingAt == '% end if ':
+            return False
+        if lookingAt == '% else ':
+            return False
+    if isinstance(parent, CommentNode):
+        if lookingAt == '% end comment ':
             return False
     return True
 
@@ -137,13 +157,15 @@ def _parse_template(template, upto, parent):
             token = SafePythonNode(token[len('% safe '):-1], root_node)
         elif token.startswith('% include'):
             token = IncludeNode(token[len('% include '):-1], root_node)
+        elif token.startswith('% let '):
+            token = LetNode(token[len('% let '): -1], root_node)
         elif token.startswith('% for'):
             for_token = re.match(for_tokenising, token)
             iterator, iterable = for_token.group(1).strip(), for_token.group(2).strip()
             iterator = [i.strip() for i in iterator.split(',')]
             token = ForNode(root_node, iterator, iterable, None, None)
-            group_node, offset = _parse_template(template, index + 1, token)
-            token.child_group = group_node
+            child_group, offset = _parse_template(template, index + 1, token)
+            token.child_group = child_group
             if template[offset] == '% empty ':
                 empty_group, offset = _parse_template(template, offset + 1, token)
                 token.empty_group = empty_group
@@ -151,11 +173,14 @@ def _parse_template(template, upto, parent):
             if_token = re.match(if_tokenising, token)
             predicate = if_token.group(1).strip()
             token = IfNode(root_node, predicate, None, None)
-            group_node, offset = _parse_template(template, index + 1, token)
-            token.main_child = group_node
+            main_child, offset = _parse_template(template, index + 1, token)
+            token.main_child = main_child
             if template[offset] == '% else ':
-                group_node, offset = _parse_template(template, offset + 1, token)
-                token.else_child = group_node
+                else_child, offset = _parse_template(template, offset + 1, token)
+                token.else_child = else_child
+        elif token.startswith('% comment'):
+            token = CommentNode(parent)
+            _, offset = _parse_template(template, index + 1, token)
         else:
             token = TextNode(token, root_node)
 
