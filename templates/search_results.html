@@ -1,14 +1,16 @@
 {% include header.html %}
 <div>
-  <h1>Search Results for: {{ search_query }}</h1>
+  <h1>Search Results for: "{{ search_query }}"</h1>
 </div>
 <body class="search-results">
-  <div>
-    <ul>
+  <div class="post">
+    <ol>
       {% for i in search_results %}
-        <li>{{ i }}</li>
+        <h2>
+          <li>"{{ i }}"</li>
+        </h2>
       {% end for %}
-    </ul>
+    </ol>
   </div>
 </body>
 
