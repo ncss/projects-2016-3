@@ -173,7 +173,8 @@ def all_post_handler(response):
         pass
 
     #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts()}))
+    userID = get_cookie(response)
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts(), 'user':User.get_person_by_id(userID)}))
 
 
 @login_required
@@ -188,7 +189,8 @@ def new_post_handler(response):
         Post.create_post(new_post_info)
         response.redirect('/post/all')
     else:
-        response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
+        userID = get_cookie(response)
+        response.write(render_file(os.path.join('templates', 'addpost.html'), {'user':User.get_person_by_id(userID)}))
 
 @login_required
 def about_handler(response):
