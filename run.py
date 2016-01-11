@@ -149,11 +149,11 @@ def process_profile_handler(response):
         DOB = dob_day + '/' + dob_month + '/' + dob_year
         lat = response.get_argument('latitude')
         long = response.get_argument('longitude')
-        #location = latitude + ',' + longitude
+        location = lat + ',' + long
         gender = ""
         photo = ""
         password = hashlib.sha256(response.get_argument("password").encode('ascii')).hexdigest()
-        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB, 'lat':lat, 'long':long, 
+        user_dict = {'email':email, 'fname':fname, 'lname':lname, 'DOB':DOB,'location':location, 
                     'gender':gender, 'photo':photo, 'password':password}
         user = User.create_user(user_dict)
         print(user.get_user_id())

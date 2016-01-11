@@ -76,7 +76,7 @@ class User:
             return False    
     @classmethod
     def create_user(klass, columnvaluedict):
-        if email_exits(columnvaluedict.get('email')):
+        if User.email_exists(columnvaluedict.get('email')):
             return None
         new_id = db.insert('user', columnvaluedict)
         newUser = User(new_id, columnvaluedict.get('email'), columnvaluedict.get('fname'), columnvaluedict.get('lname'), columnvaluedict.get('DOB'), columnvaluedict.get('location'), columnvaluedict.get('gender'), columnvaluedict.get('photo'), columnvaluedict.get('phone'), columnvaluedict.get('password'))
