@@ -1,4 +1,5 @@
 from . import dbfunctions
+import dbfunctions as db
 
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
@@ -83,7 +84,8 @@ class User:
 		else:
 			return None	
 		'''
-	@classmethod
+		
+        @classmethod
 	def get_person(user_id):
 		#TODO
 		pass
