@@ -1,11 +1,8 @@
 /* --- Base Infrastructure --- */
-header {
-  background-color: gray;
-}
-
 header div.header-icon {
   float:left;
 }
+
 header div.user-greeting {
   float:right;
 }

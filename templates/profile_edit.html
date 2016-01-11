@@ -1,23 +1,11 @@
-<!doctype html>
-<html>
-	<head>
-		<title> Michael is awesome </title>
-		<link rel="stylesheet" type="text/css" href="mainsheet.css">
-		<script>
-		</script>
-	</head>
+{% include header.html %}
 
-
-	<body>
-		<header>
-
-		</header>
 		<article>
 			<form>
 			<div class="sidebar">
 					<fieldset name="account-info">
 						<span class="img-zone">
-							<img src="images/cat.jpg" height="128px"></img>
+							<img src="images/cat.jpg" height="128">
 						</span>
 							<div class="profile-info">
 								<p>
@@ -68,7 +56,5 @@
 			</div>
 			</form>
 		</article>
-		<footer>
-		</footer>
-	</body>
-</html>
+
+{% include footer.html %}
