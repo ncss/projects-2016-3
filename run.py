@@ -152,7 +152,7 @@ def edit_profile_handler(response, id):
 
 def create_profile_handler(response):
     #signup page
-    response.write(render_file(os.path.join('templates', 'create.html'), {}))
+    response.write(render_file(os.path.join('templates', 'create.html'), {'user':None}))
 
 def process_profile_handler(response):
     print(response.request)
@@ -212,10 +212,10 @@ def about_handler(response):
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user}))
 
 def styleguide_handler(response):
-    response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
+    response.write(render_file(os.path.join('templates', 'styleguide.html'), {'user': None}))
 
 def landing_handler(response):
-    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
+    response.write(render_file(os.path.join('templates', 'landing.html'), {'user': None}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404

@@ -35,11 +35,20 @@ def insert(table, columnvaluedict):
     connect.close()
     return inserted_id
 
+<<<<<<< HEAD
+def update(table, field, value, whereClause):
+    connect = sqlite3.connect('db/database.db')
+=======
 def update(table, feild, value):
     connect = sqlite3.connect(get_db_path())
+>>>>>>> 5dd4fe9acbf484f9310314864de6975e19f2cc21
     cur = connect.cursor()
-    cur.execute('''update %s set %s = %s''' % (table, field, value))
+    cur.execute('''update %s set %s = '%s' where %s;''' % (table, field, value, whereClause))
     results = cur.fetchall()
+    connect.commit()
     cur.close()
     connect.close()
+<<<<<<< HEAD
+=======
     return results
+>>>>>>> 5dd4fe9acbf484f9310314864de6975e19f2cc21

@@ -1,4 +1,4 @@
-from . import dbfunctions as db
+import dbfunctions as db
 
 
 class User:
@@ -69,7 +69,6 @@ class User:
     @classmethod
     def email_exists(klass, email):
         whereClause = 'email = \'{}\''.format(email)
-        print(db.select('user', whereClause, 'email'))
         if db.select('user', whereClause, 'email'):
             return True
         else:
@@ -89,7 +88,6 @@ class User:
         whereClause = 'user_id = \'{}\''.format(user_id)
         person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')[0]
         #make above line into a dictionary
-        print(person_list)
         new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
         return new_user
 
@@ -98,7 +96,6 @@ class User:
         whereClause = 'email = \'{}\''.format(email)
         person_list = db.select('user', whereClause, 'user_id', 'email', 'fname', 'lname', 'DOB', 'location', 'gender', 'photo', 'phone', 'password')[0]
         #make above line into a dictionary
-        print(person_list)
         new_user = User(person_list[0], person_list[1], person_list[2], person_list[3], person_list[4], person_list[5], person_list[6], person_list[7], person_list[8], person_list[9])
         return new_user
 
@@ -114,31 +111,45 @@ class User:
         else:
             return False #Incorrect email
 
-    @classmethod
-    def updateFName(cls, user_id, newName):
-        db.update('user', 'fname', newName, 'user_id = {}'.format(user_id))
+    def update_first_name(self, user_id, newName):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'fname', newName, whereClause)
 
-    @classmethod
-    def updateLName(cls, user_id, newName):
-        db.update('user', 'lname', newName, 'user_id = {}'.format(user_id))
+    def updateDOB(self, user_id, newDOB):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'DOB', newDOB, whereClause)
 
-    @classmethod
-    def updateDOB(cls, user_id, newDOB):
-        db.update('user', 'DOB', newName, 'user_id = {}'.format(user_id))
+    def updateLocation(self, user_id, newLocation):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'Location', newLocation, whereClause)
 
-    @classmethod
-    def updateLocation(cls, user_id, newLocation):
-        db.update('user', 'location', newLocation, 'user_id = {}'.format(user_id))
+#Gender Modifications
+    def updateGender(self, user_id, newGender):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'Gender', newGender, whereClause)
 
-    @classmethod
-    def updateGender(cls, user_id, newGender):
-        db.update('user', 'gender', newGender, 'user_id = {}'.format(user_id))
+#Skills Modifications
+    def updateSkills(self, user_id, newSkills):
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'DOB', newSkills, whereClause)
+'''
+    def appendSkill(self, newSkill):
+        self.skills = self.skills.append(newSkill)
 
-    # TODO
-    # @classmethod
-    # def appendSkill(cls, user_id, newSkill):
-    #     db.update('user',  ,'user_id = {}'.format(user_id))
+#Contact Modifications
+    def updateContact(self, newContact):
+        self.contact = newContact
+'''
 
+'''
+myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
+newUser = User.create_user(myDictionary)
+print (newUser)
+
+newUser = User.get_person_by_email('george.com')
+print(newUser)
+#print(User.verify_password('george.com', 'bob1'))
+'''
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
         db.update('user', 'photo', newPhoto, 'user_id = {}'.format(user_id))
