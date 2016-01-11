@@ -26,7 +26,7 @@ posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         3:{'id': 3, 'userid': 2, 'message' : "I'm not ok", 'status': 1},
 }
 
-post = {1:Post(1, "I'm in trouble", 1, 2, 12), 
+post = {1:Post(1, "I'm in trouble", 1, 2, 12),
         2:Post(2, "I'm ok", 2, 0, 13),
         3:Post(3, "I'm not in trouble, but not ok", 3, 1, 14)}
 
@@ -89,7 +89,6 @@ def home_handler(response):
         response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         response.write(render_file(os.path.join('templates', 'index.html'), {}))
-    response.write('Home!')
 
 @login_required
 def search_handler(response):
@@ -112,8 +111,9 @@ def profile_handler(response, profile_id):
     #personInfo = users[1]
     userID = int(profile_id)
     response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
+    #response.write(render_file(os.path.join('templates', 'profile.html'), {User.get_person_by_id(userID)}))
 
-@login_required  
+@login_required
 def own_profile_handler(response):
     #redirect to user's own profile page
     userID = get_cookie(response)
@@ -141,7 +141,7 @@ def all_post_handler(response):
         pass
 
     #response.write(render_file(os.path.join('templates', 'viewpost.html'), Post.get_all_posts()))
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts()}))
 
     '''
         userID = get_cookie(response)
@@ -153,7 +153,7 @@ def all_post_handler(response):
             #response.write('by' + userName + '<br>')
             response.write('all posts')
             ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
-            
+
     else:
         response.redirect('/')
         '''
@@ -165,12 +165,14 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
+    userID = get_cookie(response)
     response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
 
 def styleguide_handler(response):
-    #about page
-    #Needs "about.html" file to be made
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
+
+def landing_handler(response):
+    response.write(render_file(os.path.join('templates', 'landing.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
@@ -194,6 +196,7 @@ server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
+server.register(r'/landing', landing_handler, url_name = 'landing')
 server.register(r'/send-to', send_to_handler, url_name = 'send-to')
 server.set_default_handler(default_handler)
 

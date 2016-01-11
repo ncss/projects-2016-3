@@ -75,9 +75,13 @@ class ForNode(Node):
 
         for_list = []
         for item in iterable:
-            context = dict(context)
-            exec(','.join(self.iterator) + '=' + str(item), {}, context)
-            for_list.append(self.child_group.evaluate(context))
+            contextCopy = dict(context)
+            if len(self.iterator) > 1:
+                for var_name, var_value in zip(self.iterator, item):
+                    contextCopy[var_name] = var_value
+            else:
+                contextCopy[self.iterator[0]] = item
+            for_list.append(self.child_group.evaluate(contextCopy))
         return ''.join(str(i) for i in for_list)
 
 
@@ -206,16 +210,18 @@ def render_file(filename, context, *, strict=False):  # TODO: strict=None
     # if strict is None:
     #     raise ParseError('Strictness must be specified')
     strictness = strict
+    cur_directory = os.getcwd()
     try:
         with open(filename) as f:
-            cur_directory = os.getcwd()
             os.chdir(os.path.dirname(os.path.abspath(filename)))
             rendered = render_template(f.read(), context)
-            os.chdir(cur_directory)
             return rendered
 
     except FileNotFoundError:
         raise ParseError('Tried to render nonexistent file - ' + filename)
+
+    finally:
+        os.chdir(cur_directory)
 
 if __name__ == '__main__':
     render_file('test.html', {'person': 0, 'title':1, 'age':2})
