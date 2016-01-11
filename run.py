@@ -88,9 +88,8 @@ def home_handler(response):
     userLoggedIn = get_cookie(response)
 
     if userLoggedIn:
-        threat_level = calculate_threat_level()
-        user_post_dict = {"posts": Post.get_all_posts(),'user':User.get_person_by_id(userLoggedIn), 'threat_level':threat_level}
-        response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
+        response.redirect('/post/all')
+        #response.write(render_file(os.path.join('templates', 'viewpost.html'), user_post_dict))
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
         response.write(render_file(os.path.join('templates', 'landing.html'), {}))
@@ -201,9 +200,8 @@ def process_profile_handler(response):
 @login_required
 def all_post_handler(response):
     #display all posts
-    posts = Post.get_all_posts()
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_all_posts(), 'user':User.get_person_by_id(userID)}))
+    response.write(render_file(os.path.join('templates', 'viewpost.html'), {"posts": Post.get_recent_10(), 'user':User.get_person_by_id(userID), 'threat_level': calculate_threat_level()}))
 
 
 @login_required

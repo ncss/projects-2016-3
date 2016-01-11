@@ -44,3 +44,6 @@ def update(table, field, value, whereClause):
     cur.close()
     connect.close()
     return results
+
+def raw_sql(statement):
+    return sqlite3.connect('db/database.db').cursor().execute(statement).fetchall()
