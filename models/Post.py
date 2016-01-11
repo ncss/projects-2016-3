@@ -11,7 +11,7 @@ class Post:
     def __str__(self):
         return 'Object for post {} by {}'.format(self._message, self._author_id)
 
-    
+
 
 #********************************************************************************
 #********************************************************************************
@@ -21,7 +21,7 @@ class Post:
 
     def get_post_id(self):
         return self._post_id
-    
+
     def get_message(self):
         return self._message
 
@@ -59,9 +59,9 @@ class Post:
 
     @classmethod
     def create_post(klass, columnvaluedict):
-           db.insert('post', columnvaluedict)
-           newPost = Post(None, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
-           return newPost
+        inserted_id = db.insert('post', columnvaluedict)
+        newPost = Post(inserted_id, columnvaluedict.get('message'), columnvaluedict.get('author_id'), columnvaluedict.get('status'), columnvaluedict.get('timestamp'))
+        return newPost
 
     #def newPost(self, title, message, author, status):
     #def Post(self, title, message, author, status):
@@ -69,7 +69,7 @@ class Post:
 '''
     def updateTitle(self, newTitle):
         self.title = newTitle
-    
+
     def updateMessage(self, newMessage):
         self.message = newMessage
 

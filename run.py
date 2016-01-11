@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-
+import datetime
 from tornado.ncss import Server
 import pprint
 import hashlib
@@ -8,6 +8,7 @@ import os
 from engine import render_file, ParseError
 from models.User import User
 from models.Post import Post
+from models.Skill import Skill
 
 #user has id, email, fname, lname, location, password
 #post has id, userid, message, status, timestamp
@@ -161,7 +162,16 @@ def all_post_handler(response):
 @login_required
 def new_post_handler(response):
     #new post page
-    response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
+    if response.request.method == "POST":
+        message = response.get_field('post')
+        status = response.get_field('threat')
+        time = datetime.datetime.now()
+        userid = get_cookie(response)
+        new_post_info = {'message': message, 'status': status, 'timestamp': time, 'author_id': userid}
+        Post.create_post(new_post_info)
+        response.redirect('/post/all')
+    else:
+        response.write(render_file(os.path.join('templates', 'addpost.html'), {}))
 
 def about_handler(response):
     #about page

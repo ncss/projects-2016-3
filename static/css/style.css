@@ -2,6 +2,7 @@
 header {
   border-bottom: #242424;
   border-style: solid;
+  text-align: center;
 }
 
 header div#logo-wrapper {
@@ -15,20 +16,20 @@ header div#logo-wrapper img {
   padding-left: 15px;
   box-sizing: border-box;
 }
-header nav{
-text-align:center;
-display:inline-block;
+
+header nav {
+  text-align: center;
+  display: inline-block;
 }
+
 header div.header-icon {
   float: left;
   padding-right: 30px;
 }
-
 header div.header-icon a {
   text-decoration: none;
 }
-
-header div.header-icon img{
+header div.header-icon img {
   height: 40px;
 }
 
@@ -40,6 +41,7 @@ header div.user-greeting {
   padding-top: 15px;
   box-sizing: border-box;
 }
+
 
 div.centering {
   text-align: center;
@@ -74,7 +76,6 @@ footer a {
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 
 
