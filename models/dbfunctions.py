@@ -32,3 +32,12 @@ def insert(table, columnvaluedict):
     cur.close()
     connect.close()
     return inserted_id
+
+def update(table, feild, value):
+    connect = sqlite3.connect('db/database.db')
+    cur = connect.cursor()
+    cur.execute('''update %s set %s = %s''' % (table, field, value))
+    results = cur.fetchall()
+    cur.close()
+    connect.close()
+    return results

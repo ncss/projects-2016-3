@@ -130,10 +130,11 @@ print(newUser)
 #Fun stuff
 #********************************************************************************
 #********************************************************************************
-'''
+
 #Name Modifications
-    def updateName(self, newName):
-        self.name = newName
+def updateName(self, user_id, newName):
+    pass
+        
 
 #Age Modifications    
     def updateAge(self, newAge):
@@ -161,4 +162,4 @@ print(newUser)
 #Contact Modifications
     def updateContact(self, newContact):
         self.contact = newContact
-'''
+

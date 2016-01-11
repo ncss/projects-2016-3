@@ -152,8 +152,18 @@ article.main-content {
 
 /* --- Profile --- */
 
-div.skills {
+div.sidebar {
+  float: left;
+  width: 49.5%;
+}
 
+div.skills {
+  float: right;
+  width: 49.5%;
+}
+div#results {
+  border: 1px solid #E8340C;
+  display: none;
 }
 
 
