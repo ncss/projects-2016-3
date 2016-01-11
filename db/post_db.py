@@ -9,16 +9,39 @@ def select(fields, table):
     connect.close()
     return results
 
+def insert(table, columnvaluedict):
+    connect = sqlite3.connect('database.db')
+    cur = connect.cursor()
+    keys = list(columnvaluedict.keys())
+    columns = ', '.join(keys)
+    value = []
+    qmarks = []
+    for key in keys:
+        value.append(columnvaluedict[key])
+        qmarks.append('?')
+    qmarks = ', '.join(qmarks)
+    query = ''' insert into %s (%s) values (%s);''' % (table, columns, qmarks)
+    cur.execute(query, value)
+    connect.commit()
+    cur.close()
+    connect.close()
+
+insert('post', {
+	'message': 'hello world! 12',
+	'author_id': 76,
+	'status': 2,
+	'timestamp': '35/1/10/2016'
+})
+
 #def where, insert
 #check location, dob
 
 #query(('message','author_id'), 'post')
 
 def get_all_posts():
-    select(('*',), 'post')
-    return 
-
-get_all_posts()
+    results = select(('*',), 'post')
+    return results
+	
 
 
 def get_all_user_posts(user_id):
