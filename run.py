@@ -115,8 +115,8 @@ def search_results_handler(response):
         userID = post.get_author_id()
         user = User.get_person_by_id(userID)
         name = user.get_last_name()
-        if name == query:
-            results.append(post)
+        if name.lower() == query.lower():
+            results.append(post.get_message())
     
     response.write(render_file(os.path.join('templates', 'search_results.html'), {'search_results':results, 'search_query':query, 'user':User.get_person_by_id(get_cookie(response))}))
 
