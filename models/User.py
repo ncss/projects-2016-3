@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 from . import dbfunctions
-=======
 import dbfunctions as db
->>>>>>> e79ac429166b9f9c6e62b6c705e21ef659fef570
 
 class User:
 	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
