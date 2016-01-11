@@ -74,6 +74,7 @@ class User:
             return True
         else:
             return False    
+
     @classmethod
     def create_user(klass, columnvaluedict):
         if User.email_exists(columnvaluedict.get('email')):
@@ -112,23 +113,24 @@ class User:
         else:
             return False #Incorrect email
 
-'''
-newUser = User.get_person_by_id(3)
-print(newUser)
-'''
+
+
+
 '''
 myDictionary = {'email' : 'george.com', 'fname' : 'george', 'lname' : 'bob', 'DOB' : '1999-12-09', 'location' : '-4.999, 78.908', 'gender' : 'M', 'photo': '...', 'phone' : '04 5678 5786', 'password' : 'cat1'}
 newUser = User.create_user(myDictionary)
 print (newUser)
 
+newUser = User.get_person_by_email('george.com')
+print(newUser)
 #print(User.verify_password('george.com', 'bob1'))'''
-'''
+
 #********************************************************************************
 #********************************************************************************
 #Fun stuff
 #********************************************************************************
 #********************************************************************************
-
+'''
 #Name Modifications
     def updateName(self, newName):
         self.name = newName

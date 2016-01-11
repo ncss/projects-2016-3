@@ -3,7 +3,7 @@ import datetime, time
 print('blah')
 #***************************************
 #Setup
-connect = sqlite3.connect('../db/database.db')
+connect = sqlite3.connect('db/database.db')
 cur = connect.cursor()
 #***************************************
 
