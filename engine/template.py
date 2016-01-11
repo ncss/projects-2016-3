@@ -38,6 +38,15 @@ class PythonNode(Node):
             return html.escape(str(eval(self.content, {}, context)))
 
 
+class SafePythonNode(Node):
+    def evaluate(self, context):
+        try:
+            return str(eval(self.content, {}, context))
+        except NameError:
+            if not strictness:
+                return ''
+            return str(eval(self.content, {}, context))
+
 class IncludeNode(Node):
     def evaluate(self, context):
         try:
@@ -114,6 +123,8 @@ def _parse_template(template, upto, parent):
         offset = None
         if token.startswith('{'):
             token = PythonNode(token[1:].strip(), root_node)
+        elif token.startswith('% safe '):
+            token = SafePythonNode(token[len('% safe '):-1], root_node)
         elif token.startswith('% include'):
             token = IncludeNode(token[len('% include '):-1], root_node)
         elif token.startswith('% for'):

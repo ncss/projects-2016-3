@@ -84,7 +84,7 @@ def profile_handler(response, profile_id):
     #displays profile of user with given id
     #personInfo = users[1]
     userID = int(profile_id)
-    response.write(render_file(os.path.join('templates', 'profile.html'), {'User':user[userID]}))
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
   
 def own_profile_handler(response):
     #redirect to user's own profile page
