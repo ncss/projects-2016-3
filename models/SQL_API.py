@@ -1,4 +1,5 @@
 import sqlite3
+import datetime, time
 #***************************************
 #Setup
 connect = sqlite3.connect('../database.db')
@@ -78,6 +79,26 @@ cur.execute('''
 
 ''')
 
+cur.execute('''
+    insert into skills (category, specialisation, rank) values ( 'medical', 'Acupuncturist', 1); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'medical', 'Nurse', 7); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'medical', 'GP', 10); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'medical', 'Dentist', 2); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'medical', 'Vet', 5); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'medical', 'Nutritionist', 4); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Physiotherapist', 4); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Social Worker', 6); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Chef', 3); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Funeral Worker', 2); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Policeman', 7); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'social', 'Criminal', 10); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'food related', 'Farmer', 7); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'food related', 'Botanist', 7); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'food related', 'Baker', 4); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'professional', 'Lawyer', 1); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'professional', 'Scientist', 5); ''')
+cur.execute('''insert into  skills (category, specialisation, rank) values ( 'professional', 'Engineer', 5); ''')
+connect.commit()
 
 #insert into user values ('sofia123@mail.com', 'Sofia', 'HeLlo', '20/12/98', '40.7127, -74.0059', 'F', null, '56_ol%' 
 
