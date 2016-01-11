@@ -43,11 +43,6 @@ header div.user-greeting {
   top: 0px;
 }
 
-div.centering {
-  text-align: center;
-}
-
-
 
 img#landing-bg {
   display: block;
@@ -152,15 +147,6 @@ article.main-content {
 
 /* --- Profile --- */
 
-div.sidebar {
-  float: left;
-  width: 49.5%;
-}
-
-div.skills {
-  float: right;
-  width: 49.5%;
-}
 div#results {
   border: 1px solid #E8340C;
   display: none;
@@ -173,7 +159,9 @@ div#results {
   clear: both;
 }
 
+
 /* --- 404 Page --- */
+
 h1.404 {
   text-align: center;
 

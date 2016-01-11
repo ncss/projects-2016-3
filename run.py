@@ -117,7 +117,7 @@ def profile_handler(response, profile_id):
     #displays profile of user with given id
     #personInfo = users[1]
     userID = int(profile_id)
-    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID)}))
+    response.write(render_file(os.path.join('templates', 'profile.html'), {'user':User.get_person_by_id(userID), "posts": Post.get_all_user_posts(userID)}))
 
 @login_required
 def own_profile_handler(response):
