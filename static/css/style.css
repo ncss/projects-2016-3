@@ -34,11 +34,6 @@ header div.user-greeting {
   float: right;
 }
 
-
-div.centering {
-  text-align: center;
-}
-
 canvas {
   position:fixed;
   left:0;
