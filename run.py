@@ -12,11 +12,13 @@ from models.Post import Post
 #status is 0-2
 #skill has skill id, skill name, category id, rank,
 #skill categories - 1=medicine, 2=engineering, currently ranked 1-10
+#user passwords = 12345, qwerty, 98765
 user = {1:User(1, 'evan@email.com', 'Evan', 'Kohilas', '12/10/97', 'Sydney', 'M', '', '123456789'),
         2:User(2, 'amy@email.com', 'Amy', "O'Rourke", '7/10/99', 'Newcastle', 'F', '', '98765432'),
         3:User(3, 'aleks@email.com', 'Aleks', 'Bricknell', '27/06/98', 'Syndey', 'M', '', '67893456')
         }
 
+emails = {'evan@email.com':1, 'amy@email.com':2, 'aleks@email.com':3}
 
 posts = {1:{'id': 1, 'userid': 1, 'message' : "I'm ok", 'status': 0},
         2:{'id': 2, 'userid': 1, 'message' : "I'm still ok", 'status': 0},
@@ -59,10 +61,13 @@ def login_handler(response):
     password = hashlib.sha256(response.get_field("password").encode('ascii')).hexdigest()
 
     if User.verify_password(email, password):
-        response.set_secure_cookie("userLoggedIn", User.getPerson(email).get_user_id())
+        userID = emails[email] #fix this once db is integrated
+        response.set_secure_cookie("userLoggedIn", str(user[userID].get_user_id()))
         response.redirect('/')
     else:
         response.write("wrong login")
+
+
 
 def logout_handler(response):
     response.clear_cookie("userLoggedIn")
@@ -75,6 +80,7 @@ def home_handler(response):
     #response.write(str(response.get_secure_cookie("userLoggedIn")))
     userLoggedIn = get_cookie(response)
     if userLoggedIn:
+        userLoggedIn = int(userLoggedIn)
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
         response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
@@ -88,19 +94,27 @@ def search_handler(response):
     response.write(render_file(os.path.join('templates', 'search.html'), {}))
 
 @login_required
+def send_to_handler(response):
+    pass
+    ''' relying on get_people
+    query = response.get_field('search-query')
+    results = User.get_people(name)
+    response.write(results)
+    '''
+
+@login_required
 def profile_handler(response, profile_id):
     #displays profile of user with given id
     #personInfo = users[1]
     userID = int(profile_id)
     response.write(render_file(os.path.join('templates', 'profile.html'), {'user':user[userID]}))
-  
+
+@login_required  
 def own_profile_handler(response):
     #redirect to user's own profile page
-    userID = get_cookie()
-    if userID:
-        profile_handler(response, userID)
-    else:
-        response.redirect('/')
+    userID = get_cookie(response)
+    profile_handler(response, userID)
+
 
 @login_required
 def edit_profile_handler(response, id):
@@ -123,7 +137,7 @@ def all_post_handler(response):
             #userName = User.get_user(post.author_id).fname
             #response.write('by' + userName + '<br>')
             response.write('all posts')
-            ########response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
+            ######response.write(render_file(os.path.join('templates', 'viewposts.html'), {'user':user[userID}))#######
 
     else:
         response.redirect('/')
@@ -159,6 +173,7 @@ server.register(r'/post/all', all_post_handler, url_name = 'all_post')
 server.register(r'/post/create', new_post_handler, url_name = 'create_post')
 server.register(r'/about', about_handler, url_name = 'about')
 server.register(r'/styleguide', styleguide_handler, url_name = 'styleguide')
+server.register(r'/send-to', send_to_handler, url_name = 'send-to')
 server.set_default_handler(default_handler)
 
 server.run()

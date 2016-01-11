@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 from . import dbfunctions
+=======
+import dbfunctions as db
+>>>>>>> e79ac429166b9f9c6e62b6c705e21ef659fef570
 
 class User:
-	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone):
+	def __init__ (self, user_id, email, fname, lname, DOB, location, gender, photo, phone, password):
 		self._user_id = user_id
 		self._email = email
 		self._fname = fname
@@ -11,6 +15,7 @@ class User:
 		self._gender = gender
 		self._photo = photo
 		self._phone = phone
+		self._password = password
 
 	def __str__(self):
 		return 'Object for user {}'.format(self.name)
@@ -56,6 +61,8 @@ class User:
 	def get_phone(self):
 		return self._phone
 
+        def get_password(self):
+                return self._password
 #********************************************************************************
 #********************************************************************************
 #Sign in and log in
@@ -80,7 +87,7 @@ class User:
 		else:
 			return None	
 		'''
-
+        @classmethod
 	def get_person(user_id):
 		#TODO
 		pass
