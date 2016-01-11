@@ -138,6 +138,7 @@ def all_post_handler(response):
     else:
         response.redirect('/')
     #display all posts
+    #response.write(render_file(os.path.join('templates', 'viewpost.html'), {}))
 
 @login_required
 def new_post_handler(response):
@@ -146,7 +147,8 @@ def new_post_handler(response):
 
 def about_handler(response):
     #about page
-    response.write('about')
+    #Needs "about.html" file to be made
+    response.write(render_file(os.path.join('templates', 'about.html'), {}))
 
 def default_handler(response, method, *args, **kwargs):
     #default 404
