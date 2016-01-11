@@ -89,7 +89,7 @@ def home_handler(response):
     print(userLoggedIn)
     if userLoggedIn:
         #response.write(User.get_person(int(userLoggedIn)).fname + ' is logged in')
-        response.write(render_file(os.path.join('templates', 'index.html'), {}))
+        response.write(render_file(os.path.join('templates', 'index.html'), {'user':User.get_person_by_id(userLoggedIn)}))
         #response.write(user[userLoggedIn].get_first_name() + ' is logged in')
     else:
         #response.write(render_file(os.path.join('templates', 'index.html'), {}))
@@ -208,7 +208,7 @@ def new_post_handler(response):
 def about_handler(response):
     #about page
     userID = get_cookie(response)
-    response.write(render_file(os.path.join('templates', 'about.html'), {'user':user[userID]}))
+    response.write(render_file(os.path.join('templates', 'about.html'), {'user':User.get_person_by_id(userID)}))
 
 def styleguide_handler(response):
     response.write(render_file(os.path.join('templates', 'styleguide.html'), {}))
