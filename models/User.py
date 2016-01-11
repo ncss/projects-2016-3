@@ -1,4 +1,4 @@
-from . import dbfunctions as db
+import dbfunctions as db
 
 
 class User:
@@ -138,8 +138,11 @@ class User:
 
     @classmethod
     def updateSkills(cls, user_id, newskill_id):
-        columnvaluedict = {'skill_id': newskill_id}
-        db.insert('user_skills', columnvaluedict)
+        whereClause = 'user_id = \'{}\''.format(user_id)
+        db.update('user', 'user_skills', newskill_id, whereClause)
+
+        #columnvaluedict = {'skill_id': newskill_id}
+        #db.insert('user_skills', columnvaluedict)
 
     @classmethod
     def updatePhoto(cls, user_id, newPhoto):
@@ -148,6 +151,8 @@ class User:
     @classmethod
     def updateContact(cls, user_id, newContact):
         db.update('user', 'email', newContact, 'user_id = {}'.format(user_id))
+
+
 
 '''
     def appendSkill(self, newSkill):
