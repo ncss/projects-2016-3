@@ -3,7 +3,10 @@ import datetime, time
 print('blah')
 #***************************************
 #Setup
-connect = sqlite3.connect('db/database.db')
+if __name__ == '__main__':
+    connect = sqlite3.connect('../db/database.db')
+else:
+    connect = sqlite3.connect('db/database.db')
 cur = connect.cursor()
 #***************************************
 
@@ -108,4 +111,5 @@ connect.commit()
 #***************************************
 #Cleanup
 connect.close()
+print('server create success')
 #***************************************
